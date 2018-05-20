@@ -1,28 +1,30 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { RestProvider } from '../../providers/rest/rest';
+import { AboutUsPage } from '../about-us/about-us';
+import { SignInPage } from '../sign-in/sign-in';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
+
 export class HomePage {
 
-  countries: any;
-  errorMessage: string;
+  video: any = {
+    url: 'https://www.youtube.com/watch?v=tqKpk1wABuI'
+  };
 
-  constructor(public navCtrl: NavController, public rest: RestProvider) {
+  constructor(public navCtrl: NavController) {
+    
+  }
+  
+  aboutUs() {
 
+    this.navCtrl.push(AboutUsPage);
   }
 
-  ionViewDidLoad() {
-    this.getCountries();
-  }
+  signIn() {
 
-  getCountries() {
-    this.rest.getCountries()
-       .subscribe(
-         countries => this.countries = countries,
-         error =>  this.errorMessage = <any>error);
+    this.navCtrl.push(SignInPage);
   }
 }

@@ -1,0 +1,121 @@
+<!--
+  Generated template for the SignInPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title text-center>Visitor Sign In</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="entryForm" (ngSubmit)="submit()">
+    <ion-item>
+      <ion-label floating>First Name</ion-label>
+      <ion-input [formControl]="firstName" type="text"></ion-input>
+    </ion-item>
+    <!--<ion-item no-lines *ngIf="firstName.hasError('required') && firstName.touched">
+      <p>* First Name is required.</p>
+    </ion-item>-->
+    <ion-item>
+      <ion-label floating>Last Name</ion-label>
+      <ion-input [formControl]="entryForm.controls['lastName']" type="text"></ion-input>
+    </ion-item>
+    <!--<ion-item no-lines *ngIf="lastName.hasError('required') && lastName.touched">
+      <p>* Last Name is required.</p>
+    </ion-item>-->
+    <ion-item>
+      <ion-label floating>Email Address</ion-label>
+      <ion-input [formControl]="entryForm.controls['emailAddress']" type="email"></ion-input>
+    </ion-item>
+    <!--<ion-item no-lines *ngIf="emailAddress.hasError('required') && emailAddress.touched">
+      <p>* Email Address is required.</p>
+    </ion-item>-->
+    <ion-item>
+      <ion-label floating>Company Name</ion-label>
+      <ion-input [formControl]="entryForm.controls['companyName']" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Phone</ion-label>
+      <ion-input [formControl]="entryForm.controls['phone']" type="tel"></ion-input>
+    </ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+            <ion-card>
+              <ion-card-content>
+                Visiting Contact
+              </ion-card-content>
+            </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-list>
+            <ion-item>
+              <ion-label class="dropdown-wrapp" style="white-space: initial; overflow: initial;">Department of the person to be visited</ion-label>
+                <ion-select [formControl]="entryForm.controls['departmentOfPerson']" [(ngModel)]="selectedDepartmentOfPerson">
+                  <ion-option *ngFor="let key of nameOfDepartmentArray" value="{{key}}">{{key}}</ion-option>
+                </ion-select>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-list>
+            <ion-item>
+              <ion-label class="dropdown-wrapp" style="white-space: initial; overflow: initial;">Name of the person to be visited</ion-label>
+                <!--<ion-select [formControl]="entryForm.controls['nameOfPerson']" [(ngModel)]="selectedNamePerson">
+                  <ion-option *ngFor="let key of nameOfPersonArray" value="{{key}}">{{key}}</ion-option>
+                </ion-select>-->
+                <ng-select formControlName="nameOfPerson"
+                        bindLabel="name"
+                        bindValue="id"
+                        [(ngModel)]="selectedPersonId2">
+              </ng-select>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-list>
+            <ion-item>
+              <ion-label class="dropdown-wrapp" style="white-space: initial; overflow: initial;">Purpose of visit</ion-label>
+                <ion-select [formControl]="entryForm.controls['purposeVisit']" [(ngModel)]="selectedVisitPurpose">
+                    <ion-option *ngFor="let key of purposeVisitedArray" value="{{key}}">{{key}}</ion-option>
+                 </ion-select>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-list>
+            <ion-item>
+              <ion-label class="dropdown-wrapp" style="white-space: initial; overflow: initial;">Are you visiting GML controlled area?</ion-label>
+                <ion-select [formControl]="entryForm.controls['controlledAreaOption']" [(ngModel)]="selectedVisitingArea">
+                  <ion-option *ngFor="let key of visitingArea" value="{{key}}">{{key}}</ion-option>
+                 </ion-select>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid> 
+    <ion-grid>
+      <ion-row>
+        <ion-col text-center>
+            <button ion-button color="secondary" outline round text-center>Submit</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
