@@ -1,9 +1,9 @@
 page-home {
 
+    .card { border-radius : 10px; }
     .home-page-header {
         font-size: 26px;
     }
-
     .logo{
         padding-left: 55px;
     }
@@ -16,8 +16,20 @@ page-home {
     .font-wt-500 {
         font-weight: 500;
     }
+    .font-wt-700 {
+        font-weight: 700;    
+    }
     .item-bg-color {
         background-color: #005de4;
+        
+    }
+    background-image: -moz-linear-gradient( -5deg, rgb(20,52,243) 0%, rgb(61,251,150) 100%);
+    background-image: -webkit-linear-gradient( -5deg, rgb(20,52,243) 0%, rgb(61,251,150) 100%);
+    background-image: -ms-linear-gradient( -5deg, rgb(20,52,243) 0%, rgb(61,251,150) 100%);
+
+    .home-img {
+        max-width: 25% !important;
+        display: inline !important;
     }
     .visitor-entry-card-bg {
         background-color: #00e0fd;

@@ -3,8 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angul
 import { FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/forms';
 import { Http } from '@angular/http';
 import { EntryServiceProvider } from '../../providers/entry-service/entry-service';
-import { NgSelectModule } from '@ng-select/ng-select';
-import { FormsModule } from '@angular/forms';
+
 
 
 import 'rxjs/add/operator/toPromise';
@@ -28,51 +27,53 @@ export class SignInPage {
 
   entryForm: FormGroup;
 
-  firstName: AbstractControl;
-  lastName: AbstractControl;
-  emailAddress: AbstractControl;
-  companyName: AbstractControl;
-  phone: AbstractControl;
-  departmentOfPerson: AbstractControl;
-  nameOfPerson: AbstractControl;
-  purposeVisit: AbstractControl;
-  controlledAreaOption: AbstractControl;
+  // firstName: AbstractControl;
+  // lastName: AbstractControl;
+  // emailAddress: AbstractControl;
+  // companyName: AbstractControl;
+  // phone: AbstractControl;
+  // departmentOfPerson: AbstractControl;
+  // nameOfPerson: AbstractControl;
+  // purposeVisit: AbstractControl;
+  // controlledAreaOption: AbstractControl;
   
-  selectedDepartmentOfPerson: string;
-  selectedNameOfPerson: string;
-  selectedVisitPurpose: string;
-  selectedVisitingArea: string;
+  // selectedDepartmentOfPerson: string;
+  // selectedNameOfPerson: string;
+  // selectedVisitPurpose: string;
+  // selectedVisitingArea: string;
 
   visitingArea = [];
   purposeVisitedArray = [];
   nameOfPersonArray = [];
   nameOfDepartmentArray = [];
+  
+  data = { firstName:'', lastName:'', phone:'', email:'' , company:'', department:'', personToBeVisit:'', purpose:'', controlledArea:''};
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
                 private formBuilder: FormBuilder, public alertCtrl: AlertController,
               public entryServicePrider: EntryServiceProvider, private http: Http) {
 
-      this.entryForm = this.formBuilder.group({
-        'firstName': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
-        'lastName': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
-        'emailAddress': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
-        'companyName': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
-        'phone': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
-        'departmentOfPerson': ['', Validators.required],
-        'nameOfPerson': ['', Validators.required],
-        'purposeVisit': ['', Validators.required],
-        'controlledAreaOption': ['', Validators.required]
-      });
+      // this.entryForm = this.formBuilder.group({
+      //   'firstName': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
+      //   'lastName': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
+      //   'emailAddress': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
+      //   'companyName': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
+      //   'phone': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
+      //   'departmentOfPerson': ['', Validators.required],
+      //   'nameOfPerson': ['', Validators.required],
+      //   'purposeVisit': ['', Validators.required],
+      //   'controlledAreaOption': ['', Validators.required]
+      // });
 
-      this.firstName = this.entryForm.controls['firstName'];
-      this.lastName = this.entryForm.controls['lastName'];
-      this.emailAddress = this.entryForm.controls['emailAddress'];
-      this.companyName = this.entryForm.controls['companyName'];
-      this.phone = this.entryForm.contains['phone'];
-      this.departmentOfPerson = this.entryForm['departmentOfPerson'];
-      this.nameOfPerson = this.entryForm['nameOfPerson'];
-      this.purposeVisit = this.entryForm['purposeVisit'];
-      this.controlledAreaOption = this.entryForm['controlledAreaOption'];
+      // this.firstName = this.entryForm.controls['firstName'];
+      // this.lastName = this.entryForm.controls['lastName'];
+      // this.emailAddress = this.entryForm.controls['emailAddress'];
+      // this.companyName = this.entryForm.controls['companyName'];
+      // this.phone = this.entryForm.contains['phone'];
+      // this.departmentOfPerson = this.entryForm['departmentOfPerson'];
+      // this.nameOfPerson = this.entryForm['nameOfPerson'];
+      // this.purposeVisit = this.entryForm['purposeVisit'];
+      // this.controlledAreaOption = this.entryForm['controlledAreaOption'];
 
       this.nameOfDepartmentArray = ["Finance", "HR", "Recruitment", "Testing", "UX", "Development"];
       this.nameOfPersonArray = ["Raj", "Avinash", "Mahesh", "Sean", "Luna", "Kathie"];
@@ -187,9 +188,11 @@ export class SignInPage {
 }
 
   submit(): void {
-    if(this.validate()) {
-      //process
-    }
+    // if(this.validate()) {
+    //   //process
+    // }
+
+    console.log(this.data);
   }
 
   ionViewDidLoad() {

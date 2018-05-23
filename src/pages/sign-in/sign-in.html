@@ -5,117 +5,127 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <ion-title text-center>Visitor Sign In</ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
 <ion-content padding>
-  <form [formGroup]="entryForm" (ngSubmit)="submit()">
-    <ion-item>
-      <ion-label floating>First Name</ion-label>
-      <ion-input [formControl]="firstName" type="text"></ion-input>
-    </ion-item>
-    <!--<ion-item no-lines *ngIf="firstName.hasError('required') && firstName.touched">
-      <p>* First Name is required.</p>
-    </ion-item>-->
-    <ion-item>
-      <ion-label floating>Last Name</ion-label>
-      <ion-input [formControl]="entryForm.controls['lastName']" type="text"></ion-input>
-    </ion-item>
-    <!--<ion-item no-lines *ngIf="lastName.hasError('required') && lastName.touched">
-      <p>* Last Name is required.</p>
-    </ion-item>-->
-    <ion-item>
-      <ion-label floating>Email Address</ion-label>
-      <ion-input [formControl]="entryForm.controls['emailAddress']" type="email"></ion-input>
-    </ion-item>
-    <!--<ion-item no-lines *ngIf="emailAddress.hasError('required') && emailAddress.touched">
-      <p>* Email Address is required.</p>
-    </ion-item>-->
-    <ion-item>
-      <ion-label floating>Company Name</ion-label>
-      <ion-input [formControl]="entryForm.controls['companyName']" type="text"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Phone</ion-label>
-      <ion-input [formControl]="entryForm.controls['phone']" type="tel"></ion-input>
-    </ion-item>
-    <ion-grid>
+  <ion-grid fixed>
       <ion-row>
-        <ion-col>
-            <ion-card>
-              <ion-card-content>
-                Visiting Contact
-              </ion-card-content>
-            </ion-card>
+        <ion-col col-lg-5 col-md-5 col-sm-12 col-xs-12>
+          <img class="sign-in-img" width="100%" height="auto" src="assets/imgs/visitor-sign-in.png" />
+        </ion-col>
+        <ion-col col-lg-7 col-md-7 col-sm-12 col-xs-12>
+          <ion-row>
+            <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
+              <ion-label text-left class="page-title">We make your visit clutter free.</ion-label>
+              <ion-label text-wrap>Food safety Food Safety 1.svg Terms Foodborne illness Hazard analysis and critical control points (HACCP) • Hazard analysis and risk-based preventive controls (HARPC) Critical control point Critical factors FAT TOM pH Water activity (aw) Bacterial pathogens Clostridium botulinum Escherichia coli Listeria Salmonella Vibrio cholerae Cronobacter spp Viral pathogens Enterovirus Hepatitis A Norovirus Rotavirus Parasitic pathogens Cryptosporidium Entamoeba histolytica Giardia Trichinella v t e Food safety is a scientific discipline describing handling, preparation, and storage of food in ways that prevent food-borne illness. The occurrence of two or more cases of a similar illnesses resulting from the ingestion of a common food is known as a food-borne disease outbreak.[1] This includes a number of routines that should be followed to avoid potential health hazards.</ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
+              <ion-label class="form-title">
+                Sign in
+              </ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
+              <form (ngSubmit)="submit()">
+                <ion-row>
+                  <ion-col col-lg-6 col-md-6 col-sm-12 col-xs-12>
+                    <ion-item>
+                        <ion-label floating>First Name</ion-label>
+                        <ion-input type="text" [(ngModel)]="data.firstName" name="firstName"></ion-input>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col col-lg-6 col-md-6 col-sm-12 col-xs-12>
+                    <ion-item>
+                      <ion-label floating>Last Name</ion-label>
+                      <ion-input type="text" [(ngModel)]="data.lastName" name="lastName"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-lg-6 col-md-6 col-sm-12 col-xs-12>
+                    <ion-item>
+                      <ion-label floating>Phone</ion-label>
+                      <ion-input type="tel" [(ngModel)]="data.phone" name="phone"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col col-lg-6 col-md-6 col-sm-12 col-xs-12>
+                    <ion-item>
+                      <ion-label floating>Email</ion-label>
+                      <ion-input type="email" [(ngModel)]="data.email" name="email"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
+                    <ion-item>
+                      <ion-label floating>Company</ion-label>
+                      <ion-input type="text" [(ngModel)]="data.company" name="company"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
+                    <ion-item>
+                        <ion-label floating>Department of the person to be visited</ion-label>
+                        <ion-select name="department" [(ngModel)]="data.department">
+                          <ion-option *ngFor="let key of nameOfDepartmentArray" value="{{key}}">{{key}}</ion-option>
+                        </ion-select>    
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
+                    <ion-item>
+                      <ion-label floating>Name of the person to be visiting</ion-label>
+                      <ion-select name="nameOfPerson" [(ngModel)]="data.personToBeVisited">
+                        <ion-option *ngFor="let key of nameOfPersonArray" value="{{key}}">{{key}}</ion-option>
+                      </ion-select>
+                    </ion-item>
+                    
+                    <!-- <ng-select name="nameOfPerson"
+                            bindLabel="name"
+                            bindValue="id"
+                            [(ngModel)]="selectedPersonId2">
+                    </ng-select> -->
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
+                    <ion-item>
+                      <ion-label floating>Purpose of visit</ion-label>
+                      <ion-select name="purpose" [(ngModel)]="data.purpose">
+                        <ion-option *ngFor="let key of purposeVisitedArray" value="{{key}}">{{key}}</ion-option>
+                      </ion-select>
+                    </ion-item>
+                    
+                    <!-- <ng-select class="custom"></ng-select> -->
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
+                    <ion-item>
+                      <ion-label floating>Are you visiting GMP controlled area?</ion-label>
+                      <ion-select name="controlledArea" [(ngModel)]="data.controlledArea">
+                        <ion-option *ngFor="let key of visitingArea" value="{{key}}">{{key}}</ion-option>
+                      </ion-select>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row padding-top>
+                  <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
+                    <button ion-button color="secondary" outline round>Submit</button>
+                  </ion-col>
+                </ion-row>
+              </form>
+            </ion-col>
+          </ion-row>
         </ion-col>
       </ion-row>
-    </ion-grid>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-list>
-            <ion-item>
-              <ion-label class="dropdown-wrapp" style="white-space: initial; overflow: initial;">Department of the person to be visited</ion-label>
-                <ion-select [formControl]="entryForm.controls['departmentOfPerson']" [(ngModel)]="selectedDepartmentOfPerson">
-                  <ion-option *ngFor="let key of nameOfDepartmentArray" value="{{key}}">{{key}}</ion-option>
-                </ion-select>
-            </ion-item>
-          </ion-list>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-list>
-            <ion-item>
-              <ion-label class="dropdown-wrapp" style="white-space: initial; overflow: initial;">Name of the person to be visited</ion-label>
-                <!--<ion-select [formControl]="entryForm.controls['nameOfPerson']" [(ngModel)]="selectedNamePerson">
-                  <ion-option *ngFor="let key of nameOfPersonArray" value="{{key}}">{{key}}</ion-option>
-                </ion-select>-->
-                <ng-select formControlName="nameOfPerson"
-                        bindLabel="name"
-                        bindValue="id"
-                        [(ngModel)]="selectedPersonId2">
-              </ng-select>
-            </ion-item>
-          </ion-list>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-list>
-            <ion-item>
-              <ion-label class="dropdown-wrapp" style="white-space: initial; overflow: initial;">Purpose of visit</ion-label>
-                <ion-select [formControl]="entryForm.controls['purposeVisit']" [(ngModel)]="selectedVisitPurpose">
-                    <ion-option *ngFor="let key of purposeVisitedArray" value="{{key}}">{{key}}</ion-option>
-                 </ion-select>
-            </ion-item>
-          </ion-list>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-list>
-            <ion-item>
-              <ion-label class="dropdown-wrapp" style="white-space: initial; overflow: initial;">Are you visiting GML controlled area?</ion-label>
-                <ion-select [formControl]="entryForm.controls['controlledAreaOption']" [(ngModel)]="selectedVisitingArea">
-                  <ion-option *ngFor="let key of visitingArea" value="{{key}}">{{key}}</ion-option>
-                 </ion-select>
-            </ion-item>
-          </ion-list>
-        </ion-col>
-      </ion-row>
-    </ion-grid> 
-    <ion-grid>
-      <ion-row>
-        <ion-col text-center>
-            <button ion-button color="secondary" outline round text-center>Submit</button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </form>
+  </ion-grid>
+  
 </ion-content>

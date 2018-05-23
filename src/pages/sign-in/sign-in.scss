@@ -3,9 +3,20 @@ page-sign-in {
     .sign-in-header {
         font-size: 18px;
     }
-
     .dropdown-wrapper {
         overflow: initial !important;
         white-space: initial !important;
+    }
+    .sign-in-img {
+        min-height: auto;
+        height: 100%;
+    }
+    .page-title {
+        font-size: 32px;
+        font-weight: 700;
+    }
+    .form-title {
+        font-size: 20px;
+        font-weight: 700;
     }
 }
