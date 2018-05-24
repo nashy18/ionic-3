@@ -80,15 +80,16 @@
         </ion-row>
         <ion-row>
           <!-- <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12> -->
-            <iframe width="100%" height="345" src="https://www.youtube.com/embed/tqKpk1wABuI" frameborder="0" allowfullscreen></iframe>
+            <iframe width="100%" height="335" src="https://www.youtube.com/embed/tqKpk1wABuI" frameborder="0" allowfullscreen></iframe>
           <!-- </ion-col> -->
         </ion-row>
       </ion-col>
-      <ion-col col-lg-6 col-md-6 col-sm-12 col-xs-12 class="item-bg-color">
-        <ion-grid fixed>
+      <ion-col col-lg-6 col-md-6 col-sm-12 col-xs-12>
+        <div class="item-bg-color">
+          <ion-grid fixed>
             <ion-row>
               <ion-col offset-lg-2 col-lg-8 offset-md-2 col-md-8 col-sm-12 col-xs-12>
-                <ion-card class="visitor-entry-card-bg" (click)="signIn()">
+                <ion-card class="visitor-entry-card-bg" (click)="openSignInPage()">
                   <ion-card-content text-center>
                     <!-- <ion-thumbnail> -->
                       <img text-center class="home-img" width="25" height="75" src="assets/imgs/visitor-entry.png" />
@@ -110,7 +111,7 @@
             </ion-row>
             <ion-row>
               <ion-col offset-lg-2 col-lg-8 offset-md-2 col-md-8 col-sm-12 col-xs-12>
-                <ion-card class="about-us-card-bg">
+                <ion-card class="about-us-card-bg" (click)="openAboutUsPage()">
                   <ion-card-content text-center>
                     <img text-center class="home-img" width="25" height="75" src="assets/imgs/about-us.png" />
                     <ion-label class="font-wt-700">About Us</ion-label>
@@ -119,6 +120,7 @@
               </ion-col>
             </ion-row>
         </ion-grid>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -1,11 +1,8 @@
-import { Component } from '@angular/core';
+import { Component,ErrorHandler, NgModule } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
-import { FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Http } from '@angular/http';
 import { EntryServiceProvider } from '../../providers/entry-service/entry-service';
-
-
-
 import 'rxjs/add/operator/toPromise';
 
 /**
@@ -13,6 +10,9 @@ import 'rxjs/add/operator/toPromise';
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
+ * 
+ * @author: MaheshDe
+ * @since: 11/05/2018
  */
 
 @IonicPage()
@@ -25,23 +25,18 @@ export class SignInPage {
 
   private rootApi: string = "http://localhost:1337";
 
-  entryForm: FormGroup;
+  signInForm: FormGroup;
 
-  // firstName: AbstractControl;
-  // lastName: AbstractControl;
-  // emailAddress: AbstractControl;
-  // companyName: AbstractControl;
-  // phone: AbstractControl;
-  // departmentOfPerson: AbstractControl;
-  // nameOfPerson: AbstractControl;
-  // purposeVisit: AbstractControl;
-  // controlledAreaOption: AbstractControl;
+  firstName: AbstractControl;
+  lastName: AbstractControl;
+  email: AbstractControl;
+  company: AbstractControl;
+  phone: AbstractControl;
+  department: AbstractControl;
+  nameOfPerson: AbstractControl;
+  purpose: AbstractControl;
+  controlledArea: AbstractControl;
   
-  // selectedDepartmentOfPerson: string;
-  // selectedNameOfPerson: string;
-  // selectedVisitPurpose: string;
-  // selectedVisitingArea: string;
-
   visitingArea = [];
   purposeVisitedArray = [];
   nameOfPersonArray = [];
@@ -50,31 +45,22 @@ export class SignInPage {
   data = { firstName:'', lastName:'', phone:'', email:'' , company:'', department:'', personToBeVisit:'', purpose:'', controlledArea:''};
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-                private formBuilder: FormBuilder, public alertCtrl: AlertController,
+              private formBuilder: FormBuilder, public alertCtrl: AlertController,
               public entryServicePrider: EntryServiceProvider, private http: Http) {
 
-      // this.entryForm = this.formBuilder.group({
-      //   'firstName': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
-      //   'lastName': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
-      //   'emailAddress': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
-      //   'companyName': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
-      //   'phone': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
-      //   'departmentOfPerson': ['', Validators.required],
-      //   'nameOfPerson': ['', Validators.required],
-      //   'purposeVisit': ['', Validators.required],
-      //   'controlledAreaOption': ['', Validators.required]
-      // });
+       this.signInForm = formBuilder.group({
+         'firstName': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(2)])],
+         'lastName': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(2)])],
+         'email': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
+         'company': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
+         'phone': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
+         'department': ['', Validators.required],
+         'nameOfPerson': ['', Validators.required],
+         'purpose': ['', Validators.required],
+         'controlledArea': ['', Validators.required]
+       });
 
-      // this.firstName = this.entryForm.controls['firstName'];
-      // this.lastName = this.entryForm.controls['lastName'];
-      // this.emailAddress = this.entryForm.controls['emailAddress'];
-      // this.companyName = this.entryForm.controls['companyName'];
-      // this.phone = this.entryForm.contains['phone'];
-      // this.departmentOfPerson = this.entryForm['departmentOfPerson'];
-      // this.nameOfPerson = this.entryForm['nameOfPerson'];
-      // this.purposeVisit = this.entryForm['purposeVisit'];
-      // this.controlledAreaOption = this.entryForm['controlledAreaOption'];
-
+      // Initializing Drop Down
       this.nameOfDepartmentArray = ["Finance", "HR", "Recruitment", "Testing", "UX", "Development"];
       this.nameOfPersonArray = ["Raj", "Avinash", "Mahesh", "Sean", "Luna", "Kathie"];
       this.purposeVisitedArray = ["Interview","Bank Work", "Personal", "Delivary"];
@@ -82,120 +68,23 @@ export class SignInPage {
       
   }
 
-  validate(): boolean {
 
-    console.log("Validating!");
-    if(this.entryForm.valid) {
-      return true;
-    }
 
-    let errMsg = "<ul>";
-    let showAlert = false;
-    // validate each field
-    let firstName = this.entryForm.controls['firstName'];
-    if(!firstName.valid) {
-      if(firstName['errors'].required) {
+  onSubmit(value: any): void {
+    
+    if(this.signInForm.valid) {
 
-        showAlert = true;
-        errMsg = errMsg+ "<li>First Name is missing.</li>";
-      }
+      console.log("Sign in Form is valid");
+      console.log(this.data);
+    } else {
+
+      console.log("Sign in Form is invalid");
     }
     
-    let lastName = this.entryForm.controls['lastName'];
-    if(!lastName.valid) {
-      if(lastName['errors'].required) {
-
-        showAlert = true;
-        errMsg = errMsg +"<br><li>Last Name is missing.</li>";
-      }
-    }
-
-    let emailAddress = this.entryForm.controls['emailAddress'];
-    if(!emailAddress.valid) {
-      if(emailAddress['errors'].required) {
-
-        showAlert = true;
-        errMsg = errMsg + "<br><li text-left>Email Address is missing.</li>";
-      }
-    }
-
-    let companyName = this.entryForm.controls['companyName'];
-    if(!companyName.valid) {
-      if(companyName['errors'].required) {
-
-        showAlert = true;
-        errMsg = errMsg + "<br><li>Company Name is missing.</li>";
-      }
-    }
-    
-    let phone = this.entryForm.controls['phone'];
-    if(!phone.valid) {
-      if(phone['errors'].required) {
-
-        showAlert = true;
-        errMsg = errMsg + "<br><li>Phone is missing.</li>";
-      }
-    }
-
-    let departmentOfPerson = this.entryForm.controls['departmentOfPerson'];
-    if(!departmentOfPerson.valid) {
-      if(departmentOfPerson['errors'].required) {
-
-        showAlert = true;
-        errMsg = errMsg + "<br><li>Please select Department of tye person to be visited.</li>";
-      }
-    }
-
-    let nameOfPerson = this.entryForm.controls['nameOfPerson'];
-    if(!nameOfPerson.valid) {
-      if(nameOfPerson['errors'].required) {
-
-        showAlert = true;
-        errMsg = errMsg + "<br><li>Please select name of the person.</li>";
-      }
-    }
-
-    let purposeVisit = this.entryForm.controls['purposeVisit'];
-    if(!purposeVisit.valid) {
-      if(purposeVisit['errors'].required) {
-
-        showAlert = true;
-        errMsg = errMsg + "<br><li>Please select purpose of visit.</li>";
-      }
-    }
-
-    let controlledAreaOption = this.entryForm.controls['controlledAreaOption'];
-    if(!purposeVisit.valid) {
-      if(controlledAreaOption['errors'].required) {
-
-        showAlert = true;
-        errMsg = errMsg + "<br><li>Please select are you visiting GML controlled area.</li>";
-      }
-    }
-
-    errMsg = errMsg + "</ul>"
-
-    if(showAlert) {
-      let alert = this.alertCtrl.create({
-        //title: 'New Friend!',
-        subTitle: errMsg,
-        cssClass:".alert-ios .alert-head {text-align: start !important ;padding: 12px 16px 7px;}",
-        buttons: ['OK']
-      });
-      alert.present();
-    }
-    
-}
-
-  submit(): void {
-    // if(this.validate()) {
-    //   //process
-    // }
-
-    console.log(this.data);
   }
 
   ionViewDidLoad() {
+    
     console.log('ionViewDidLoad SignInPage');
   }
 
@@ -222,7 +111,120 @@ export class SignInPage {
     console.log("DO DELETE");
   }
 
+  onChangeEvent() {
+    console.log("Drop down Change event occured");
+  }
 
+  onCancelEvent() {
+    console.log("Drop down Cancel event occured");
+  }
 
+  resetForm() {
+    this.data = { firstName:'', lastName:'', phone:'', email:'' , company:'', department:'', personToBeVisit:'', purpose:'', controlledArea:''};
+  }
 
+  //   validate(): boolean {
+
+  //     console.log("Validating!");
+  //     if(this.signInForm.valid) {
+  //       return true;
+  //     }
+
+  //     let errMsg = "<ul>";
+  //     let showAlert = false;
+  //     // validate each field
+  //     let firstName = this.signInForm.controls['firstName'];
+  //     if(!firstName.valid) {
+  //       if(firstName['errors'].required) {
+
+  //         showAlert = true;
+  //         errMsg = errMsg+ "<li>First Name is missing.</li>";
+  //       }
+  //     }
+      
+  //     let lastName = this.signInForm.controls['lastName'];
+  //     if(!lastName.valid) {
+  //       if(lastName['errors'].required) {
+
+  //         showAlert = true;
+  //         errMsg = errMsg +"<br><li>Last Name is missing.</li>";
+  //       }
+  //     }
+
+  //     let emailAddress = this.signInForm.controls['emailAddress'];
+  //     if(!emailAddress.valid) {
+  //       if(emailAddress['errors'].required) {
+
+  //         showAlert = true;
+  //         errMsg = errMsg + "<br><li text-left>Email Address is missing.</li>";
+  //       }
+  //     }
+
+  //     let companyName = this.signInForm.controls['companyName'];
+  //     if(!companyName.valid) {
+  //       if(companyName['errors'].required) {
+
+  //         showAlert = true;
+  //         errMsg = errMsg + "<br><li>Company Name is missing.</li>";
+  //       }
+  //     }
+      
+  //     let phone = this.signInForm.controls['phone'];
+  //     if(!phone.valid) {
+  //       if(phone['errors'].required) {
+
+  //         showAlert = true;
+  //         errMsg = errMsg + "<br><li>Phone is missing.</li>";
+  //       }
+  //     }
+
+  //     let departmentOfPerson = this.signInForm.controls['departmentOfPerson'];
+  //     if(!departmentOfPerson.valid) {
+  //       if(departmentOfPerson['errors'].required) {
+
+  //         showAlert = true;
+  //         errMsg = errMsg + "<br><li>Please select Department of tye person to be visited.</li>";
+  //       }
+  //     }
+
+  //     let nameOfPerson = this.signInForm.controls['nameOfPerson'];
+  //     if(!nameOfPerson.valid) {
+  //       if(nameOfPerson['errors'].required) {
+
+  //         showAlert = true;
+  //         errMsg = errMsg + "<br><li>Please select name of the person.</li>";
+  //       }
+  //     }
+
+  //     let purposeVisit = this.signInForm.controls['purposeVisit'];
+  //     if(!purposeVisit.valid) {
+  //       if(purposeVisit['errors'].required) {
+
+  //         showAlert = true;
+  //         errMsg = errMsg + "<br><li>Please select purpose of visit.</li>";
+  //       }
+  //     }
+
+  //     let controlledAreaOption = this.signInForm.controls['controlledAreaOption'];
+  //     if(!purposeVisit.valid) {
+  //       if(controlledAreaOption['errors'].required) {
+
+  //         showAlert = true;
+  //         errMsg = errMsg + "<br><li>Please select are you visiting GML controlled area.</li>";
+  //       }
+  //     }
+
+  //     errMsg = errMsg + "</ul>"
+
+  //     if(showAlert) {
+  //       let alert = this.alertCtrl.create({
+  //         //title: 'New Friend!',
+  //         subTitle: errMsg,
+  //         cssClass:".alert-ios .alert-head {text-align: start !important ;padding: 12px 16px 7px;}",
+  //         buttons: ['OK']
+  //       });
+  //       alert.present();
+  //     }
+      
+  // }
 }
