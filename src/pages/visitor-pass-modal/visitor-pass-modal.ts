@@ -15,8 +15,18 @@ import { IonicPage, NavController, NavParams, ViewController, AlertController } 
 })
 export class VisitorPassModalPage {
 
+  GMPType: string;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController,
               public alertCtrl: AlertController) {
+      
+    //this.GMPType = this.navParams.get('GMPType');
+
+    if(this.navParams.get('GMPType') == 'agree') {
+      this.GMPType = "Yes";
+    } else {
+      this.GMPType = "No";
+    }
   }
 
   ionViewDidLoad() {

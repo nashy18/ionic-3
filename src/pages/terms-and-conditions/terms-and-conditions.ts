@@ -47,7 +47,7 @@ export class TermsAndConditionsPage {
     // });
     // alert.present();
 
-    var data = { header: 'Confirmation', body : 'Please wait, your contact has been notified to receive you shortly. Please collect your visitor pass from the printer.' };
+    var data = { header: 'Confirmation', body : 'Please wait, your contact has been notified to receive you shortly. Please collect your visitor pass from the printer.', type: 'agree' };
     var modalPage = this.modalCtrl.create('ConfirmationModalPage', data); 
     modalPage.present();
 
@@ -86,7 +86,7 @@ export class TermsAndConditionsPage {
     // });
     // alert.present();
 
-    var data = { header: 'Confirmation', body : 'Please note your access will be restricted to non-GMP compliant areas only.' };
+    var data = { header: 'Confirmation', body : 'Please note your access will be restricted to non-GMP compliant areas only.', type: 'disagree' };
     var modalPage = this.modalCtrl.create('ConfirmationModalPage', data); 
     modalPage.present();
 

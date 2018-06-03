@@ -17,12 +17,14 @@ export class ConfirmationModalPage {
 
   modalHeader: string;
   modalBody: string;
+  modalType: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public viewCtrl : ViewController, public modalCtrl : ModalController) {
     
     this.modalHeader = this.navParams.get('header');
     this.modalBody = this.navParams.get('body');
+    this.modalType = this.navParams.get('type');
 
     console.log("Header: "+ this.modalHeader);
     console.log("Header: "+ this.modalBody);
@@ -48,8 +50,9 @@ export class ConfirmationModalPage {
   confirmClick() {
 
     this.viewCtrl.dismiss();
-
-    var modalPage = this.modalCtrl.create('VisitorPassModalPage'); 
+    
+    var data = {GMPType: this.modalType}
+    var modalPage = this.modalCtrl.create('VisitorPassModalPage', data); 
     modalPage.present();
 
     modalPage.onDidDismiss((data) => {
