@@ -30,37 +30,35 @@
             </ion-label>
           </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row>          
           <ion-col>
-            <ion-row>
-              <ion-col>
-                <h6>Sign out</h6>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <ion-item>
-                  <select-searchable [(ngModel)]="UserList" [items]="users" itemValueField="id" itemTextField="name" [canSearch]="true" (onChange)="userSelectChange($event)">
-                    <ng-template selectSearchableLabelTemplate>
-                      Name
-                    </ng-template>
-                  </select-searchable>
-                </ion-item>
-              </ion-col>
-            </ion-row>
-            <ion-row text-center>
-              <ion-col></ion-col>
-            </ion-row>
-            <ion-row text-center>
-              <ion-col>
-                <button ion-button round small (click)="reset()">
-                  <ion-label>Reset</ion-label>
-                </button>
-                <button ion-button round small (click)="submit()">
-                  <ion-label>Submit</ion-label>
-                </button>
-              </ion-col>
-            </ion-row>
+            <form [formGroup]="signOutForm">
+              <ion-row>
+                <ion-col>
+                  <h6>Sign out</h6>
+                </ion-col>
+              </ion-row>
+              <ion-row>              
+                <ion-col>
+                  <ion-item>
+                    <select-searchable formControlName="UserList" [(ngModel)]="data.UserList" [items]="users" itemValueField="id" itemTextField="name" [canSearch]="true" (onChange)="userSelectChange($event)">
+                      <ng-template selectSearchableLabelTemplate>
+                        Name
+                      </ng-template>
+                    </select-searchable>
+                  </ion-item>                  
+                </ion-col>
+              </ion-row>
+              <ion-row text-center>
+                <ion-col></ion-col>
+              </ion-row>
+              <ion-row text-center>
+                <ion-col>
+                  <button ion-button color="danger" outline round (click)="resetForm();">Reset</button>               
+                  <button ion-button color="secondary" [disabled]="!signOutForm.valid" (click)="onSubmit(signOutForm.value);" type="submit" outline round>Submit</button>
+                </ion-col>
+              </ion-row>
+            </form>
           </ion-col>
         </ion-row>
       </ion-col>

@@ -35,7 +35,7 @@
                 <form [formGroup]="signInForm">
                   <ion-row>
                     <ion-col col-lg-6 col-md-6 col-sm-12 col-xs-12>
-                      <ion-item [ngClass]="{'error-border':!signInForm.controls.firstName.valid && signInForm.controls.firstName.touched}">
+                      <ion-item>
                         <ion-label floating>First Name</ion-label>
                         <ion-input type="text" [(ngModel)]="data.firstName" formControlName="firstName"></ion-input>
                       </ion-item>
@@ -43,7 +43,7 @@
                       <ion-label padding-left class="error-msg" *ngIf="signInForm.controls.firstName.hasError('minlength') && signInForm.controls.firstName.touched">Minimum first name length is 2!</ion-label>
                     </ion-col>
                     <ion-col col-lg-6 col-md-6 col-sm-12 col-xs-12>
-                      <ion-item [ngClass]="{'error-border':!signInForm.controls.lastName.valid && signInForm.controls.lastName.touched}">
+                      <ion-item>
                         <ion-label floating>Last Name</ion-label>
                         <ion-input type="text" [(ngModel)]="data.lastName" formControlName="lastName"></ion-input>
                       </ion-item>
@@ -53,14 +53,14 @@
                   </ion-row>
                   <ion-row>
                     <ion-col col-lg-6 col-md-6 col-sm-12 col-xs-12>
-                      <ion-item [ngClass]="{'error-border':!signInForm.controls.phone.valid && signInForm.controls.phone.touched}">
+                      <ion-item>
                         <ion-label floating>Phone</ion-label>
                         <ion-input type="tel" [(ngModel)]="data.phone" formControlName="phone"></ion-input>
                       </ion-item>
                       <ion-label padding-left class="error-msg m-t-xs" *ngIf="signInForm.controls.phone.hasError('required') && signInForm.controls.phone.touched">Phone is required!</ion-label>
                     </ion-col>
                     <ion-col col-lg-6 col-md-6 col-sm-12 col-xs-12>
-                      <ion-item [ngClass]="{'error-border':!signInForm.controls.email.valid && signInForm.controls.email.touched}">
+                      <ion-item>
                         <ion-label floating>Email</ion-label>
                         <ion-input type="email" [(ngModel)]="data.email" formControlName="email"></ion-input>
                       </ion-item>
@@ -69,7 +69,7 @@
                   </ion-row>
                   <ion-row>
                     <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
-                      <ion-item [ngClass]="{'error-border':!signInForm.controls.company.valid && signInForm.controls.company.touched}">
+                      <ion-item>
                         <ion-label floating>Company</ion-label>
                         <ion-input type="text" [(ngModel)]="data.company" formControlName="company"></ion-input>
                       </ion-item>
@@ -78,7 +78,7 @@
                   </ion-row>
                   <ion-row>
                     <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
-                      <ion-item [ngClass]="{'error-border':!signInForm.controls.department.valid && signInForm.controls.department.touched}">
+                      <ion-item>
                           <ion-label floating>Department of the person to be visited</ion-label>
                           <ion-select formControlName="department" [(ngModel)]="data.department" (ionChange)='onChangeEvent()' multiple="false" interface="popover">
                             <ion-option *ngFor="let key of nameOfDepartmentArray" value="{{key}}">{{key}}</ion-option>
@@ -89,7 +89,7 @@
                   </ion-row>
                   <ion-row>
                     <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
-                      <ion-item [ngClass]="{'error-border':!signInForm.controls.nameOfPerson.valid && signInForm.controls.nameOfPerson.touched}">
+                      <ion-item>
                         <ion-label floating>Name of the person to be visiting</ion-label>
                         <ion-select formControlName="nameOfPerson" [(ngModel)]="data.personToBeVisit" (ionChange)='onChangeEvent()' multiple="false" interface="popover">
                           <ion-option *ngFor="let key of nameOfPersonArray" value="{{key}}">{{key}}</ion-option>
@@ -100,7 +100,7 @@
                   </ion-row>
                   <ion-row>
                     <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
-                      <ion-item [ngClass]="{'error-border':!signInForm.controls.purpose.valid && signInForm.controls.purpose.touched}">
+                      <ion-item>
                         <ion-label floating>Purpose of visit</ion-label>
                         <ion-select formControlName="purpose" [(ngModel)]="data.purpose" (ionChange)='onChangeEvent()' multiple="false" interface="popover">
                           <ion-option *ngFor="let key of purposeVisitedArray" value="{{key}}">{{key}}</ion-option>
@@ -111,7 +111,7 @@
                   </ion-row>
                   <ion-row>
                     <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
-                      <ion-item [ngClass]="{'error-border':!signInForm.controls.controlledArea.valid && signInForm.controls.controlledArea.touched}">
+                      <ion-item>
                         <ion-label floating>Are you visiting GMP controlled area?</ion-label>
                         <ion-select formControlName="controlledArea" [(ngModel)]="data.controlledArea" (ionChange)='onChangeEvent()' (ionCancel)='onCancelEvent()' multiple="false" interface="popover">
                           <ion-option *ngFor="let key of visitingArea" value="{{key}}">{{key}}</ion-option>
