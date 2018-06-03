@@ -13,6 +13,7 @@ import { SignInPage } from '../pages/sign-in/sign-in';
 import { EntryServiceProvider } from '../providers/entry-service/entry-service';
 import { HttpModule } from '@angular/http';
 import { SignOutPage } from '../pages/sign-out/sign-out';
+import { TermsAndConditionsPage } from '../pages/terms-and-conditions/terms-and-conditions';
 import { SelectSearchableModule } from 'ionic-select-searchable';
 
 @NgModule({
@@ -21,7 +22,8 @@ import { SelectSearchableModule } from 'ionic-select-searchable';
     HomePage,
     AboutUsPage,
     SignInPage,
-    SignOutPage
+    SignOutPage,
+    TermsAndConditionsPage
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,8 @@ import { SelectSearchableModule } from 'ionic-select-searchable';
     HomePage,
     AboutUsPage,
     SignInPage,
-    SignOutPage
+    SignOutPage,
+    TermsAndConditionsPage
   ],
   providers: [
     StatusBar,

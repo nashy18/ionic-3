@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 import { Http } from '@angular/http';
 import { EntryServiceProvider } from '../../providers/entry-service/entry-service';
 import 'rxjs/add/operator/toPromise';
+import {TermsAndConditionsPage} from '../terms-and-conditions/terms-and-conditions'
 
 /**
  * Generated class for the SignInPage page.
@@ -51,9 +52,9 @@ export class SignInPage {
        this.signInForm = formBuilder.group({
          'firstName': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(2)])],
          'lastName': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(2)])],
-         'email': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
+         'email': ['', Validators.compose([Validators.required, Validators.pattern('[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})')])],
          'company': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
-         'phone': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
+         'phone': ['', Validators.compose([Validators.required, Validators.minLength(10),Validators.maxLength(10)])],
          'department': ['', Validators.required],
          'nameOfPerson': ['', Validators.required],
          'purpose': ['', Validators.required],
@@ -68,19 +69,22 @@ export class SignInPage {
       
   }
 
-
-
   onSubmit(value: any): void {
     
     if(this.signInForm.valid) {
 
       console.log("Sign in Form is valid");
       console.log(this.data);
+      this.navCtrl.push(TermsAndConditionsPage);		
     } else {
 
       console.log("Sign in Form is invalid");
     }
     
+  }
+
+  resetForm() {		
+     this.data = { firstName:'', lastName:'', phone:'', email:'' , company:'', department:'', personToBeVisit:'', purpose:'', controlledArea:''};		
   }
 
   ionViewDidLoad() {
@@ -119,9 +123,7 @@ export class SignInPage {
     console.log("Drop down Cancel event occured");
   }
 
-  resetForm() {
-    this.data = { firstName:'', lastName:'', phone:'', email:'' , company:'', department:'', personToBeVisit:'', purpose:'', controlledArea:''};
-  }
+  
 
   //   validate(): boolean {
 
