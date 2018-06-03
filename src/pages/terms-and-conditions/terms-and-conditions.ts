@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content, ModalController } from 'ionic-angular';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the TermsAndConditionsPage page.
@@ -103,6 +104,7 @@ export class TermsAndConditionsPage {
 
   submit() {
 
+    this.navCtrl.push(HomePage);
   }
   scrollToTop() {
     this.content.scrollToTop();

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the VisitorPassModalPage page.
@@ -47,12 +48,13 @@ export class VisitorPassModalPage {
   printVisitorPass() {
 
     this.viewCtrl.dismiss();
-
-    let alert = this.alertCtrl.create({
-      title: 'Print Successfully Completed!',
-      subTitle: '<strong>Please collect your visitor pass.</strong>',
-      buttons: ['Ok']
-    });
-     alert.present();
+    this.navCtrl.push(HomePage);
+    
+    // let alert = this.alertCtrl.create({
+    //   title: 'Print Successfully Completed!',
+    //   subTitle: '<strong>Please collect your visitor pass.</strong>',
+    //   buttons: ['Ok']
+    // });
+    //  alert.present();
   }
 }
