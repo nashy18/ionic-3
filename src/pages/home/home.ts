@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AboutUsPage } from '../about-us/about-us';
 import { SignInPage } from '../sign-in/sign-in';
+import { SignOutPage } from '../sign-out/sign-out';
 
 /**
  * Generated class for the Home page.
@@ -19,15 +20,15 @@ import { SignInPage } from '../sign-in/sign-in';
 })
 
 export class HomePage {
-
+  lang:any;
   video: any = {
     url: 'https://www.youtube.com/watch?v=tqKpk1wABuI'
   };
 
   constructor(public navCtrl: NavController) {
-    
+
   }
-  
+
   openAboutUsPage() {
 
     this.navCtrl.push(AboutUsPage);
@@ -36,5 +37,10 @@ export class HomePage {
   openSignInPage() {
 
     this.navCtrl.push(SignInPage);
+  }
+
+  signOut() {
+
+    this.navCtrl.push(SignOutPage);
   }
 }

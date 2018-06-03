@@ -12,26 +12,31 @@ import { AboutUsPage } from '../pages/about-us/about-us';
 import { SignInPage } from '../pages/sign-in/sign-in';
 import { EntryServiceProvider } from '../providers/entry-service/entry-service';
 import { HttpModule } from '@angular/http';
+import { SignOutPage } from '../pages/sign-out/sign-out';
+import { SelectSearchableModule } from 'ionic-select-searchable';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     AboutUsPage,
-    SignInPage
+    SignInPage,
+    SignOutPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    SelectSearchableModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
     AboutUsPage,
-    SignInPage
+    SignInPage,
+    SignOutPage
   ],
   providers: [
     StatusBar,

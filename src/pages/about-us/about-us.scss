@@ -4,4 +4,23 @@ page-about-us {
         font-size: 32px;
         font-weight: 700;
     }
+
+    .comp-logo-img {
+        min-height: auto;
+        height: 100%;
+        contain: none;
+    }
+    .font-wt-500 {
+        font-weight: 500;
+    }
+    .font-wt-700 {
+        font-weight: 700;    
+    }
+    .exit-btn{
+        width: 120px;
+    }
+    .para-lbl{        
+        padding: 5px 10px;
+    }
+
 }
