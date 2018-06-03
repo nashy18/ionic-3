@@ -52,9 +52,9 @@ export class SignInPage {
        this.signInForm = formBuilder.group({
          'firstName': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(2)])],
          'lastName': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(2)])],
-         'email': ['', Validators.compose([Validators.required, Validators.pattern('[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})')])],
+         'email': ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
          'company': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
-         'phone': ['', Validators.compose([Validators.required, Validators.minLength(10),Validators.maxLength(10)])],
+         'phone': ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(15)])],
          'department': ['', Validators.required],
          'nameOfPerson': ['', Validators.required],
          'purpose': ['', Validators.required],
@@ -65,7 +65,7 @@ export class SignInPage {
       this.nameOfDepartmentArray = ["Finance", "HR", "Recruitment", "Testing", "UX", "Development"];
       this.nameOfPersonArray = ["Raj", "Avinash", "Mahesh", "Sean", "Luna", "Kathie"];
       this.purposeVisitedArray = ["Interview","Bank Work", "Personal", "Delivary"];
-      this.visitingArea = ["yes","No"];
+      this.visitingArea = ["Yes","No"];
       
   }
 
