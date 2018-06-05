@@ -48,13 +48,18 @@ export class VisitorPassModalPage {
   printVisitorPass() {
 
     this.viewCtrl.dismiss();
-    this.navCtrl.push(HomePage);
+    //this.navCtrl.push(HomePage);
     
-    // let alert = this.alertCtrl.create({
-    //   title: 'Print Successfully Completed!',
-    //   subTitle: '<strong>Please collect your visitor pass.</strong>',
-    //   buttons: ['Ok']
-    // });
-    //  alert.present();
+     let alert = this.alertCtrl.create({
+       title: 'Please collect your visitor pass.',
+       subTitle: '<strong>Thank you for visting natures touch. We wish you a pleasant day.</strong>',
+       buttons: [{
+          text: 'Ok',
+          handler: () => {
+            this.navCtrl.push(HomePage);
+          }
+        }]
+     });
+      alert.present();
   }
 }

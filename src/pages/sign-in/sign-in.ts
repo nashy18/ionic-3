@@ -44,6 +44,7 @@ export class SignInPage {
   nameOfDepartmentArray = [];
   
   data = { firstName:'', lastName:'', phone:'', email:'' , company:'', department:'', personToBeVisit:'', purpose:'', controlledArea:''};
+  emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private formBuilder: FormBuilder, public alertCtrl: AlertController,
@@ -52,9 +53,9 @@ export class SignInPage {
        this.signInForm = formBuilder.group({
          'firstName': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(2)])],
          'lastName': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(2)])],
-         'email': ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
+         'email': ['', Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])],
          'company': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
-         'phone': ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(15)])],
+         'phone': ['', Validators.compose([Validators.required, Validators.pattern('[0-9]{0-10}'), Validators.minLength(10), Validators.maxLength(15)])],
          'department': ['', Validators.required],
          'nameOfPerson': ['', Validators.required],
          'purpose': ['', Validators.required],
@@ -84,7 +85,7 @@ export class SignInPage {
   }
 
   resetForm() {		
-     this.data = { firstName:'', lastName:'', phone:'', email:'' , company:'', department:'', personToBeVisit:'', purpose:'', controlledArea:''};		
+    this.data = { firstName:'', lastName:'', phone:'', email:'' , company:'', department:'', personToBeVisit:'', purpose:'', controlledArea:''};		
   }
 
   ionViewDidLoad() {
@@ -94,7 +95,7 @@ export class SignInPage {
 
   private results;
 
-  doGet() {debugger
+  doGet() {
     
     console.log("DO GET");
     this.entryServicePrider.getCity(this.rootApi).subscribe(data => {

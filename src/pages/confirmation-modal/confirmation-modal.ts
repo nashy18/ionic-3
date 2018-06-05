@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { SharedService } from '../../service/shared.service';
+
 
 /**
  * Generated class for the ConfirmationModalPage page.
@@ -11,7 +13,7 @@ import { IonicPage, NavController, NavParams, ViewController, ModalController } 
 @IonicPage()
 @Component({
   selector: 'page-confirmation-modal',
-  templateUrl: 'confirmation-modal.html',
+  templateUrl: 'confirmation-modal.html'
 })
 export class ConfirmationModalPage {
 
@@ -19,50 +21,57 @@ export class ConfirmationModalPage {
   modalBody: string;
   modalType: string;
 
+  shareService;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public viewCtrl : ViewController, public modalCtrl : ModalController) {
+              public viewCtrl : ViewController, public modalCtrl : ModalController,
+              shareService: SharedService) {
     
     this.modalHeader = this.navParams.get('header');
     this.modalBody = this.navParams.get('body');
     this.modalType = this.navParams.get('type');
 
-    console.log("Header: "+ this.modalHeader);
-    console.log("Header: "+ this.modalBody);
+    this.shareService = shareService;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ConfirmationModalPage');
-    console.log("Header: "+this.navParams.get('header'));
-    console.log("Header: "+this.navParams.get('body'));
-    
   }
 
   closeModal(){
   
+    this.shareService.setVal(true, true, 'cancel');
     this.viewCtrl.dismiss();
   }
 
   cancelModal(){
   
+    this.shareService.setVal(true, true, 'cancel');
     this.viewCtrl.dismiss();
   }
 
   confirmClick() {
 
     this.viewCtrl.dismiss();
-    
-    var data = {GMPType: this.modalType}
-    var modalPage = this.modalCtrl.create('VisitorPassModalPage', data); 
-    modalPage.present();
+    this.shareService.setVal(false, false, this.modalType);
 
-    modalPage.onDidDismiss((data) => {
-    
-      console.log("I have dismissed.");
-    });
+    //this.newMessage();
+    //this.sendMessage();
+    // var data = {GMPType: this.modalType}
+    // var modalPage = this.modalCtrl.create('VisitorPassModalPage', data); 
+    // modalPage.present();
 
-    modalPage.onWillDismiss((data) => {
     
-      console.log("I'm about to dismiss");
-    });
+
+    // //isSubmitDisabled = true;
+    // modalPage.onDidDismiss((data) => {
+    
+    //   console.log("I have dismissed.");
+    // });
+
+    // modalPage.onWillDismiss((data) => {
+    
+    //   console.log("I'm about to dismiss");
+    // });
   }
 }

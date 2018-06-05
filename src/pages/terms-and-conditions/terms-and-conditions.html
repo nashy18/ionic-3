@@ -53,11 +53,11 @@
     </ion-row>
     <ion-row padding-top>
       <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center>
-        <button ion-button class="custom-btn" color="secondary" (click)="openAgreeModal();" outline round>Agree</button>
-        <button ion-button class="custom-btn" color="danger" (click)="openDisagreeModal();" outline round>Disagree</button>
+        <button ion-button class="custom-btn" [disabled]="isAgreeDisabled" [ngStyle]="{'background-color': agreeDefaultButtonBGColor, 'color': agreeBttnText}" color="secondary" (click)="openAgreeModal();" outline round>Agree</button>
+        <button ion-button class="custom-btn" [disabled]="isDisagreeDisabled" [ngStyle]="{'background-color': disagreeDefaultButtonBGColor, 'color': disagreeBttnText}" color="danger" (click)="openDisagreeModal();" outline round>Disagree</button>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="!isSignatureBoxHidden">
       <ion-col text-center class="digital-signature" col-lg-12 col-md-12 col-sm-12 col-xs-12>
           <ion-textarea placeholder="Digital Signature" 
             name="digitalSignature" class="signature-textarea" rows="10" autocomplete="off" autocorrect="off">
@@ -66,7 +66,7 @@
     </ion-row>
     <ion-row>
       <ion-col text-center col-lg-12 col-md-12 col-sm-12 col-xs-12>
-        <button ion-button class="custom-btn" color="default" (click)="submit();" outline round>Submit</button>
+        <button ion-button class="custom-btn" color="default" (click)="submit();" [disabled]="isSubmitDisabled" outline round>Submit</button>
       </ion-col>
     </ion-row>
   </ion-grid>

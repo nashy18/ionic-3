@@ -15,6 +15,7 @@ import { HttpModule } from '@angular/http';
 import { SignOutPage } from '../pages/sign-out/sign-out';
 import { TermsAndConditionsPage } from '../pages/terms-and-conditions/terms-and-conditions';
 import { SelectSearchableModule } from 'ionic-select-searchable';
+import { SharedService } from '../service/shared.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { SelectSearchableModule } from 'ionic-select-searchable';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RestProvider,
-    EntryServiceProvider
+    EntryServiceProvider,
+    SharedService
   ]
 })
 export class AppModule {}
