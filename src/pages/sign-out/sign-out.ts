@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SelectSearchableComponent } from 'ionic-select-searchable';
 import { HomePage } from '../home/home';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the SignOutPage page.
@@ -27,7 +28,7 @@ export class SignOutPage {
     { id: 103, name: 'Raj Ali' }
   ];  
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private alertCtrl: AlertController) {
     this.signOutForm = formBuilder.group({
       'UserList': ['', Validators.required]
     }); 
@@ -47,6 +48,7 @@ export class SignOutPage {
     if(this.signOutForm.valid) {
       console.log("Sign out Form is valid");
       console.log(this.data);
+      this.showMsg();
       this.navCtrl.push(HomePage);
     } else {
       console.log("Sign out Form is invalid");
@@ -57,4 +59,14 @@ export class SignOutPage {
   userSelectChange(event: { component: SelectSearchableComponent, value: any }) {
     console.log('User Name:', event.value);
   }
+
+  showMsg() {
+    let alert = this.alertCtrl.create({
+      title: 'Signed Out',
+      subTitle: 'Successfully Signed Out.<br/>See You Soon.!',
+      buttons: ['Ok']
+    });
+    alert.present();
+  }
+
 }

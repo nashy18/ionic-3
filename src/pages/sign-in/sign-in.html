@@ -11,131 +11,129 @@
 </ion-header>
 <ion-content padding class="item-bg-color">
   <ion-grid fixed>
-    <ion-row>
+      <ion-row>
         <ion-col col-lg-5 col-md-5 col-sm-12 col-xs-12>
-          <img class="" width="100%" height="630" src="assets/imgs/sign-in.png" />
+          <img class="sign-in-img" width="100%" height="auto" src="assets/imgs/sign-in.png" />
         </ion-col>
         <ion-col col-lg-7 col-md-7 col-sm-12 col-xs-12 padding-horizontal>
-          <ion-scroll scrollY="true" style="height: 630px;">
-              <div class="">
-                <ion-row>
-                  <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12 style="margin-left: 10px;margin-right: 10px;">
-                    <ion-label text-left text-justify class="page-title">We make your visit clutter free</ion-label>
-                    <ion-label text-wrap text-justify>Food safety Food Safety 1.svg Terms Foodborne illness Hazard analysis and critical control points (HACCP) • Hazard analysis and risk-based preventive controls (HARPC) Critical control point Critical factors FAT TOM pH Water activity (aw) Bacterial pathogens Clostridium botulinum Escherichia coli Listeria Salmonella Vibrio cholerae Cronobacter spp Viral pathogens Enterovirus Hepatitis A Norovirus Rotavirus Parasitic pathogens Cryptosporidium Entamoeba histolytica Giardia Trichinella v t e Food safety is a scientific discipline describing handling, preparation, and storage of food in ways that prevent food-borne illness. The occurrence of two or more cases of a similar illnesses resulting from the ingestion of a common food is known as a food-borne disease outbreak.[1] This includes a number of routines that should be followed to avoid potential health hazards.</ion-label>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12 style="margin-left: 10px;margin-right: 10px;">
-                    <ion-label class="form-title">
-                      Sign in
-                    </ion-label>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
-                    <ion-card>
-                      <ion-card-content>
-                          <form [formGroup]="signInForm">
-                            <ion-row>
-                              <ion-col col-lg-6 col-md-6 col-sm-12 col-xs-12>
-                                <ion-item>
-                                  <ion-label floating>First Name</ion-label>
-                                  <ion-input type="text" [(ngModel)]="data.firstName" formControlName="firstName"></ion-input>
-                                </ion-item>
-                                <ion-label padding-left class="error-msg m-t-xs" *ngIf="signInForm.controls.firstName.hasError('required') && signInForm.controls.firstName.touched">First Name is required!</ion-label>
-                                <ion-label padding-left class="error-msg" *ngIf="signInForm.controls.firstName.hasError('minlength') && signInForm.controls.firstName.touched">Minimum first name length is 2!</ion-label>
-                              </ion-col>
-                              <ion-col col-lg-6 col-md-6 col-sm-12 col-xs-12>
-                                <ion-item>
-                                  <ion-label floating>Last Name</ion-label>
-                                  <ion-input type="text" [(ngModel)]="data.lastName" formControlName="lastName"></ion-input>
-                                </ion-item>
-                                <ion-label padding-left class="error-msg m-t-xs" *ngIf="signInForm.controls.lastName.hasError('required') && signInForm.controls.lastName.touched">Lirst Name is required!</ion-label>
-                                <ion-label padding-left class="error-msg" *ngIf="signInForm.controls.lastName.hasError('minlength') && signInForm.controls.lastName.touched">Minimum last name length is 2!</ion-label>
-                              </ion-col>
-                            </ion-row>
-                            <ion-row>
-                              <ion-col col-lg-6 col-md-6 col-sm-12 col-xs-12>
-                                <ion-item>
-                                  <ion-label floating>Phone</ion-label>
-                                  <ion-input type="tel" [(ngModel)]="data.phone" formControlName="phone"></ion-input>
-                                </ion-item>
-                                <ion-label padding-left class="error-msg m-t-xs" *ngIf="signInForm.controls.phone.hasError('required') && signInForm.controls.phone.touched">Phone is required!</ion-label>
-                              </ion-col>
-                              <ion-col col-lg-6 col-md-6 col-sm-12 col-xs-12>
-                                <ion-item>
-                                  <ion-label floating>Email</ion-label>
-                                  <ion-input type="email" [(ngModel)]="data.email" formControlName="email"></ion-input>
-                                </ion-item>
-                                <ion-label padding-left class="error-msg m-t-xs" *ngIf="signInForm.controls.email.hasError('required') && signInForm.controls.email.touched">Email is required!</ion-label>
-                              </ion-col>
-                            </ion-row>
-                            <ion-row>
-                              <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
-                                <ion-item>
-                                  <ion-label floating>Company</ion-label>
-                                  <ion-input type="text" [(ngModel)]="data.company" formControlName="company"></ion-input>
-                                </ion-item>
-                                <ion-label padding-left class="error-msg m-t-xs" *ngIf="signInForm.controls.company.hasError('required') && signInForm.controls.company.touched">Company is required!</ion-label>
-                              </ion-col>
-                            </ion-row>
-                            <ion-row>
-                              <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
-                                <ion-item>
-                                    <ion-label floating>Department of the person to be visited</ion-label>
-                                    <ion-select formControlName="department" [(ngModel)]="data.department" (ionChange)='onChangeEvent()' multiple="false" interface="popover">
-                                      <ion-option *ngFor="let key of nameOfDepartmentArray" value="{{key}}">{{key}}</ion-option>
-                                    </ion-select>   
-                                </ion-item>
-                                <ion-label padding-left class="error-msg m-t-xs" *ngIf="signInForm.controls.department.hasError('required') && signInForm.controls.department.touched">Department is required!</ion-label>
-                              </ion-col>
-                            </ion-row>
-                            <ion-row>
-                              <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
-                                <ion-item>
-                                  <ion-label floating>Name of the person to be visiting</ion-label>
-                                  <ion-select formControlName="nameOfPerson" [(ngModel)]="data.personToBeVisit" (ionChange)='onChangeEvent()' multiple="false" interface="popover">
-                                    <ion-option *ngFor="let key of nameOfPersonArray" value="{{key}}">{{key}}</ion-option>
-                                  </ion-select>
-                                </ion-item>
-                                <ion-label padding-left class="error-msg m-t-xs" *ngIf="signInForm.controls.nameOfPerson.hasError('required') && signInForm.controls.nameOfPerson.touched">Name of person is required!</ion-label>
-                              </ion-col>
-                            </ion-row>
-                            <ion-row>
-                              <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
-                                <ion-item>
-                                  <ion-label floating>Purpose of visit</ion-label>
-                                  <ion-select formControlName="purpose" [(ngModel)]="data.purpose" (ionChange)='onChangeEvent()' multiple="false" interface="popover">
-                                    <ion-option *ngFor="let key of purposeVisitedArray" value="{{key}}">{{key}}</ion-option>
-                                  </ion-select>
-                                </ion-item>
-                                <ion-label padding-left class="error-msg m-t-xs" *ngIf="signInForm.controls.purpose.hasError('required') && signInForm.controls.purpose.touched">Purpose is required!</ion-label>
-                              </ion-col>
-                            </ion-row>
-                            <ion-row>
-                              <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
-                                <ion-item>
-                                  <ion-label floating>Are you visiting GMP controlled area?</ion-label>
-                                  <ion-select formControlName="controlledArea" [(ngModel)]="data.controlledArea" (ionChange)='onChangeEvent()' (ionCancel)='onCancelEvent()' multiple="false" interface="popover">
-                                    <ion-option *ngFor="let key of visitingArea" value="{{key}}">{{key}}</ion-option>
-                                  </ion-select>
-                                </ion-item>
-                                <ion-label padding-left class="error-msg m-t-xs" *ngIf="signInForm.controls.controlledArea.hasError('required') && signInForm.controls.controlledArea.touched">Controlled area is required!</ion-label>
-                              </ion-col>
-                            </ion-row>
-                            <ion-row padding-top>
-                              <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center>
-                                <button ion-button color="danger" outline round (click)="resetForm();">Reset</button>
-                                <button ion-button color="secondary" [disabled]="!signInForm.valid" (click)="onSubmit(signInForm.value);" type="submit" outline round>Submit</button>
-                              </ion-col>
-                            </ion-row>
-                          </form>
-                      </ion-card-content>
-                    </ion-card>
-                  </ion-col>
-                </ion-row>
-              </div>
-          </ion-scroll>
+          <div class="sign-in-bg-color">
+            <ion-row>
+              <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
+                <ion-label text-wrap text-left class="page-title">We make your visit clutter free.</ion-label>
+                <ion-label text-wrap text-justify>Food safety Food Safety 1.svg Terms Foodborne illness Hazard analysis and critical control points (HACCP)</ion-label>
+                <ion-label text-wrap text-justify>• Hazard analysis and risk-based preventive controls (HARPC) Critical control point Critical factors FAT TOM pH Water activity (aw) Bacterial pathogens Clostridium botulinum Escherichia coli Listeria Salmonella Vibrio cholerae Cronobacter spp Viral pathogens Enterovirus Hepatitis A Norovirus Rotavirus Parasitic pathogens Cryptosporidium Entamoeba histolytica Giardia Trichinella v t e Food safety is a scientific discipline describing handling, preparation, and storage of food in ways that prevent food-borne illness.</ion-label>
+                <ion-label text-wrap text-justify>The occurrence of two or more cases of a similar illnesses resulting from the ingestion of a common food is known as a food-borne disease outbreak.</ion-label>
+                <ion-label text-wrap text-justify>[1] This includes a number of routines that should be followed to avoid potential health hazards.</ion-label>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
+                <ion-label class="form-title">
+                  Sign in
+                </ion-label>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
+                <form [formGroup]="signInForm">
+                  <ion-row>
+                    <ion-col col-lg-6 col-md-6 col-sm-12 col-xs-12>
+                      <ion-item>
+                        <ion-label floating>First Name</ion-label>
+                        <ion-input type="text" [(ngModel)]="data.firstName" formControlName="firstName"></ion-input>
+                      </ion-item>
+                      <ion-label padding-left class="error-msg m-t-xs" *ngIf="signInForm.controls.firstName.hasError('required') && signInForm.controls.firstName.touched">First Name is required!</ion-label>
+                      <ion-label padding-left class="error-msg" *ngIf="signInForm.controls.firstName.hasError('minlength') && signInForm.controls.firstName.touched">Minimum first name length is 2!</ion-label>
+                    </ion-col>
+                    <ion-col col-lg-6 col-md-6 col-sm-12 col-xs-12>
+                      <ion-item>
+                        <ion-label floating>Last Name</ion-label>
+                        <ion-input type="text" [(ngModel)]="data.lastName" formControlName="lastName"></ion-input>
+                      </ion-item>
+                      <ion-label padding-left class="error-msg m-t-xs" *ngIf="signInForm.controls.lastName.hasError('required') && signInForm.controls.lastName.touched">Lirst Name is required!</ion-label>
+                      <ion-label padding-left class="error-msg" *ngIf="signInForm.controls.lastName.hasError('minlength') && signInForm.controls.lastName.touched">Minimum last name length is 2!</ion-label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col col-lg-6 col-md-6 col-sm-12 col-xs-12>
+                      <ion-item>
+                        <ion-label floating>Phone</ion-label>
+                        <ion-input type="tel" [(ngModel)]="data.phone" formControlName="phone"></ion-input>
+                      </ion-item>
+                      <ion-label padding-left class="error-msg m-t-xs" *ngIf="signInForm.controls.phone.hasError('required') && signInForm.controls.phone.touched">Phone is required!</ion-label>
+                    </ion-col>
+                    <ion-col col-lg-6 col-md-6 col-sm-12 col-xs-12>
+                      <ion-item>
+                        <ion-label floating>Email</ion-label>
+                        <ion-input type="email" [(ngModel)]="data.email" formControlName="email"></ion-input>
+                      </ion-item>
+                      <ion-label padding-left class="error-msg m-t-xs" *ngIf="signInForm.controls.email.hasError('required') && signInForm.controls.email.touched">Email is required!</ion-label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
+                      <ion-item>
+                        <ion-label floating>Company</ion-label>
+                        <ion-input type="text" [(ngModel)]="data.company" formControlName="company"></ion-input>
+                      </ion-item>
+                      <ion-label padding-left class="error-msg m-t-xs" *ngIf="signInForm.controls.company.hasError('required') && signInForm.controls.company.touched">Company is required!</ion-label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
+                      <ion-item>
+                          <ion-label floating>Department of the person to be visited</ion-label>
+                          <ion-select formControlName="department" [(ngModel)]="data.department" (ionChange)='onChangeEvent()' multiple="false" interface="popover">
+                            <ion-option *ngFor="let key of nameOfDepartmentArray" value="{{key}}">{{key}}</ion-option>
+                          </ion-select>   
+                      </ion-item>
+                      <ion-label padding-left class="error-msg m-t-xs" *ngIf="signInForm.controls.department.hasError('required') && signInForm.controls.department.touched">Department is required!</ion-label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
+                      <ion-item>
+                        <ion-label floating>Name of the person to be visiting</ion-label>
+                        <ion-select formControlName="nameOfPerson" [(ngModel)]="data.personToBeVisit" (ionChange)='onChangeEvent()' multiple="false" interface="popover">
+                          <ion-option *ngFor="let key of nameOfPersonArray" value="{{key}}">{{key}}</ion-option>
+                        </ion-select>
+                      </ion-item>
+                      <ion-label padding-left class="error-msg m-t-xs" *ngIf="signInForm.controls.nameOfPerson.hasError('required') && signInForm.controls.nameOfPerson.touched">Name of person is required!</ion-label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
+                      <ion-item>
+                        <ion-label floating>Purpose of visit</ion-label>
+                        <ion-select formControlName="purpose" [(ngModel)]="data.purpose" (ionChange)='onChangeEvent()' multiple="false" interface="popover">
+                          <ion-option *ngFor="let key of purposeVisitedArray" value="{{key}}">{{key}}</ion-option>
+                        </ion-select>
+                      </ion-item>
+                      <ion-label padding-left class="error-msg m-t-xs" *ngIf="signInForm.controls.purpose.hasError('required') && signInForm.controls.purpose.touched">Purpose is required!</ion-label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
+                      <ion-item>
+                        <ion-label floating>Are you visiting GMP controlled area?</ion-label>
+                        <ion-select formControlName="controlledArea" [(ngModel)]="data.controlledArea" (ionChange)='onChangeEvent()' (ionCancel)='onCancelEvent()' multiple="false" interface="popover">
+                          <ion-option *ngFor="let key of visitingArea" value="{{key}}">{{key}}</ion-option>
+                        </ion-select>
+                      </ion-item>
+                      <ion-label padding-left class="error-msg m-t-xs" *ngIf="signInForm.controls.controlledArea.hasError('required') && signInForm.controls.controlledArea.touched">Controlled area is required!</ion-label>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row padding-top>
+                    <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center>
+                      <button ion-button color="danger" outline round (click)="resetForm();">Reset</button>
+                      <button ion-button color="secondary" [disabled]="!signInForm.valid" (click)="onSubmit(signInForm.value);" type="submit" outline round>Submit</button>
+                    </ion-col>
+                  </ion-row>
+                </form>
+              </ion-col>
+            </ion-row>
+          </div>
+          
         </ion-col>
       </ion-row>
   </ion-grid>
