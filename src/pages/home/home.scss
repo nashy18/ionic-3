@@ -41,9 +41,31 @@ page-home {
         background-color: #58b9ff;
     }   
     .comp-logo-img {
-        height: "50%";
+        min-height: auto;
+        height: 100%;
         contain: none;
-        width: "50%";
+    }
+    
+    /* For following screen resolution */
+    @media screen and (max-width: 1200px){
+        .comp-title {
+            max-width: 30%;
+        }
+        .comp-title-pad {
+            font-size: 14px;
+        }
     }
 
+    @media screen and (min-width: 1200px){
+        .comp-title {
+            max-width: 20%;
+        }
+        .comp-title-pad {
+            font-size: 16px;
+        }
+        .home-lft-col{
+            padding-top: 0px;
+            padding-bottom: 0px;
+        }
+    }
 }

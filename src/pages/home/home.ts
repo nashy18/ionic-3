@@ -22,7 +22,6 @@ import { SignOutPage } from '../sign-out/sign-out';
 export class HomePage {
   lang:any;
   video: any = {
-    // url: 'https://www.youtube.com/watch?v=tqKpk1wABuI'
     url: 'https://www.youtube.com/watch?v=P_aO2quAPuY'
   };
 

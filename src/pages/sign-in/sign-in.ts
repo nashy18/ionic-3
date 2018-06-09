@@ -55,7 +55,7 @@ export class SignInPage {
          'lastName': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(2)])],
          'email': ['', Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])],
          'company': ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*')])],
-         'phone': ['', Validators.compose([Validators.required, Validators.pattern('[0-9]{0-10}'), Validators.minLength(10), Validators.maxLength(15)])],
+         'phone': ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(15)])],
          'department': ['', Validators.required],
          'nameOfPerson': ['', Validators.required],
          'purpose': ['', Validators.required],
@@ -71,7 +71,6 @@ export class SignInPage {
   }
 
   onSubmit(value: any): void {
-    
     if(this.signInForm.valid) {
 
       console.log("Sign in Form is valid");
