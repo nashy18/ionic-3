@@ -137,7 +137,7 @@
                     <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>    
                       <ion-label class="label_name">Name of the person to be visiting<span class="astrik"> * </span></ion-label>  
                         <ion-item>                              
-                          <select-searchable class="select-option" formControlName="nameOfPerson" [(ngModel)]="data.nameOfPerson" [items]="nameOfPersonList" itemValueField="id" itemTextField="name" [canSearch]="true" (onChange)="userSelectChange($event, 'emplyee')"> 
+                          <select-searchable class="select-option" formControlName="nameOfPerson" [(ngModel)]="data.nameOfPerson" [items]="nameOfPersonList" itemValueField="id" itemTextField="fullName" [canSearch]="true" (onChange)="userSelectChange($event, 'emplyee')"> 
                           </select-searchable>
                           <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
                           <img class="tooltip" src="assets/imgs/help_outline.svg">

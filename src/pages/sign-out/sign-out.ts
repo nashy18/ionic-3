@@ -75,18 +75,20 @@ export class SignOutPage {
     alert.present();
   }
 
-  getAllVisitors() {debugger
+  getAllVisitors() {
 
     const requestData = {};
     requestData["action"] = APIActions.getAllVisitors;
 
     try {
-      this.httpServiceProvider.get(requestData).subscribe((response: any) => {debugger
+      this.httpServiceProvider.get(requestData).subscribe((response: any) => {
         console.log(response.data);
         var list = response.data;
-        for (var i = 0; i < list.length; i++) {debugger
+        if(list != null && list != undefined) {
+          for (var i = 0; i < list.length; i++) {
 
-          list[i]["fullName"] = list[i].firstName + ' ' + list[i].lastName;
+            list[i]["fullName"] = list[i].firstName + ' ' + list[i].lastName;
+          }
         }
         this.users = list;
       }, err => {

@@ -121,9 +121,9 @@ export class SignInPage {
         request["email"] = value.email;
         request["mobileNumber"] = value.phone;
         request["companyName"] = value.company;
-        request["departmentId"] = value.department;
-        request["employeeId"] = value.nameOfPerson;
-        request["visitPurposeId"] = value.purpose;
+        request["departmentId"] = value.department.id;
+        request["employeeId"] = value.nameOfPerson.id;
+        request["visitPurposeId"] = value.purpose.id;
         request["visitingRestrictedAreas"] = (value.controlledArea == 'Yes') ? true: false;
         request["companyId"] = Global.companyId;
 
@@ -157,7 +157,7 @@ export class SignInPage {
       requestData["body"] = request;
 
       try {
-        this.httpServiceProvider.post(requestData).subscribe((response: any) => {debugger
+        this.httpServiceProvider.post(requestData).subscribe((response: any) => {
           console.log("Employee Data: "+response.data);
           this.nameOfPersonList = response.data;  
         }, err => {
@@ -189,13 +189,13 @@ export class SignInPage {
     }
   }
 
-  getAllPurposeData(){debugger
+  getAllPurposeData(){
 
     const requestData = {};
     requestData["action"] = APIActions.getAllPurposes;
 
     try {
-      this.httpServiceProvider.get(requestData).subscribe((response: any) => {debugger
+      this.httpServiceProvider.get(requestData).subscribe((response: any) => {
         console.log(response.data);
         this.purposeVisitedList = response.data;
       }, err => {
@@ -214,14 +214,21 @@ export class SignInPage {
 
       const requestData = {};
       const request = {};
-      request["departmentId"] = event.value;
+      request["departmentId"] = event.value.id;
       requestData["action"] = APIActions.getEmployeesByDepartment;
       requestData["body"] = request;
 
       try {
-        this.httpServiceProvider.post(requestData).subscribe((response: any) => {debugger
+        this.httpServiceProvider.post(requestData).subscribe((response: any) => {
           console.log("Employee Data: "+response.data);
-          this.nameOfPersonList = response.data;  
+          var list = response.data;
+          if(list != null && list != undefined) {
+            for (var i = 0; i < list.length; i++) {
+
+              list[i]["fullName"] = list[i].firstName + ' ' + list[i].lastName;
+            }
+          }
+          this.nameOfPersonList = list;  
         }, err => {
             console.log(err);
           });
