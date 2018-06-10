@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content, ViewController, ModalController } from 'ionic-angular';
 import { HomePage } from '../home/home';
-import {SharedService} from '../../service/shared.service';
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 
 /**

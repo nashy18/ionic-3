@@ -6,6 +6,10 @@ import { Http } from '@angular/http';
 import 'rxjs/Rx';
 import { MyApp } from '../../app/app.component';
 import {TermsAndConditionsPage} from '../terms-and-conditions/terms-and-conditions'
+import { HttpServiceProvider } from '../../providers/http-service/http-service';
+import { Global,APIActions,Enums  } from '../../providers/config/contsants';
+import { HttpHeaders } from '@angular/common/http';
+
 
 /**
  * Generated class for the SignInPage page.
@@ -48,7 +52,7 @@ export class SignInPage {
   data = { firstName:'', lastName:'', phone:'', email:'' , company:'', department:'', nameOfPerson:'', purpose:'', controlledArea:''};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private fb: FormBuilder, public alertCtrl: AlertController,
-              private http: Http) {
+              private http: Http, private httpServiceProvider: HttpServiceProvider) {
           this.signInForm = fb.group({
             firstName : ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(2)])],     
             lastName : ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(2)])],  
@@ -63,29 +67,29 @@ export class SignInPage {
         });  
 
         // Initializing Drop Down
-        this.nameOfDepartmentList = [
-          { id: 101, name: 'Finance'},
-          { id: 102, name: 'Recruitment'},
-          { id: 103, name: 'Administration'},
-          { id: 104, name: 'Sales'},
-          { id: 105, name: 'Development'}
-        ];
+        // this.nameOfDepartmentList = [
+        //   { id: 101, name: 'Finance'},
+        //   { id: 102, name: 'Recruitment'},
+        //   { id: 103, name: 'Administration'},
+        //   { id: 104, name: 'Sales'},
+        //   { id: 105, name: 'Development'}
+        // ];
 
-        this.nameOfPersonList = [
-          { id: 101, name: 'Alex'},
-          { id: 102, name: 'John'},
-          { id: 103, name: 'Martin'},
-          { id: 104, name: 'Sofia'},
-          { id: 105, name: 'Gustavo'},
-          { id: 106, name: 'Kathie'}
-        ];
+        // this.nameOfPersonList = [
+        //   { id: 101, name: 'Alex'},
+        //   { id: 102, name: 'John'},
+        //   { id: 103, name: 'Martin'},
+        //   { id: 104, name: 'Sofia'},
+        //   { id: 105, name: 'Gustavo'},
+        //   { id: 106, name: 'Kathie'}
+        // ];
 
-        this.purposeVisitedList = [
-          { id: 101, name: 'Interview'},
-          { id: 102, name: 'Bank Work'},
-          { id: 103, name: 'Personal'},
-          { id: 104, name: 'Delivery'}
-        ];
+        // this.purposeVisitedList = [
+        //   { id: 101, name: 'Interview'},
+        //   { id: 102, name: 'Bank Work'},
+        //   { id: 103, name: 'Personal'},
+        //   { id: 104, name: 'Delivery'}
+        // ];
 
         this.visitingAreaList = [
           { id: 101, name: 'Yes' },
@@ -98,25 +102,133 @@ export class SignInPage {
     this.data = { firstName:'', lastName:'', phone:'', email:'' , company:'', department:'', nameOfPerson:'', purpose:'', controlledArea:''};
   }
 
+  ionViewDidLoad() {
+    this.getDepartentData();
+    this.getAllPurposeData();
+    console.log('ionViewDidLoad SignInPage');
+  }
+
   onSubmit(value: any): void {
     this.submitAttempt=true;
     if(this.signInForm.valid) {
-      this.navCtrl.push(TermsAndConditionsPage);		
+
+      try {
+
+        const requestData = {};
+        const request = {};
+        request["firstName"] = value.firstName;
+        request["lastName"] = value.lastName;
+        request["email"] = value.email;
+        request["mobileNumber"] = value.phone;
+        request["companyName"] = value.company;
+        request["departmentId"] = value.department;
+        request["employeeId"] = value.nameOfPerson;
+        request["visitPurposeId"] = value.purpose;
+        request["visitingRestrictedAreas"] = (value.controlledArea == 'Yes') ? true: false;
+        request["companyId"] = Global.companyId;
+
+        requestData["action"] = APIActions.addVisitor;
+        requestData["body"] = request;
+
+        this.httpServiceProvider.post(requestData).subscribe((response: any) => {
+          console.log("Visitor created Successfully! "+response.data);
+          this.navCtrl.push(TermsAndConditionsPage);
+        }, err => {
+          console.log(err);
+        });
+      } catch (error) {
+        console.log(error);
+      }
     } else {
       console.log("Sign in Form is invalid");
     }    
   }
 
-  onChangeEvent() {
-    console.log("Drop down Change event occured");
+  onChangeEvent(event, selectedValue, type) {
+    console.log("Drop down Change event occured"+ selectedValue);
+
+    // List employees belongs to selected department
+    if(type =='department') {
+
+      const requestData = {};
+      const request = {};
+      request["departmentId"] = selectedValue;
+      requestData["action"] = APIActions.getEmployeesByDepartment;
+      requestData["body"] = request;
+
+      try {
+        this.httpServiceProvider.post(requestData).subscribe((response: any) => {debugger
+          console.log("Employee Data: "+response.data);
+          this.nameOfPersonList = response.data;  
+        }, err => {
+            console.log(err);
+          });
+        } catch (error) {
+          console.log(error);
+        }
+    }
   }
 
   onCancelEvent() {
     console.log("Drop down Cancel event occured");
   }
 
-  userSelectChange(event: { component: SelectSearchableComponent, value: any }) {
+  getDepartentData() {
+
+    const request = {};
+    request["action"] = APIActions.getAllDepartmets;
+    try {
+      this.httpServiceProvider.get(request).subscribe((response: any) => {
+        console.log(response.data);
+        this.nameOfDepartmentList = response.data;
+        }, err => {
+          console.log(err);
+        });
+      } catch (error) {
+        console.log(error);
+    }
+  }
+
+  getAllPurposeData(){debugger
+
+    const requestData = {};
+    requestData["action"] = APIActions.getAllPurposes;
+
+    try {
+      this.httpServiceProvider.get(requestData).subscribe((response: any) => {debugger
+        console.log(response.data);
+        this.purposeVisitedList = response.data;
+      }, err => {
+        console.log(err);
+      });
+    } catch(error) {
+      console.log(error);
+    }
+  }
+
+  userSelectChange(event: { component: SelectSearchableComponent, value: any }, type) {
     console.log('DropDown Value:', event.value);
+
+    // List employees belongs to selected department
+    if(type =='department') {
+
+      const requestData = {};
+      const request = {};
+      request["departmentId"] = event.value;
+      requestData["action"] = APIActions.getEmployeesByDepartment;
+      requestData["body"] = request;
+
+      try {
+        this.httpServiceProvider.post(requestData).subscribe((response: any) => {debugger
+          console.log("Employee Data: "+response.data);
+          this.nameOfPersonList = response.data;  
+        }, err => {
+            console.log(err);
+          });
+        } catch (error) {
+          console.log(error);
+        }
+    }
   }
 
   nextPage(){

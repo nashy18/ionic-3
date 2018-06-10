@@ -41,7 +41,7 @@
               <ion-row>              
                 <ion-col>
                   <ion-item>
-                    <select-searchable formControlName="UserList" [(ngModel)]="data.UserList" [items]="users" itemValueField="id" itemTextField="name" [canSearch]="true" (onChange)="userSelectChange($event)">
+                    <select-searchable formControlName="UserList" [(ngModel)]="data.UserList" [items]="users" itemValueField="id" itemTextField="fullName" [canSearch]="true" (onChange)="userSelectChange($event)">
                       <ng-template selectSearchableLabelTemplate>
                         Name
                       </ng-template>
