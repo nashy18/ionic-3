@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content, ViewController, ModalController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import {SharedService} from '../../service/shared.service';
+import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 
 /**
  * Generated class for the TermsAndConditionsPage page.
@@ -17,6 +18,16 @@ import {SharedService} from '../../service/shared.service';
 })
 export class TermsAndConditionsPage {
 
+  @ViewChild(SignaturePad) public signaturePad : SignaturePad;
+  
+  public signaturePadOptions : Object = {
+    'minWidth': 2,
+    'canvasWidth': 400,
+    'canvasHeight': 200,
+    'backgroundColor': '#f6fbff',
+    'penColor': '#666a73'
+  };
+
   @ViewChild(Content) content: Content;
 
   modalHeader: string;
@@ -29,7 +40,7 @@ export class TermsAndConditionsPage {
   disagreeBttnText: string = '#e93a3a'; 
 
   isSubmitDisabled:boolean = true;
-  isSignatureBoxHidden: boolean = true;
+  isSignatureBoxHidden: boolean = false;
   isAgreeDisabled: boolean = false;
   isDisagreeDisabled: boolean = false;
 
@@ -39,53 +50,69 @@ export class TermsAndConditionsPage {
   shareService;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public viewCtrl : ViewController, public modalCtrl : ModalController,
-              shareService: SharedService) {
+              public viewCtrl : ViewController, public modalCtrl : ModalController) {
    
       this.modalHeader = this.navParams.get('header');
       this.modalBody = this.navParams.get('body');
       this.modalType = this.navParams.get('type');
-
-      this.shareService = shareService;
   }
   
+  signature = '';
+  
+  ionViewDidLoad() {
+    
+    console.log('ionViewDidLoad TermsAndConditionsPage');
+  }
+
+  ionViewDidEnter() {
+    console.log("ionViewDidEnter");
+    this.signaturePad.clear();
+  }
+ 
+  drawComplete() {
+    console.log("Draw completed");
+  }
+ 
+  drawStart() {
+    console.log("drawStart");
+  }
+ 
+  clearPad() {
+    console.log("Signature pad is cleared");
+    this.signaturePad.clear();
+  }
   openAgreeModal() {
 
     this.agreeDefaultButtonBGColor = '#30d05f';
     this.agreeBttnText= '#ffffff';
 
-    // let alert = this.alertCtrl.create({
-    //   title: '<center>Confirmation</center>',
-    //   message: '<strong>Please wait, your contact has been notified to receive you shortly. Please collect your visitor pass from the printer.</strong>',
-    //   buttons: [
-    //     {
-    //       text: 'Cancel',
-    //       role: 'cancel',
-    //       handler: () => {
-    //         console.log('Cancel clicked');
-    //       }
-    //     },
-    //     {
-    //       text: 'Ok',
-    //       handler: () => {
-    //         console.log('Ok clicked');
-    //       }
-    //     }
-    //   ]
-    // });
-    // alert.present();
-
     var data = { header: 'Confirmation', body : 'Please wait, your contact has been notified to receive you shortly. Please collect your visitor pass from the printer.', type: 'agree' };
     var modalPage = this.modalCtrl.create('ConfirmationModalPage', data); 
     modalPage.present();
 
-    modalPage.onDidDismiss((data) => {
-      console.log("I have dismissed.");
+    modalPage.onDidDismiss((obj) => {
+      console.log("I have dismissed." + obj);
       
-      this.isSubmitDisabled = this.shareService.getVal().buttonDisabled;
-      this.isSignatureBoxHidden = this.shareService.getVal().signatureHidden;
-      this.isAgreeDisabled = this.shareService.getVal().isagreeDisabled;
-      this.isDisagreeDisabled = this.shareService.getVal().isDisagreeDisabled;
+      if(obj.status == 'confirmed') {
+
+        this.isSubmitDisabled = false; //used to enable submit button after click agree button on modal
+        //this.isSignatureBoxHidden = false; //used to enable signature box after click agree button on modal
+      
+        // Changing the button background-color & text color on agree button click.
+        this.agreeDefaultButtonBGColor = '#30d05f';
+        this.agreeBttnText= '#ffffff';
+        // If click on agree then removing highlight from disagree button
+        this.disagreeDefaultButtonBGColor = "#0000";
+        this.disagreeBttnText = '#e93a3a';
+      } else {
+
+        this.isSubmitDisabled = true; //used to disable submit button after click cancel button on modal
+        //this.isSignatureBoxHidden = true; //used to disable signature box after click cancel button on modal
+      
+        // Changing the button background-color & text color on cancel button click.
+        this.agreeDefaultButtonBGColor = '#0000';
+        this.agreeBttnText= '#30d05f';
+      }
     });
 
     modalPage.onWillDismiss((data) => {
@@ -99,37 +126,35 @@ export class TermsAndConditionsPage {
 
     this.disagreeDefaultButtonBGColor = "#e93a3a";
     this.disagreeBttnText = '#ffffff';
-    // let alert = this.alertCtrl.create({
-    //   title: '<center>Confirmation</center>',
-    //   message: '<strong>Please note your access will be restricted to non-GMP compliant areas only.</strong>',
-    //   buttons: [
-    //     {
-    //       text: 'Cancel',
-    //       role: 'cancel',
-    //       handler: () => {
-    //         console.log('Cancel clicked');
-    //       }
-    //     },
-    //     {
-    //       text: 'Ok',
-    //       handler: () => {
-    //         console.log('Ok clicked');
-    //       }
-    //     }
-    //   ]
-    // });
-    // alert.present();
-
+    
     var data = { header: 'Confirmation', body : 'Please note your access will be restricted to non-GMP compliant areas only.', type: 'disagree' };
     var modalPage = this.modalCtrl.create('ConfirmationModalPage', data); 
     modalPage.present();
 
-    modalPage.onDidDismiss((data) => {
-      console.log("I have dismissed.");
-      this.isSubmitDisabled = this.shareService.getVal().buttonDisabled;
-      this.isSignatureBoxHidden = this.shareService.getVal().signatureHidden;
-      this.isAgreeDisabled = this.shareService.getVal().isagreeDisabled;
-      this.isDisagreeDisabled = this.shareService.getVal().isDisagreeDisabled;
+    modalPage.onDidDismiss((obj) => {
+      console.log("I have dismissed."+obj);
+      
+      if(obj.status == 'confirmed') {
+
+        this.isSubmitDisabled = false; //used to enable submit button after click agree button on modal
+        //this.isSignatureBoxHidden = false; //used to enable signature box after click agree button on modal
+
+        // Changing the button background-color & text color on Disagree button click.
+        this.disagreeDefaultButtonBGColor = "#e93a3a";
+        this.disagreeBttnText = '#ffffff';
+
+        // If click on disagree removing highlight from agree button
+        this.agreeDefaultButtonBGColor = '#0000';
+        this.agreeBttnText= '#30d05f';
+      } else {
+
+        this.isSubmitDisabled = true; //used to disable submit button after click cancel button on modal
+        //this.isSignatureBoxHidden = true; //used to disable signature box after click cancel button on modal
+        
+        // Changing the button background-color & text color on Disagree button click.
+        this.disagreeDefaultButtonBGColor = "#0000";
+        this.disagreeBttnText = '#e93a3a';
+      }
     });
 
     modalPage.onWillDismiss((data) => {
@@ -142,6 +167,10 @@ export class TermsAndConditionsPage {
 
     this.viewCtrl.dismiss();
     
+    this.signature = this.signaturePad.toDataURL();
+    console.log("Signature: "+this.signature);
+    this.signaturePad.clear();
+
     var data = {GMPType: this.modalType}
     var modalPage = this.modalCtrl.create('VisitorPassModalPage', data); 
     modalPage.present();
@@ -159,8 +188,4 @@ export class TermsAndConditionsPage {
   scrollToTop() {
     this.content.scrollToTop();
   }
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TermsAndConditionsPage');
-  }
-
 }

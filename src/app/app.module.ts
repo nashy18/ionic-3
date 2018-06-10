@@ -16,6 +16,7 @@ import { SignOutPage } from '../pages/sign-out/sign-out';
 import { TermsAndConditionsPage } from '../pages/terms-and-conditions/terms-and-conditions';
 import { SelectSearchableModule } from 'ionic-select-searchable';
 import { SharedService } from '../service/shared.service';
+import { SignaturePadModule } from 'angular2-signaturepad';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { SharedService } from '../service/shared.service';
     IonicModule.forRoot(MyApp),
     HttpClientModule,
     HttpModule,
-    SelectSearchableModule
+    SelectSearchableModule,
+    SignaturePadModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

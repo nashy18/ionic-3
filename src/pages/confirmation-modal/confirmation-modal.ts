@@ -20,18 +20,16 @@ export class ConfirmationModalPage {
   modalHeader: string;
   modalBody: string;
   modalType: string;
+  modalData: any;
 
   shareService;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public viewCtrl : ViewController, public modalCtrl : ModalController,
-              shareService: SharedService) {
+              public viewCtrl : ViewController, public modalCtrl : ModalController) {
     
     this.modalHeader = this.navParams.get('header');
     this.modalBody = this.navParams.get('body');
     this.modalType = this.navParams.get('type');
-
-    this.shareService = shareService;
   }
 
   ionViewDidLoad() {
@@ -40,30 +38,21 @@ export class ConfirmationModalPage {
 
   closeModal(){
   
-    this.shareService.setVal(true, true, 'cancel');
-    this.viewCtrl.dismiss();
+    this.modalData = {'status':'cancel'};
+    this.viewCtrl.dismiss(this.modalData);
   }
 
   cancelModal(){
   
-    this.shareService.setVal(true, true, 'cancel');
-    this.viewCtrl.dismiss();
+    this.modalData = {'status':'cancel'};
+    this.viewCtrl.dismiss(this.modalData);
   }
 
   confirmClick() {
 
-    this.viewCtrl.dismiss();
-    this.shareService.setVal(false, false, this.modalType);
-
-    //this.newMessage();
-    //this.sendMessage();
-    // var data = {GMPType: this.modalType}
-    // var modalPage = this.modalCtrl.create('VisitorPassModalPage', data); 
-    // modalPage.present();
-
+    this.modalData = {'status':'confirmed'};
+    this.viewCtrl.dismiss(this.modalData);
     
-
-    // //isSubmitDisabled = true;
     // modalPage.onDidDismiss((data) => {
     
     //   console.log("I have dismissed.");
