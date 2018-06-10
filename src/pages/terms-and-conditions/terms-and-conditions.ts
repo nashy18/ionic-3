@@ -82,50 +82,19 @@ export class TermsAndConditionsPage {
   }
   openAgreeModal() {
 
+    // Changing the button background-color & text color on agree button click.
     this.agreeDefaultButtonBGColor = '#30d05f';
     this.agreeBttnText= '#ffffff';
+    // If click on agree then removing highlight from disagree button
+    this.disagreeDefaultButtonBGColor = "#0000";
+    this.disagreeBttnText = '#e93a3a';
 
-    var data = { header: 'Confirmation', body : 'Please wait, your contact has been notified to receive you shortly. Please collect your visitor pass from the printer.', type: 'agree' };
-    var modalPage = this.modalCtrl.create('ConfirmationModalPage', data); 
-    modalPage.present();
-
-    modalPage.onDidDismiss((obj) => {
-      console.log("I have dismissed." + obj);
-      
-      if(obj.status == 'confirmed') {
-
-        this.isSubmitDisabled = false; //used to enable submit button after click agree button on modal
-        //this.isSignatureBoxHidden = false; //used to enable signature box after click agree button on modal
-      
-        // Changing the button background-color & text color on agree button click.
-        this.agreeDefaultButtonBGColor = '#30d05f';
-        this.agreeBttnText= '#ffffff';
-        // If click on agree then removing highlight from disagree button
-        this.disagreeDefaultButtonBGColor = "#0000";
-        this.disagreeBttnText = '#e93a3a';
-      } else {
-
-        this.isSubmitDisabled = true; //used to disable submit button after click cancel button on modal
-        //this.isSignatureBoxHidden = true; //used to disable signature box after click cancel button on modal
-      
-        // Changing the button background-color & text color on cancel button click.
-        this.agreeDefaultButtonBGColor = '#0000';
-        this.agreeBttnText= '#30d05f';
-      }
-    });
-
-    modalPage.onWillDismiss((data) => {
-      console.log("I'm about to dismiss");
-      console.log(data);
-    });
-
+    this.isSubmitDisabled = false; //used to enable submit button after click agree button on modal
+    //this.isSignatureBoxHidden = false; //used to enable signature box after click agree button on modal
   }
 
   openDisagreeModal() {
 
-    this.disagreeDefaultButtonBGColor = "#e93a3a";
-    this.disagreeBttnText = '#ffffff';
-    
     var data = { header: 'Confirmation', body : 'Please note your access will be restricted to non-GMP compliant areas only.', type: 'disagree' };
     var modalPage = this.modalCtrl.create('ConfirmationModalPage', data); 
     modalPage.present();
@@ -147,7 +116,7 @@ export class TermsAndConditionsPage {
         this.agreeBttnText= '#30d05f';
       } else {
 
-        this.isSubmitDisabled = true; //used to disable submit button after click cancel button on modal
+        //this.isSubmitDisabled = true; //used to disable submit button after click cancel button on modal
         //this.isSignatureBoxHidden = true; //used to disable signature box after click cancel button on modal
         
         // Changing the button background-color & text color on Disagree button click.
@@ -170,18 +139,45 @@ export class TermsAndConditionsPage {
     console.log("Signature: "+this.signature);
     this.signaturePad.clear();
 
-    var data = {GMPType: this.modalType}
-    var modalPage = this.modalCtrl.create('VisitorPassModalPage', data); 
+    // var data = {GMPType: this.modalType}
+    // var modalPage = this.modalCtrl.create('VisitorPassModalPage', data); 
+    // modalPage.present();
+
+    var data = { header: 'Confirmation', body : 'Please wait, your contact has been notified to receive you shortly. Please collect your visitor pass from the printer.', type: 'agree' };
+    var modalPage = this.modalCtrl.create('ConfirmationModalPage', data); 
     modalPage.present();
 
-    modalPage.onDidDismiss((data) => {
+    modalPage.onDidDismiss((obj) => {
     
-      console.log("I have dismissed.");
+      console.log("I have dismissed "+obj);
+
+      if(obj.status == 'confirmed') {
+
+        var data = {GMPType: this.modalType}
+        var printModalPage = this.modalCtrl.create('VisitorPassModalPage', data); 
+        printModalPage.present();
+
+        printModalPage.onDidDismiss((obj) => {
+          
+          console.log("I have dismissed "+obj);
+          if(obj.status != 'confirmed') {
+            this.navCtrl.push(TermsAndConditionsPage);
+          }
+        });
+
+        printModalPage.onWillDismiss((obj) => {
+    
+          console.log("I'm about to dismiss "+obj);
+        });
+      } else {
+
+        this.navCtrl.push(TermsAndConditionsPage);
+      }
     });
 
-    modalPage.onWillDismiss((data) => {
+    modalPage.onWillDismiss((obj) => {
     
-      console.log("I'm about to dismiss");
+      console.log("I'm about to dismiss "+obj);
     });
   }
   scrollToTop() {

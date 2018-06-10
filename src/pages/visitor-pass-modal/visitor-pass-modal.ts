@@ -17,6 +17,7 @@ import { HomePage } from '../home/home';
 export class VisitorPassModalPage {
 
   GMPType: string;
+  modalData: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController,
               public alertCtrl: AlertController) {
@@ -37,17 +38,20 @@ export class VisitorPassModalPage {
 
   closeModal(){
   
-    this.viewCtrl.dismiss();
+    this.modalData = {'status':'cancel'};
+    this.viewCtrl.dismiss(this.modalData);
   }
 
   cancelPrint() {
 
-    this.viewCtrl.dismiss();
+    this.modalData = {'status':'cancel'};
+    this.viewCtrl.dismiss(this.modalData);
   }
 
   printVisitorPass() {
 
-    this.viewCtrl.dismiss();
+    this.modalData = {'status':'confirmed'};
+    this.viewCtrl.dismiss(this.modalData);
     //this.navCtrl.push(HomePage);
     
      let alert = this.alertCtrl.create({
