@@ -238,12 +238,4 @@ export class SignInPage {
     }
   }
 
-  nextPage(){
-    console.log("<<<<< nextPage >>>>>");
-    if( this.signInForm.valid){
-      console.log("<<<<< valid Data >>>>>");
-    } else{
-      console.log("<<<<< Invalid Data >>>>>");
-    } 
-  } 
 }

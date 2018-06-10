@@ -19,10 +19,7 @@ page-home {
     .font-wt-700 {
         font-weight: 700;    
     }
-    .item-bg-color {
-        // background-color: #005de4;
-        background-color: #edeef2;        
-    }
+    
     background-image: -moz-linear-gradient( -5deg, rgb(20,52,243) 0%, rgb(61,251,150) 100%);
     background-image: -webkit-linear-gradient( -5deg, rgb(20,52,243) 0%, rgb(61,251,150) 100%);
     background-image: -ms-linear-gradient( -5deg, rgb(20,52,243) 0%, rgb(61,251,150) 100%);
@@ -31,23 +28,53 @@ page-home {
         max-width: 25% !important;
         display: inline !important;
     }
+
     .visitor-entry-card-bg {
         background-color: #00e0fd;
     }
+
     .visitor-exit-card-bg {
         background-color: #00eab6;
     }
     .about-us-card-bg {
         background-color: #58b9ff;
-    }   
+    }
+       
     .comp-logo-img {
         min-height: auto;
         height: 100%;
         contain: none;
     }
-    
+
     .comp-title-pad {
-        padding-left:30px
+        padding-left:30px;
+        text-align:left;
+    }
+    .comp-title-pad-lbl{
+        text-align:left; 
+        font-weight: bold;
+    }
+    .comp-para-lbl{
+        padding-top:0px; 
+        margin-top: 0px;
+    }
+    .comp-para-lbl-spn{
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .container-left-panel{
+        padding-top:0px; 
+        margin-top: 0px;
+    }
+
+    .comp-title {
+        text-align:right;
+    }
+
+    .comp-title-img{
+        position: relative;
+        width: 65px;
+        height: 65px;
     }
 
     /* For following screen resolution */
@@ -56,7 +83,10 @@ page-home {
             max-width: 30%;
         }
         .comp-title-pad {
-            font-size: 16px;
+            font-size: 14px !important;
+        }
+        .comp-title-pad-lbl {
+            font-size: 14px !important;
         }
     }
 
@@ -65,8 +95,12 @@ page-home {
             max-width: 20%;
         }
         .comp-title-pad {
-            font-size: 32px;
+            font-size: 20px !important;
         }
+        .comp-title-pad-lbl {
+            font-size: 20px !important;
+        }
+
         .home-lft-col{
             padding-top: 0px;
             padding-bottom: 0px;

@@ -11,157 +11,153 @@
 </ion-header>
 <ion-content padding class="item-bg-color">
   <ion-grid fixed>
-      <ion-row>
-        <ion-col col-12 col-lg-5 col-md-5 col-sm-12 col-xs-12>
-          <img class="sign-in-img" width="100%" height="auto" src="assets/imgs/sign-in.png" />
-        </ion-col>
-        <ion-col col-12 col-lg-7 col-md-7 col-sm-12 col-xs-12 padding-horizontal>
-          <div class="sign-in-bg-color">
-            <form [formGroup]="signInForm" >
+    <ion-row>
+      <ion-col col-12 col-lg-5 col-md-5 col-sm-12 col-xs-12>
+        <img class="sign-in-img" width="100%" height="auto" src="assets/imgs/sign-in.png" />
+      </ion-col>
+      <ion-col col-12 col-lg-7 col-md-7 col-sm-12 col-xs-12 padding-horizontal>
+        <div class="sign-in-bg-color">
+          <form [formGroup]="signInForm" >
             <ion-row>
-              <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
-                <ion-label text-wrap text-left class="page-title">We make your visit clutter free.</ion-label>
-                <ion-label text-wrap text-justify>Food safety Food Safety 1.svg Terms Foodborne illness Hazard analysis and critical control points (HACCP)</ion-label>
-                <ion-label text-wrap text-justify>• Hazard analysis and risk-based preventive controls (HARPC) Critical control point Critical factors FAT TOM pH Water activity (aw) Bacterial pathogens Clostridium botulinum Escherichia coli Listeria Salmonella Vibrio cholerae Cronobacter spp Viral pathogens Enterovirus Hepatitis A Norovirus Rotavirus Parasitic pathogens Cryptosporidium Entamoeba histolytica Giardia Trichinella v t e Food safety is a scientific discipline describing handling, preparation, and storage of food in ways that prevent food-borne illness.</ion-label>
-                <ion-label text-wrap text-justify>The occurrence of two or more cases of a similar illnesses resulting from the ingestion of a common food is known as a food-borne disease outbreak.</ion-label>
-                <ion-label text-wrap text-justify>[1] This includes a number of routines that should be followed to avoid potential health hazards.</ion-label>
-              </ion-col>
+             <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
+               <ion-label text-wrap text-left class="page-title">We make your visit clutter free.</ion-label>
+               <!-- <ion-label text-wrap text-justify>Food safety Food Safety 1.svg Terms Foodborne illness Hazard analysis and critical control points (HACCP)</ion-label>
+               <ion-label text-wrap text-justify>• Hazard analysis and risk-based preventive controls (HARPC) Critical control point Critical factors FAT TOM pH Water activity (aw) Bacterial pathogens Clostridium botulinum Escherichia coli Listeria Salmonella Vibrio cholerae Cronobacter spp Viral pathogens Enterovirus Hepatitis A Norovirus Rotavirus Parasitic pathogens Cryptosporidium Entamoeba histolytica Giardia Trichinella v t e Food safety is a scientific discipline describing handling, preparation, and storage of food in ways that prevent food-borne illness.</ion-label>
+               <ion-label text-wrap text-justify>The occurrence of two or more cases of a similar illnesses resulting from the ingestion of a common food is known as a food-borne disease outbreak.</ion-label>
+               <ion-label text-wrap text-justify>[1] This includes a number of routines that should be followed to avoid potential health hazards.</ion-label> -->
+             </ion-col>
+           </ion-row>
+           <ion-row>
+            <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
+              <ion-label class="form-title">
+                Sign in
+              </ion-label>
+            </ion-col>
+           </ion-row>
+           <ion-row>
+             <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>
+               <ion-label class="label_name">Scan business card here or enter below </ion-label>
+             </ion-col>                
+             <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12 text-left padding-top>
+               <ion-img width="100" height="25" src="assets/imgs/bar_code.png"></ion-img>
+             </ion-col>
+           </ion-row>            
+           <ion-row>
+            <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>    
+              <ion-label class="label_name">First Name<span class="astrik"> * </span></ion-label>  
+                <ion-item>
+                  <ion-input type="text" [(ngModel)]="data.firstName" formControlName="firstName" [class.invalid]="!signInForm.controls.firstName.valid && 
+                   (signInForm.controls.firstName.dirty)"></ion-input>
+                  <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
+                    <img class="tooltip" src="assets/imgs/help_outline.svg">
+                     <span class="tooltiptext">Enter Your First Name</span>
+                  </button>
+                </ion-item> 
+                <div class="req-lbl" *ngIf="signInForm.controls.firstName.hasError('required')  &&
+                  (signInForm.controls.firstName.touched)">* First Name is required!</div>
+                <div class="req-lbl" *ngIf="signInForm.controls.firstName.hasError('minlength')  &&
+                  (signInForm.controls.firstName.touched )">* Minimum First Name length is 2!</div>                
+            </ion-col>
+            <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>    
+              <ion-label class="label_name">Last Name<span class="astrik"> * </span></ion-label>  
+                <ion-item>
+                  <ion-input type="text" [(ngModel)]="data.lastName" formControlName="lastName" [class.invalid]="!signInForm.controls.lastName.valid && 
+                   (signInForm.controls.lastName.dirty)"></ion-input>
+                    <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
+                     <img class="tooltip" src="assets/imgs/help_outline.svg">
+                     <span class="tooltiptext">Enter Your Last Name</span>
+                    </button>
+                </ion-item> 
+                <div class="req-lbl" *ngIf="signInForm.controls.lastName.hasError('required')  &&
+                  (signInForm.controls.lastName.touched )">* Last Name is required!</div>  
+                <div class="req-lbl" *ngIf="signInForm.controls.lastName.hasError('minlength')  &&
+                  (signInForm.controls.lastName.touched )">* Minimum Last Name length is 2!</div>                
+             </ion-col>
             </ion-row>
-            <ion-row>
-              <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
-                <ion-label class="form-title">
-                  Sign in
-                </ion-label>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>
-                  <ion-label class="label_name">Scan business card here or enter below </ion-label>
-                </ion-col>                
-                <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12 text-left padding-top>
-                  <ion-img width="100" height="25" src="assets/imgs/bar_code.png"></ion-img>
-                </ion-col>
-            </ion-row>            
             <ion-row>
               <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>    
-                  <ion-label class="label_name">First Name<span class="astrik"> * </span></ion-label>  
-                    <ion-item>
-                      <ion-input type="text" [(ngModel)]="data.firstName" formControlName="firstName" [class.invalid]="!signInForm.controls.firstName.valid && 
-                    (signInForm.controls.firstName.dirty)"></ion-input>
-                     <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
-                      <img class="tooltip" src="assets/imgs/help_outline.svg">
-                      <span class="tooltiptext">Enter Your First Name</span>
-                    </button>
-                    </ion-item> 
-                    <div class="req-lbl" *ngIf="signInForm.controls.firstName.hasError('required')  &&
-                    (signInForm.controls.firstName.touched)">* First Name is required!</div>
-                    <div class="req-lbl" *ngIf="signInForm.controls.firstName.hasError('minlength')  &&
-                    (signInForm.controls.firstName.touched )">* Minimum First Name length is 2!</div>                
-              </ion-col>
-              <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>    
-                  <ion-label class="label_name">Last Name<span class="astrik"> * </span></ion-label>  
-                    <ion-item>
-                      <ion-input type="text" [(ngModel)]="data.lastName" formControlName="lastName" [class.invalid]="!signInForm.controls.lastName.valid && 
-                    (signInForm.controls.lastName.dirty)"></ion-input>
-                     <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
-                      <img class="tooltip" src="assets/imgs/help_outline.svg">
-                      <span class="tooltiptext">Enter Your Last Name</span>
-                    </button>
-                    </ion-item> 
-                    <div class="req-lbl" *ngIf="signInForm.controls.lastName.hasError('required')  &&
-                    (signInForm.controls.lastName.touched )">* Last Name is required!</div>  
-                    <div class="req-lbl" *ngIf="signInForm.controls.lastName.hasError('minlength')  &&
-                    (signInForm.controls.lastName.touched )">* Minimum Last Name length is 2!</div>                
-              </ion-col>
-            </ion-row>
-
-            <ion-row>
-                <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>    
-                    <ion-label class="label_name">Phone<span class="astrik"> * </span></ion-label>  
-                      <ion-item>
-                        <ion-input type="tel" [(ngModel)]="data.phone" formControlName="phone" [class.invalid]="!signInForm.controls.phone.valid && 
+                <ion-label class="label_name">Phone<span class="astrik"> * </span></ion-label>  
+                  <ion-item>
+                    <ion-input type="tel" [(ngModel)]="data.phone" formControlName="phone" [class.invalid]="!signInForm.controls.phone.valid && 
                       (signInForm.controls.phone.dirty)"></ion-input>
-                       <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
-                        <img class="tooltip" src="assets/imgs/help_outline.svg">
-                        <span class="tooltiptext">Enter Your Contact Number</span>
-                      </button>
-                      </ion-item> 
-                      <div class="req-lbl" *ngIf="!signInForm.controls.phone.valid && 
-                      (signInForm.controls.phone.touched )">* Phone is required (10 digit)!</div>             
-                </ion-col>
-                <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>    
-                    <ion-label class="label_name">Email-Id<span class="astrik"> * </span></ion-label>  
-                      <ion-item>
-                        <ion-input type="text" [(ngModel)]="data.email" formControlName="email" [class.invalid]="!signInForm.controls.email.valid && 
-                      (signInForm.controls.email.dirty)"></ion-input>
-                       <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
-                        <img class="tooltip" src="assets/imgs/help_outline.svg">
-                        <span class="tooltiptext">Enter Your Email-Id</span>
-                      </button>
-                      </ion-item> 
-                      <div class="req-lbl" *ngIf="!signInForm.controls.email.valid  &&
-                      (signInForm.controls.email.touched )">* Email-Id is required!</div>                
-                </ion-col>
-              </ion-row>
-
-              <ion-row>
-                <ion-col col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12>    
-                  <ion-label class="label_name">Company<span class="astrik"> * </span></ion-label>  
-                    <ion-item>
-                      <ion-input type="text" [(ngModel)]="data.company" formControlName="company" [class.invalid]="!signInForm.controls.company.valid && 
-                    (signInForm.controls.company.dirty)"></ion-input>
                       <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
+                       <img class="tooltip" src="assets/imgs/help_outline.svg">
+                       <span class="tooltiptext">Enter Your Contact Number</span>
+                      </button>
+                  </ion-item> 
+                  <div class="req-lbl" *ngIf="!signInForm.controls.phone.valid && 
+                    (signInForm.controls.phone.touched )">* Phone is required (10 digit)!</div>             
+              </ion-col>
+              <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>    
+                <ion-label class="label_name">Email-Id<span class="astrik"> * </span></ion-label>  
+                  <ion-item>
+                    <ion-input type="text" [(ngModel)]="data.email" formControlName="email" [class.invalid]="!signInForm.controls.email.valid && 
+                      (signInForm.controls.email.dirty)"></ion-input>
+                      <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
+                       <img class="tooltip" src="assets/imgs/help_outline.svg">
+                       <span class="tooltiptext">Enter Your Email-Id</span>
+                      </button>
+                  </ion-item> 
+                  <div class="req-lbl" *ngIf="!signInForm.controls.email.valid  &&
+                    (signInForm.controls.email.touched )">* Email-Id is required!</div>                
+               </ion-col>
+              </ion-row>
+              <ion-row>
+               <ion-col col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12>    
+                 <ion-label class="label_name">Company<span class="astrik"> * </span></ion-label>  
+                   <ion-item>
+                    <ion-input type="text" [(ngModel)]="data.company" formControlName="company" [class.invalid]="!signInForm.controls.company.valid && 
+                     (signInForm.controls.company.dirty)"></ion-input>
+                     <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
                       <img class="tooltip" src="assets/imgs/help_outline.svg">
                       <span class="tooltiptext">Enter Company Name</span>
-                    </button>
-                    </ion-item> 
-                    <div class="req-lbl" *ngIf="!signInForm.controls.company.valid  &&
+                     </button>
+                   </ion-item> 
+                   <div class="req-lbl" *ngIf="!signInForm.controls.company.valid  &&
                     (signInForm.controls.company.touched )">* Company is required!</div>                
                 </ion-col>                  
                 </ion-row>
-
                 <ion-row>
-                    <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>    
-                      <ion-label class="label_name">Department of the person to be visited<span class="astrik"> * </span></ion-label>  
-                        <ion-item>                          
-                          <select-searchable class="select-option" formControlName="department" [(ngModel)]="data.department" [items]="nameOfDepartmentList" itemValueField="id" itemTextField="name" [canSearch]="true" (onChange)="userSelectChange($event, 'department')"> 
-                          </select-searchable>
-                          <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
+                  <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>    
+                    <ion-label class="label_name">Department of the person to be visited<span class="astrik"> * </span></ion-label>  
+                      <ion-item>                          
+                        <select-searchable class="select-option" formControlName="department" [(ngModel)]="data.department" [items]="nameOfDepartmentList" itemValueField="id" itemTextField="name" [canSearch]="true" (onChange)="userSelectChange($event, 'department')"> 
+                        </select-searchable>
+                        <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
                           <img class="tooltip" src="assets/imgs/help_outline.svg">
                           <span class="tooltiptext">Select Department Name</span>
                         </button>
-                        </ion-item> 
-                        <div class="req-lbl" *ngIf="!signInForm.controls.department.valid  &&
-                        (signInForm.controls.department.touched )">* Department is required!</div>                
-                    </ion-col>
-                    <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>    
-                      <ion-label class="label_name">Name of the person to be visiting<span class="astrik"> * </span></ion-label>  
-                        <ion-item>                              
-                          <select-searchable class="select-option" formControlName="nameOfPerson" [(ngModel)]="data.nameOfPerson" [items]="nameOfPersonList" itemValueField="id" itemTextField="fullName" [canSearch]="true" (onChange)="userSelectChange($event, 'emplyee')"> 
-                          </select-searchable>
-                          <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
+                      </ion-item> 
+                      <div class="req-lbl" *ngIf="!signInForm.controls.department.valid  &&
+                       (signInForm.controls.department.dirty )">* Department is required!</div>                
+                  </ion-col>
+                  <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>    
+                    <ion-label class="label_name">Name of the person to be visiting<span class="astrik"> * </span></ion-label>  
+                      <ion-item>                              
+                        <select-searchable class="select-option" formControlName="nameOfPerson" [(ngModel)]="data.nameOfPerson" [items]="nameOfPersonList" itemValueField="id" itemTextField="name" [canSearch]="true" (onChange)="userSelectChange($event, 'emplyee')"> 
+                        </select-searchable>
+                        <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
                           <img class="tooltip" src="assets/imgs/help_outline.svg">
                           <span class="tooltiptext">Select Person Name</span>
                         </button>
-                        </ion-item> 
-                        <div class="req-lbl" *ngIf="!signInForm.controls.nameOfPerson.valid  &&
-                        (signInForm.controls.nameOfPerson.touched )">* Name of person is required!</div>                
-                    </ion-col>
-                  </ion-row>
- 
+                      </ion-item> 
+                      <div class="req-lbl" *ngIf="!signInForm.controls.nameOfPerson.valid  &&
+                        (signInForm.controls.nameOfPerson.dirty )">* Name of person is required!</div>                
+                   </ion-col>
+                  </ion-row> 
                   <ion-row>
                     <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>    
                       <ion-label class="label_name">Purpose of visit<span class="astrik"> * </span></ion-label>  
                         <ion-item>
-                            <select-searchable class="select-option" formControlName="purpose" [(ngModel)]="data.purpose" [items]="purposeVisitedList" itemValueField="id" itemTextField="name" [canSearch]="true" (onChange)="userSelectChange($event, 'purpose')"> 
-                            </select-searchable>
+                          <select-searchable class="select-option" formControlName="purpose" [(ngModel)]="data.purpose" [items]="purposeVisitedList" itemValueField="id" itemTextField="name" [canSearch]="true" (onChange)="userSelectChange($event, 'purpose')"> 
+                          </select-searchable>
                           <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
-                          <img class="tooltip" src="assets/imgs/help_outline.svg">
-                          <span class="tooltiptext">Select Purpose of visiting</span>
-                        </button>
-                        </ion-item> 
-                        <div class="req-lbl" *ngIf="!signInForm.controls.purpose.valid  &&
-                        (signInForm.controls.purpose.touched )">* Purpose is required!</div>                
+                           <img class="tooltip" src="assets/imgs/help_outline.svg">
+                           <span class="tooltiptext">Select Purpose of visiting</span>
+                          </button>
+                       </ion-item> 
+                       <div class="req-lbl" *ngIf="!signInForm.controls.purpose.valid  &&
+                        (signInForm.controls.purpose.dirty )">* Purpose is required!</div>                
                     </ion-col>
                     <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>    
                       <ion-label class="label_name">Are you visiting GMP controlled area?<span class="astrik"> * </span></ion-label>  
@@ -169,39 +165,26 @@
                           <select-searchable class="select-option" formControlName="controlledArea" [(ngModel)]="data.controlledArea" [items]="visitingAreaList" itemValueField="id" itemTextField="name" [canSearch]="true" (onChange)="userSelectChange($event, 'controlledArea')"> 
                           </select-searchable>
                         <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
-                        <img class="tooltip" src="assets/imgs/help_outline.svg">
-                        <span class="tooltiptext">Select appropriate option</span>
+                         <img class="tooltip" src="assets/imgs/help_outline.svg">
+                         <span class="tooltiptext">Select appropriate option</span>
                         </button>
-                        </ion-item> 
-                        <div class="req-lbl" *ngIf="!signInForm.controls.controlledArea.valid  &&
-                        (signInForm.controls.controlledArea.touched )">* Controlled area is required!</div>                
+                       </ion-item> 
+                       <div class="req-lbl" *ngIf="!signInForm.controls.controlledArea.valid  &&
+                        (signInForm.controls.controlledArea.dirty )">* GMP is required!</div>                
+                     </ion-col>
+                   </ion-row> 
+                   <ion-row>
+                      <ion-col col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center>
+                        <p *ngIf="submitAttempt && !signInForm.valid" class="req-lbl">(*) Please fill all mandatory details.</p>
                       </ion-col>
-                    </ion-row>         
-
-                    <ion-row>
-                        <ion-col col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center>
-                          <p *ngIf="submitAttempt && !signInForm.valid" class="req-lbl">(*) Please fill all mandatory details.</p>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center>
-                          <button ion-button color="danger" outline round (click)="resetForm();">Reset</button>
-                          <button ion-button color="secondary" (click)="onSubmit(signInForm.value);" type="submit" outline round>Submit</button>
-                        </ion-col>
-                    </ion-row>
-
-            <!-- <ion-row>
-              <ion-col>
-                  <button (click)="nextPage()" style="width: 37%;
-                  border-radius: 10px;
-                  height: 35px;
-                  margin-left: 29%;
-                  color:#fff;
-                  background-color:rgb(255, 152, 0);" >SUBMIT</button>
-              <p *ngIf="!signInForm.valid" style=" color: #000;margin-left:10%">* Please fill out all details accurately.</p>
-              </ion-col>
-            </ion-row> -->
-          </form>
+                   </ion-row>
+                   <ion-row>
+                      <ion-col col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center>
+                        <button ion-button color="danger" outline round (click)="resetForm();">Reset</button>
+                        <button ion-button color="secondary" (click)="onSubmit(signInForm.value);" type="submit" outline round>Submit</button>
+                     </ion-col>
+                   </ion-row>
+            </form>
           </div>          
         </ion-col>
       </ion-row>

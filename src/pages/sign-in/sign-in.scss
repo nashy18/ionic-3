@@ -26,7 +26,7 @@ page-sign-in {
         margin-top: 5px;
     }
     
-    //Form-Fileds-Css
+    //Form-Fields
     .item-input:last-child {
         border-bottom:transparent; 
    }
@@ -36,49 +36,50 @@ page-sign-in {
         box-shadow:transparent;
    }
 
-    .scroll-content{
+   .scroll-content{
         padding:0px !important;
-    }
-    .label_name{
-        //padding-left: 38px;
+   }
+
+   .label_name{
         color:#444444;
-    }
-    .text-input {
+   }
+
+   .text-input {
        margin: 0px;
        padding: 0px;   
        font-size: 14px;
-    }
+   }
 
-    .tooltip {        
+   .tooltip {        
         position: relative;
         display: inline-block;    
-    }
+   }
 
-    .tooltip .tooltiptext {
-        visibility: hidden;
-        width: 130px;
-        background-color:#555;
-        color: #fff;
-        font-size: 11px;
-        text-align: center;
-        border-radius: 6px;
-        padding: 5px 0;
-        position: absolute;
-        z-index: 1;
-        top: -5px;
-        right: 110%;
-    }
+   .tooltip .tooltiptext {
+       visibility: hidden;
+       width: 130px;
+       background-color:#555;
+       color: #fff;
+       font-size: 11px;
+       text-align: center;
+       border-radius: 6px;
+       padding: 5px 0;
+       position: absolute;
+       z-index: 1;
+       top: -5px;
+       right: 110%;
+   }
     
-    .tooltip .tooltiptext::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 100%;
-        margin-top: -5px;
-        border-width: 5px;
-        border-style: solid;
-        border-color: transparent transparent transparent #555;
-    }
+   .tooltip .tooltiptext::after {
+       content: "";
+       position: absolute;
+       top: 50%;
+       left: 100%;
+       margin-top: -5px;
+       border-width: 5px;
+       border-style: solid;
+       border-color: transparent transparent transparent #555;
+   }
 
     .tooltip:hover .tooltiptext {
         visibility: visible;
@@ -113,8 +114,5 @@ page-sign-in {
     .astrik{
         font-size: 8px; 
         color: #FF0000;
-    }
-    .bar-img{
-        
     }
 }
