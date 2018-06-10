@@ -21,6 +21,7 @@ import { Global,APIActions,Enums  } from '../../providers/config/contsants';
   templateUrl: 'sign-out.html'
 })
 export class SignOutPage { 
+  selectedVisitor: any;
   signOutForm: FormGroup;
   UserList: AbstractControl;
   data = { UserList:''};
@@ -56,6 +57,8 @@ export class SignOutPage {
       console.log(this.data);
       this.showMsg();
       this.navCtrl.push(HomePage);
+      //call function to update visitor signout status
+      this.updateVisitorLog(this.selectedVisitor);
     } else {
       console.log("Sign out Form is invalid");
     }
@@ -64,6 +67,7 @@ export class SignOutPage {
 
   userSelectChange(event: { component: SelectSearchableComponent, value: any }) {
     console.log('User Name:', event.value);
+    this.selectedVisitor = event.value;
   }
 
   showMsg() {
@@ -91,6 +95,27 @@ export class SignOutPage {
           }
         }
         this.users = list;
+      }, err => {
+        console.log(err);
+      });
+    } catch(error) {
+      console.log(error);
+    }
+  }
+
+  updateVisitorLog(input) {
+    try {
+      if(!input) return alert("Please select the user");
+      const requestData = {},
+            date = new Date(),
+            milliseconds = date.getMilliseconds();
+      requestData["action"] = APIActions.updateVisitor + "/" + input.Id;
+      requestData["body"] = {
+        "isLoggedOut" : true,
+        "dateModified" : milliseconds
+      }
+      this.httpServiceProvider.patch(requestData).subscribe((response: any) => {
+        console.log(response.data);
       }, err => {
         console.log(err);
       });

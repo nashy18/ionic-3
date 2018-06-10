@@ -14,19 +14,22 @@ export class HttpServiceProvider {
   private _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
   private baseURL = Global.BaseAPIURL;
-  
+
   constructor(public http: HttpClient) {
     console.log('Hello HttpServiceProvider Provider');
   }
 
-  post(req) {debugger
-
+  post(req) {
     return this.http.post(
       this.baseURL + req.action, req.body, this._options)
   }
 
-  get(req) {debugger
+  get(req) {
+    return this.http.get(this.baseURL + req.action)
+  }
 
-   return this.http.get(this.baseURL + req.action)
- }
+  patch(req) {
+    return this.http.patch(
+      this.baseURL + req.action, req.body, this._options)
+  }
 }
