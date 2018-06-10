@@ -1,9 +1,9 @@
 export const Global = Object.freeze({
 
-    "devBaseAPIURL" :"http://localhost:1337/",
+    //"BaseAPIURL" :"http://localhost:1337/",
     "BaseAPIURL" :"https://smartfoodsafe-api.herokuapp.com/",
-    "companyId":"5af6b480789aa61d98736751"
-    
+    "companyId":"5af6b480789aa61d98736751",
+    "AboutUsURL": "https://www.naturestouchfrozenfoods.com/en/about-us"
 })
 
 

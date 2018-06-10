@@ -17,6 +17,7 @@ import { TermsAndConditionsPage } from '../pages/terms-and-conditions/terms-and-
 import { SelectSearchableModule } from 'ionic-select-searchable';
 import { SharedService } from '../service/shared.service';
 import { SignaturePadModule } from 'angular2-signaturepad';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { SignaturePadModule } from 'angular2-signaturepad';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RestProvider,
     HttpServiceProvider,
-    SharedService
+    SharedService,
+    InAppBrowser
   ]
 })
 export class AppModule {}
