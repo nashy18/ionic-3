@@ -46,13 +46,17 @@ page-home {
         contain: none;
     }
     
+    .comp-title-pad {
+        padding-left:30px
+    }
+
     /* For following screen resolution */
     @media screen and (max-width: 1200px){
         .comp-title {
             max-width: 30%;
         }
         .comp-title-pad {
-            font-size: 14px;
+            font-size: 16px;
         }
     }
 
@@ -61,11 +65,28 @@ page-home {
             max-width: 20%;
         }
         .comp-title-pad {
-            font-size: 16px;
+            font-size: 32px;
         }
         .home-lft-col{
             padding-top: 0px;
             padding-bottom: 0px;
         }
     }
+
+    .video-container {
+        position:relative;
+        padding-bottom:70%;
+        padding-top:30px;
+        height:0;
+         overflow:hidden;
+    }
+    
+    .video-container iframe, .video-container object, .video-container embed {
+         position:absolute;
+         top:0;
+         left:0;
+         width:100%;
+         height:100%;
+     }
+    
 }
