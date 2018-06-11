@@ -88,13 +88,15 @@ export class SignOutPage {
       this.httpServiceProvider.get(requestData).subscribe((response: any) => {
         console.log(response.data);
         var list = response.data;
+        this.users = [];
         if(list != null && list != undefined) {
           for (var i = 0; i < list.length; i++) {
-
-            list[i]["fullName"] = list[i].firstName + ' ' + list[i].lastName;
+            if(list[i] && !list[i].isLoggedOut){
+              list[i]["fullName"] = list[i].firstName + ' ' + list[i].lastName;
+              this.users.push(list[i]);
+            }
           }
         }
-        this.users = list;
       }, err => {
         console.log(err);
       });
@@ -106,13 +108,11 @@ export class SignOutPage {
   updateVisitorLog(input) {
     try {
       if(!input) return alert("Please select the user");
-      const requestData = {},
-            date = new Date(),
-            milliseconds = date.getMilliseconds();
-      requestData["action"] = APIActions.updateVisitor + "/" + input.Id;
+      const requestData = {};
+      requestData["action"] = APIActions.updateVisitor + "/" + input.id;
       requestData["body"] = {
         "isLoggedOut" : true,
-        "dateModified" : milliseconds
+        "dateModified" : Date.now()
       }
       this.httpServiceProvider.patch(requestData).subscribe((response: any) => {
         console.log(response.data);

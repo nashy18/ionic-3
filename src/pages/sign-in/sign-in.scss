@@ -115,4 +115,17 @@ page-sign-in {
         font-size: 8px; 
         color: #FF0000;
     }
+
+    /* For following screen resolution */
+    @media screen and (max-width: 1200px){
+        .sign-in-img{
+            display: none;
+        }
+    }
+
+    @media screen and (min-width: 1200px){
+        .sign-in-img{
+            display: block;
+        }
+    }
 }

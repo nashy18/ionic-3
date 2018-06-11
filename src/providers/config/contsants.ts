@@ -15,6 +15,7 @@ export const Enums = Object.freeze({
 export const APIActions = Object.freeze({
 
     "addVisitor": "visitor",
+    "updateVisitor" : "visitor",
     "getAllDepartmets": "department",
     "getEmployeesByDepartment": "user/search",
     "getAllPurposes": "visitPurpose",
