@@ -160,6 +160,9 @@ export class SignInPage {
         this.httpServiceProvider.post(requestData).subscribe((response: any) => {
           console.log("Employee Data: "+response.data);
           this.nameOfPersonList = response.data;  
+          this.nameOfDepartmentList.forEach((item)=>{
+            item.fullName = item.firstName + " " + item.lastName;
+          })
         }, err => {
             console.log(err);
           });
