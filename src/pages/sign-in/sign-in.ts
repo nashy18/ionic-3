@@ -214,7 +214,7 @@ export class SignInPage {
 
     // List employees belongs to selected department
     if(type =='department') {
-
+      this.data.nameOfPerson='';
       const requestData = {};
       const request = {};
       request["departmentId"] = event.value.id;

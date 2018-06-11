@@ -36,10 +36,10 @@
            </ion-row> -->
            <ion-row>&nbsp;</ion-row>
            <ion-row>
-             <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>
-               <ion-label class="label_name">Scan business card here or enter below </ion-label>
+             <ion-col col-12 col-lg-8 col-md-8 col-sm-12 col-xs-12>
+               <ion-label class="label_name" text-wrap>Scan business card here or enter below </ion-label>
              </ion-col>                
-             <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12 text-left padding-top>
+             <ion-col col-12 col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left padding-top>
                <ion-img width="100" height="25" src="assets/imgs/bar_code.png"></ion-img>
              </ion-col>
            </ion-row>            
@@ -51,13 +51,13 @@
                    (signInForm.controls.firstName.dirty)"></ion-input>
                   <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
                     <img class="tooltip" src="assets/imgs/help_outline.svg">
-                     <span class="tooltiptext">Enter Your First Name</span>
+                     <span class="tooltiptext">Enter first name</span>
                   </button>
                 </ion-item> 
                 <div class="req-lbl" *ngIf="signInForm.controls.firstName.hasError('required')  &&
                   (signInForm.controls.firstName.touched)">* First Name is required!</div>
                 <div class="req-lbl" *ngIf="signInForm.controls.firstName.hasError('minlength')  &&
-                  (signInForm.controls.firstName.touched )">* Minimum First Name length is 2!</div>                
+                  (signInForm.controls.firstName.touched )">* Minimum first name length is 2!</div>                
             </ion-col>
             <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>    
               <ion-label class="label_name">Last Name<span class="astrik"> * </span></ion-label>  
@@ -66,13 +66,13 @@
                    (signInForm.controls.lastName.dirty)"></ion-input>
                     <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
                      <img class="tooltip" src="assets/imgs/help_outline.svg">
-                     <span class="tooltiptext">Enter Your Last Name</span>
+                     <span class="tooltiptext">Enter last name</span>
                     </button>
                 </ion-item> 
                 <div class="req-lbl" *ngIf="signInForm.controls.lastName.hasError('required')  &&
                   (signInForm.controls.lastName.touched )">* Last Name is required!</div>  
                 <div class="req-lbl" *ngIf="signInForm.controls.lastName.hasError('minlength')  &&
-                  (signInForm.controls.lastName.touched )">* Minimum Last Name length is 2!</div>                
+                  (signInForm.controls.lastName.touched )">* Minimum last name length is 2!</div>                
              </ion-col>
             </ion-row>
             <ion-row>
@@ -83,24 +83,24 @@
                       (signInForm.controls.phone.dirty)"></ion-input>
                       <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
                        <img class="tooltip" src="assets/imgs/help_outline.svg">
-                       <span class="tooltiptext">Enter Your Contact Number</span>
+                       <span class="tooltiptext">Enter your contact</span>
                       </button>
                   </ion-item> 
                   <div class="req-lbl" *ngIf="!signInForm.controls.phone.valid && 
                     (signInForm.controls.phone.touched )">* Phone is required (10 digit)!</div>             
               </ion-col>
               <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>    
-                <ion-label class="label_name">Email-Id<span class="astrik"> * </span></ion-label>  
+                <ion-label class="label_name">Email<span class="astrik"> * </span></ion-label>  
                   <ion-item>
                     <ion-input type="text" [(ngModel)]="data.email" formControlName="email" [class.invalid]="!signInForm.controls.email.valid && 
                       (signInForm.controls.email.dirty)"></ion-input>
                       <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
                        <img class="tooltip" src="assets/imgs/help_outline.svg">
-                       <span class="tooltiptext">Enter Your Email-Id</span>
+                       <span class="tooltiptext">Enter email</span>
                       </button>
                   </ion-item> 
                   <div class="req-lbl" *ngIf="!signInForm.controls.email.valid  &&
-                    (signInForm.controls.email.touched )">* Email-Id is required!</div>                
+                    (signInForm.controls.email.touched )">* Email is required!</div>                
                </ion-col>
               </ion-row>
               <ion-row>
@@ -111,7 +111,7 @@
                      (signInForm.controls.company.dirty)"></ion-input>
                      <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
                       <img class="tooltip" src="assets/imgs/help_outline.svg">
-                      <span class="tooltiptext">Enter Company Name</span>
+                      <span class="tooltiptext">Enter company name</span>
                      </button>
                    </ion-item> 
                    <div class="req-lbl" *ngIf="!signInForm.controls.company.valid  &&
@@ -120,26 +120,26 @@
                 </ion-row>
                 <ion-row>
                   <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>    
-                    <ion-label class="label_name">Department of the person to be visited<span class="astrik"> * </span></ion-label>  
+                    <ion-label class="label_name" text-wrap>Department of the person to be visited<span class="astrik"> * </span></ion-label>  
                       <ion-item>                          
                         <select-searchable class="select-option" formControlName="department" [(ngModel)]="data.department" [items]="nameOfDepartmentList" itemValueField="id" itemTextField="name" [canSearch]="true" (onChange)="userSelectChange($event, 'department')"> 
                         </select-searchable>
                         <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
                           <img class="tooltip" src="assets/imgs/help_outline.svg">
-                          <span class="tooltiptext">Select Department Name</span>
+                          <span class="tooltiptext">Select department name</span>
                         </button>
                       </ion-item> 
                       <div class="req-lbl" *ngIf="!signInForm.controls.department.valid  &&
                        (signInForm.controls.department.dirty )">* Department is required!</div>                
                   </ion-col>
                   <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>    
-                    <ion-label class="label_name">Name of the person to be visiting<span class="astrik"> * </span></ion-label>  
+                    <ion-label class="label_name" text-wrap>Name of the person to be visiting<span class="astrik"> * </span></ion-label>  
                       <ion-item>                              
                         <select-searchable class="select-option" formControlName="nameOfPerson" [(ngModel)]="data.nameOfPerson" [items]="nameOfPersonList" itemValueField="id" itemTextField="fullName" [canSearch]="true" (onChange)="userSelectChange($event, 'emplyee')"> 
                         </select-searchable>
                         <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
                           <img class="tooltip" src="assets/imgs/help_outline.svg">
-                          <span class="tooltiptext">Select Person Name</span>
+                          <span class="tooltiptext">Select person name</span>
                         </button>
                       </ion-item> 
                       <div class="req-lbl" *ngIf="!signInForm.controls.nameOfPerson.valid  &&
@@ -154,20 +154,20 @@
                           </select-searchable>
                           <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
                            <img class="tooltip" src="assets/imgs/help_outline.svg">
-                           <span class="tooltiptext">Select Purpose of visiting</span>
+                           <span class="tooltiptext">Select purpose for visiting</span>
                           </button>
                        </ion-item> 
                        <div class="req-lbl" *ngIf="!signInForm.controls.purpose.valid  &&
                         (signInForm.controls.purpose.dirty )">* Purpose is required!</div>                
                     </ion-col>
-                    <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>    
-                      <ion-label class="label_name">Are you visiting GMP controlled area?<span class="astrik"> * </span></ion-label>  
+                    <ion-col col-12 col-lg-6 col-md-12 col-sm-12 col-xs-12>    
+                      <ion-label class="label_name" text-wrap>Are you visiting GMP controlled area?<span class="astrik"> * </span></ion-label>  
                         <ion-item>
                           <select-searchable class="select-option" formControlName="controlledArea" [(ngModel)]="data.controlledArea" [items]="visitingAreaList" itemValueField="id" itemTextField="name" [canSearch]="true" (onChange)="userSelectChange($event, 'controlledArea')"> 
                           </select-searchable>
                         <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
                          <img class="tooltip" src="assets/imgs/help_outline.svg">
-                         <span class="tooltiptext">Select appropriate option</span>
+                         <span class="tooltiptext">select option for GMP</span>
                         </button>
                        </ion-item> 
                        <div class="req-lbl" *ngIf="!signInForm.controls.controlledArea.valid  &&
@@ -176,7 +176,7 @@
                    </ion-row> 
                    <ion-row>
                       <ion-col col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center>
-                        <p *ngIf="submitAttempt && !signInForm.valid" class="req-lbl">(*) Please fill all mandatory details.</p>
+                        <p *ngIf="submitAttempt && !signInForm.valid" class="req-lbl" text-wrap>(*) Please fill all mandatory details.</p>
                       </ion-col>
                    </ion-row>
                    <ion-row>
