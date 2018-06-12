@@ -48,11 +48,22 @@ page-sign-in {
        margin: 0px;
        padding: 0px;   
        font-size: 14px;
+       border: none;
    }
 
    .tooltip {        
         position: relative;
         display: inline-block;    
+   }
+
+   .tooltip-img {        
+    width:20px;
+    height:20px;
+   }
+
+   .tooltip-btn{
+    background-color: transparent;
+    margin:0px;
    }
 
    .tooltip .tooltiptext {
@@ -107,8 +118,9 @@ page-sign-in {
         font-size: 11px;
     }
 
-    .select-option{
+    .select-option .select-searchable-value{
         font-size: 13px;
+        max-width: 100%;
     }
 
     .astrik{

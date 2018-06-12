@@ -36,10 +36,10 @@
            </ion-row> -->
            <ion-row>&nbsp;</ion-row>
            <ion-row>
-             <ion-col col-12 col-lg-8 col-md-8 col-sm-12 col-xs-12>
+             <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>
                <ion-label class="label_name" text-wrap>Scan business card here or enter below </ion-label>
              </ion-col>                
-             <ion-col col-12 col-lg-4 col-md-4 col-sm-12 col-xs-12 text-left padding-top>
+             <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12 text-center padding-top>
                <ion-img width="100" height="25" src="assets/imgs/bar_code.png"></ion-img>
              </ion-col>
            </ion-row>            
@@ -49,30 +49,50 @@
                 <ion-item>
                   <ion-input type="text" [(ngModel)]="data.firstName" formControlName="firstName" [class.invalid]="!signInForm.controls.firstName.valid && 
                    (signInForm.controls.firstName.dirty)"></ion-input>
-                  <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
-                    <img class="tooltip" src="assets/imgs/help_outline.svg">
+                  <button class="tooltip tooltip-btn" clear item-right>
+                    <img class="tooltip tooltip-img" src="assets/imgs/help_outline.svg">
                      <span class="tooltiptext">Enter first name</span>
                   </button>
                 </ion-item> 
-                <div class="req-lbl" *ngIf="signInForm.controls.firstName.hasError('required')  &&
-                  (signInForm.controls.firstName.touched)">* First Name is required!</div>
-                <div class="req-lbl" *ngIf="signInForm.controls.firstName.hasError('minlength')  &&
-                  (signInForm.controls.firstName.touched )">* Minimum first name length is 2!</div>                
+                <ng-container *ngIf="signInForm.controls.firstName.hasError('required') && (signInForm.controls.firstName.touched); then fnReq"></ng-container>
+                <ng-template #fnReq>
+                  <div class="req-lbl">* First Name is required!</div>
+                </ng-template>
+                <ng-container *ngIf="signInForm.controls.firstName.hasError('minlength') && (signInForm.controls.firstName.touched); then fnMinReq"></ng-container>
+                <ng-template #fnMinReq>
+                  <div class="req-lbl">* Minimum length is 2!</div>
+                </ng-template>
+                <ng-container *ngIf="!signInForm.controls.firstName.hasError('required') && !signInForm.controls.firstName.hasError('minlength') && !signInForm.controls.firstName.valid && (signInForm.controls.firstName.touched); then fnInvalidName"></ng-container>
+                <ng-template #fnInvalidName>
+                  <div class="req-lbl">* Invalid name!</div>
+                </ng-template>
             </ion-col>
             <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>    
               <ion-label class="label_name">Last Name<span class="astrik"> * </span></ion-label>  
                 <ion-item>
                   <ion-input type="text" [(ngModel)]="data.lastName" formControlName="lastName" [class.invalid]="!signInForm.controls.lastName.valid && 
                    (signInForm.controls.lastName.dirty)"></ion-input>
-                    <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
-                     <img class="tooltip" src="assets/imgs/help_outline.svg">
+                    <button class="tooltip tooltip-btn" clear item-right >
+                     <img class="tooltip tooltip-img" src="assets/imgs/help_outline.svg">
                      <span class="tooltiptext">Enter last name</span>
                     </button>
                 </ion-item> 
-                <div class="req-lbl" *ngIf="signInForm.controls.lastName.hasError('required')  &&
+                <!-- <div class="req-lbl" *ngIf="signInForm.controls.lastName.hasError('required')  &&
                   (signInForm.controls.lastName.touched )">* Last Name is required!</div>  
                 <div class="req-lbl" *ngIf="signInForm.controls.lastName.hasError('minlength')  &&
-                  (signInForm.controls.lastName.touched )">* Minimum last name length is 2!</div>                
+                  (signInForm.controls.lastName.touched )">* Minimum last name length is 2!</div>  -->
+                <ng-container *ngIf="signInForm.controls.lastName.hasError('required') && (signInForm.controls.lastName.touched); then lnReq"></ng-container>
+                <ng-template #lnReq>
+                  <div class="req-lbl">* Last Name is required!</div>
+                </ng-template>
+                <ng-container *ngIf="signInForm.controls.lastName.hasError('minlength') && (signInForm.controls.lastName.touched); then lnMinReq"></ng-container>
+                <ng-template #lnMinReq>
+                  <div class="req-lbl">* Minimum length is 2!</div>
+                </ng-template>
+                <ng-container *ngIf="!signInForm.controls.lastName.hasError('required') && !signInForm.controls.lastName.hasError('minlength') && !signInForm.controls.lastName.valid && (signInForm.controls.lastName.touched); then lnInvalidName"></ng-container>
+                <ng-template #lnInvalidName>
+                  <div class="req-lbl">* Invalid name!</div>
+                </ng-template>                 
              </ion-col>
             </ion-row>
             <ion-row>
@@ -81,8 +101,8 @@
                   <ion-item>
                     <ion-input type="tel" [(ngModel)]="data.phone" formControlName="phone" [class.invalid]="!signInForm.controls.phone.valid && 
                       (signInForm.controls.phone.dirty)"></ion-input>
-                      <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
-                       <img class="tooltip" src="assets/imgs/help_outline.svg">
+                      <button class="tooltip tooltip-btn" clear item-right >
+                       <img class="tooltip tooltip-img" src="assets/imgs/help_outline.svg">
                        <span class="tooltiptext">Enter your contact</span>
                       </button>
                   </ion-item> 
@@ -94,8 +114,8 @@
                   <ion-item>
                     <ion-input type="text" [(ngModel)]="data.email" formControlName="email" [class.invalid]="!signInForm.controls.email.valid && 
                       (signInForm.controls.email.dirty)"></ion-input>
-                      <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
-                       <img class="tooltip" src="assets/imgs/help_outline.svg">
+                      <button class="tooltip tooltip-btn" clear item-right >
+                       <img class="tooltip tooltip-img" src="assets/imgs/help_outline.svg">
                        <span class="tooltiptext">Enter email</span>
                       </button>
                   </ion-item> 
@@ -109,8 +129,8 @@
                    <ion-item>
                     <ion-input type="text" [(ngModel)]="data.company" formControlName="company" [class.invalid]="!signInForm.controls.company.valid && 
                      (signInForm.controls.company.dirty)"></ion-input>
-                     <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
-                      <img class="tooltip" src="assets/imgs/help_outline.svg">
+                     <button class="tooltip tooltip-btn" clear item-right >
+                      <img class="tooltip tooltip-img" src="assets/imgs/help_outline.svg">
                       <span class="tooltiptext">Enter company name</span>
                      </button>
                    </ion-item> 
@@ -124,8 +144,8 @@
                       <ion-item>                          
                         <select-searchable class="select-option" formControlName="department" [(ngModel)]="data.department" [items]="nameOfDepartmentList" itemValueField="id" itemTextField="name" [canSearch]="true" (onChange)="userSelectChange($event, 'department')"> 
                         </select-searchable>
-                        <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
-                          <img class="tooltip" src="assets/imgs/help_outline.svg">
+                        <button class="tooltip tooltip-btn" clear item-right >
+                          <img class="tooltip tooltip-img" src="assets/imgs/help_outline.svg">
                           <span class="tooltiptext">Select department name</span>
                         </button>
                       </ion-item> 
@@ -137,8 +157,8 @@
                       <ion-item>                              
                         <select-searchable class="select-option" formControlName="nameOfPerson" [(ngModel)]="data.nameOfPerson" [items]="nameOfPersonList" itemValueField="id" itemTextField="fullName" [canSearch]="true" (onChange)="userSelectChange($event, 'emplyee')"> 
                         </select-searchable>
-                        <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
-                          <img class="tooltip" src="assets/imgs/help_outline.svg">
+                        <button class="tooltip tooltip-btn" clear item-right >
+                          <img class="tooltip tooltip-img" src="assets/imgs/help_outline.svg">
                           <span class="tooltiptext">Select person name</span>
                         </button>
                       </ion-item> 
@@ -152,8 +172,8 @@
                         <ion-item>
                           <select-searchable class="select-option" formControlName="purpose" [(ngModel)]="data.purpose" [items]="purposeVisitedList" itemValueField="id" itemTextField="name" [canSearch]="true" (onChange)="userSelectChange($event, 'purpose')"> 
                           </select-searchable>
-                          <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
-                           <img class="tooltip" src="assets/imgs/help_outline.svg">
+                          <button class="tooltip tooltip-btn" clear item-right >
+                           <img class="tooltip tooltip-img" src="assets/imgs/help_outline.svg">
                            <span class="tooltiptext">Select purpose for visiting</span>
                           </button>
                        </ion-item> 
@@ -165,8 +185,8 @@
                         <ion-item>
                           <select-searchable class="select-option" formControlName="controlledArea" [(ngModel)]="data.controlledArea" [items]="visitingAreaList" itemValueField="id" itemTextField="name" [canSearch]="true" (onChange)="userSelectChange($event, 'controlledArea')"> 
                           </select-searchable>
-                        <button class="tooltip" clear item-right style="background-color: transparent;margin:0px;width:25px;height:25px">
-                         <img class="tooltip" src="assets/imgs/help_outline.svg">
+                        <button class="tooltip tooltip-btn" clear item-right >
+                         <img class="tooltip tooltip-img" src="assets/imgs/help_outline.svg">
                          <span class="tooltiptext">select option for GMP</span>
                         </button>
                        </ion-item> 
