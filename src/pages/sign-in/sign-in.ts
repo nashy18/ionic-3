@@ -102,7 +102,7 @@ export class SignInPage {
         request["departmentId"] = value.department.id;
         request["employeeId"] = value.nameOfPerson.id;
         request["visitPurposeId"] = value.purpose.id;
-        request["visitingRestrictedAreas"] = (value.controlledArea == 'Yes') ? true: false;
+        request["visitingRestrictedAreas"] = (value.controlledArea.name == 'Yes') ? true : false;
         request["companyId"] = Global.companyId;
 
         requestData["action"] = APIActions.addVisitor;
