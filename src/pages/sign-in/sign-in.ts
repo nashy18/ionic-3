@@ -9,6 +9,8 @@ import {TermsAndConditionsPage} from '../terms-and-conditions/terms-and-conditio
 import { HttpServiceProvider } from '../../providers/http-service/http-service';
 import { Global,APIActions,Enums  } from '../../providers/config/contsants';
 import { HttpHeaders } from '@angular/common/http';
+import { Storage } from '@ionic/storage';
+
 
 
 /**
@@ -52,7 +54,7 @@ export class SignInPage {
   data = { firstName:'', lastName:'', phone:'', email:'' , company:'', department:'', nameOfPerson:'', purpose:'', controlledArea:''};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private fb: FormBuilder, public alertCtrl: AlertController,
-              private http: Http, private httpServiceProvider: HttpServiceProvider) {
+              private http: Http, private httpServiceProvider: HttpServiceProvider,private storage: Storage) {
           this.signInForm = fb.group({
             firstName : ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(2)])],     
             lastName : ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(2)])],  
@@ -65,31 +67,6 @@ export class SignInPage {
             controlledArea : ['', Validators.required],
 
         });  
-
-        // Initializing Drop Down
-        // this.nameOfDepartmentList = [
-        //   { id: 101, name: 'Finance'},
-        //   { id: 102, name: 'Recruitment'},
-        //   { id: 103, name: 'Administration'},
-        //   { id: 104, name: 'Sales'},
-        //   { id: 105, name: 'Development'}
-        // ];
-
-        // this.nameOfPersonList = [
-        //   { id: 101, name: 'Alex'},
-        //   { id: 102, name: 'John'},
-        //   { id: 103, name: 'Martin'},
-        //   { id: 104, name: 'Sofia'},
-        //   { id: 105, name: 'Gustavo'},
-        //   { id: 106, name: 'Kathie'}
-        // ];
-
-        // this.purposeVisitedList = [
-        //   { id: 101, name: 'Interview'},
-        //   { id: 102, name: 'Bank Work'},
-        //   { id: 103, name: 'Personal'},
-        //   { id: 104, name: 'Delivery'}
-        // ];
 
         this.visitingAreaList = [
           { id: 101, name: 'Yes' },
@@ -109,6 +86,7 @@ export class SignInPage {
   }
 
   onSubmit(value: any): void {
+
     this.submitAttempt=true;
     if(this.signInForm.valid) {
 
@@ -132,6 +110,9 @@ export class SignInPage {
 
         this.httpServiceProvider.post(requestData).subscribe((response: any) => {
           console.log("Visitor created Successfully! "+response.data);
+
+          // Save visitor data in local storage
+          this.storage.set('visitor', response.data);
           this.navCtrl.push(TermsAndConditionsPage);
         }, err => {
           console.log(err);

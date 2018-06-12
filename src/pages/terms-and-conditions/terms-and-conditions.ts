@@ -2,6 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content, ViewController, ModalController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
+import { HttpServiceProvider } from '../../providers/http-service/http-service';
+import { Global,APIActions,Enums  } from '../../providers/config/contsants';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the TermsAndConditionsPage page.
@@ -32,6 +35,11 @@ export class TermsAndConditionsPage {
   modalHeader: string;
   modalBody: string;
   modalType: string;
+ // isAgreeDisagreeRequired = false;
+  isSignatureRequired = false;
+  agreeSelected = false;
+  disagreeSelected = false;
+  touchSignature = false;
 
   agreeDefaultButtonBGColor: string = '#0000';
   disagreeDefaultButtonBGColor: string = '#0000';
@@ -49,7 +57,8 @@ export class TermsAndConditionsPage {
   shareService;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public viewCtrl : ViewController, public modalCtrl : ModalController) {
+              public viewCtrl : ViewController, public modalCtrl : ModalController,
+              private httpServiceProvider: HttpServiceProvider, private storage: Storage) {
    
       this.modalHeader = this.navParams.get('header');
       this.modalBody = this.navParams.get('body');
@@ -69,16 +78,25 @@ export class TermsAndConditionsPage {
   }
  
   drawComplete() {
+    
     console.log("Draw completed");
+    this.touchSignature = true;
+    this.isSignatureRequired = false;
   }
  
   drawStart() {
+    
     console.log("drawStart");
+    this.touchSignature = true;
+    this.isSignatureRequired = false;
   }
  
   clearPad() {
     console.log("Signature pad is cleared");
     this.signaturePad.clear();
+
+    this.isSignatureRequired = false;
+    this.touchSignature = false;
   }
   openAgreeModal() {
 
@@ -91,6 +109,10 @@ export class TermsAndConditionsPage {
 
     this.isSubmitDisabled = false; //used to enable submit button after click agree button on modal
     //this.isSignatureBoxHidden = false; //used to enable signature box after click agree button on modal
+
+   // this.isAgreeDisagreeRequired = false;
+    this.agreeSelected = true;
+    this.disagreeSelected = false;
   }
 
   openDisagreeModal() {
@@ -114,6 +136,10 @@ export class TermsAndConditionsPage {
         // If click on disagree removing highlight from agree button
         this.agreeDefaultButtonBGColor = '#0000';
         this.agreeBttnText= '#30d05f';
+
+       // this.isAgreeDisagreeRequired = false;
+        this.disagreeSelected = true;
+        this.agreeSelected = false;
       } else {
 
         //this.isSubmitDisabled = true; //used to disable submit button after click cancel button on modal
@@ -122,6 +148,8 @@ export class TermsAndConditionsPage {
         // Changing the button background-color & text color on Disagree button click.
         this.disagreeDefaultButtonBGColor = "#0000";
         this.disagreeBttnText = '#e93a3a';
+
+        //this.isAgreeDisagreeRequired = true;
       }
     });
 
@@ -133,52 +161,81 @@ export class TermsAndConditionsPage {
 
   submit() {
 
-    this.viewCtrl.dismiss();
+    if(this.touchSignature) {
+      this.viewCtrl.dismiss();
     
-    this.signature = this.signaturePad.toDataURL();
-    console.log("Signature: "+this.signature);
-    this.signaturePad.clear();
+      this.signature = this.signaturePad.toDataURL();
+      console.log("Signature: "+this.signature);
+      this.signaturePad.clear();
 
-    // var data = {GMPType: this.modalType}
-    // var modalPage = this.modalCtrl.create('VisitorPassModalPage', data); 
-    // modalPage.present();
+      // Update visitor to add signature and isAgree/isDisagree
 
-    var data = { header: 'Confirmation', body : 'Please wait, your contact has been notified to receive you shortly. Please collect your visitor pass from the printer.', type: 'agree' };
-    var modalPage = this.modalCtrl.create('ConfirmationModalPage', data); 
-    modalPage.present();
+      this.storage.get('visitor').then((obj) => {
+        console.log("Visitor from local storage: "+obj.firstName);
 
-    modalPage.onDidDismiss((obj) => {
-    
-      console.log("I have dismissed "+obj);
+        const requestData = {};
+        const request = {};
+        const jsonObject = {};
+        jsonObject["signature"] = this.signature;
+        jsonObject["isAgree"] = this.agreeSelected;
+        jsonObject["isDisagree"] = this.disagreeSelected;
+        request["json"] = jsonObject;
+        requestData["action"] = APIActions.updateVisitor+"/"+obj.id;
+        requestData["body"] = request;
 
-      if(obj.status == 'confirmed') {
+         try {
+           this.httpServiceProvider.patch(requestData).subscribe((response: any) => {
+             console.log("Visior Updated Data: "+response.data);
+            
+           }, err => {
+               console.log(err);
+             });
+           } catch (error) {
+             console.log(error);
+           }
+      });
+      
+      
+      var data = { header: 'Confirmation', body : 'Please wait, your contact has been notified to receive you shortly. Please collect your visitor pass from the printer.', type: 'agree' };
+      var modalPage = this.modalCtrl.create('ConfirmationModalPage', data); 
+      modalPage.present();
 
-        var data = {GMPType: this.modalType}
-        var printModalPage = this.modalCtrl.create('VisitorPassModalPage', data); 
-        printModalPage.present();
+      modalPage.onDidDismiss((obj) => {
+      
+        console.log("I have dismissed "+obj);
 
-        printModalPage.onDidDismiss((obj) => {
-          
-          console.log("I have dismissed "+obj);
-          if(obj.status != 'confirmed') {
-            this.navCtrl.push(TermsAndConditionsPage);
-          }
-        });
+        if(obj.status == 'confirmed') {
 
-        printModalPage.onWillDismiss((obj) => {
-    
-          console.log("I'm about to dismiss "+obj);
-        });
-      } else {
+          var data = {GMPType: this.modalType}
+          var printModalPage = this.modalCtrl.create('VisitorPassModalPage', data); 
+          printModalPage.present();
 
-        this.navCtrl.push(TermsAndConditionsPage);
-      }
-    });
+          printModalPage.onDidDismiss((obj) => {
+            
+            console.log("I have dismissed "+obj);
+            if(obj.status != 'confirmed') {
+              this.navCtrl.push(TermsAndConditionsPage);
+            }
+          });
 
-    modalPage.onWillDismiss((obj) => {
-    
-      console.log("I'm about to dismiss "+obj);
-    });
+          printModalPage.onWillDismiss((obj) => {
+      
+            console.log("I'm about to dismiss "+obj);
+          });
+        } else {
+
+          this.navCtrl.push(TermsAndConditionsPage);
+        }
+      });
+
+      modalPage.onWillDismiss((obj) => {
+      
+        console.log("I'm about to dismiss "+obj);
+      });
+    } else {
+
+      this.isSignatureRequired = true;
+    }
   }
   scrollToTop() {
     this.content.scrollToTop();

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the VisitorPassModalPage page.
@@ -18,22 +19,38 @@ export class VisitorPassModalPage {
 
   GMPType: string;
   modalData: any;
+  name: string;
+  company: string;
+  signInDateTime: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController, private storage: Storage) {
       
     //this.GMPType = this.navParams.get('GMPType');
 
-    if(this.navParams.get('GMPType') == 'agree') {
-      this.GMPType = "Yes";
-    } else {
-      this.GMPType = "No";
-    }
+    // if(this.navParams.get('GMPType') == 'agree') {
+    //   this.GMPType = "Yes";
+    // } else {
+    //   this.GMPType = "No";
+    // }
   }
 
   ionViewDidLoad() {
 
     console.log('ionViewDidLoad VisitorPassModalPage');
+    this.getVisitorFromLocalStorage();
+  }
+
+  getVisitorFromLocalStorage() {
+
+    this.storage.get('visitor').then((obj) => {
+    
+      this.name = obj.firstName +" "+ obj.lastName;
+      this.company = obj.companyName;
+      this.GMPType = (obj.visitingRestrictedAreas) ? "Yes" : "No";
+      var date = new Date(obj.dateCreated);
+      this.signInDateTime = date.toString();
+    });
   }
 
   closeModal(){
