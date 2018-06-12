@@ -19,6 +19,5 @@ export const APIActions = Object.freeze({
     "getAllDepartmets": "department",
     "getEmployeesByDepartment": "user/search",
     "getAllPurposes": "visitPurpose",
-    "getAllVisitors":"visitor",
-    "updateVisitor":"visitor"
+    "getAllVisitors":"visitor"
 })
