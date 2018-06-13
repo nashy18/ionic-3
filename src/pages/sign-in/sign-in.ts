@@ -10,7 +10,7 @@ import { HttpServiceProvider } from '../../providers/http-service/http-service';
 import { Global,APIActions,Enums  } from '../../providers/config/contsants';
 import { HttpHeaders } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
-
+import { LoadingController } from 'ionic-angular';
 
 
 /**
@@ -54,7 +54,8 @@ export class SignInPage {
   data = { firstName:'', lastName:'', phone:'', email:'' , company:'', department:'', nameOfPerson:'', purpose:'', controlledArea:''};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private fb: FormBuilder, public alertCtrl: AlertController,
-              private http: Http, private httpServiceProvider: HttpServiceProvider,private storage: Storage) {
+              private http: Http, private httpServiceProvider: HttpServiceProvider,private storage: Storage,
+              public loadingController:LoadingController) {
           this.signInForm = fb.group({
             firstName : ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(2)])],     
             lastName : ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(2)])],  
@@ -90,6 +91,9 @@ export class SignInPage {
     this.submitAttempt=true;
     if(this.signInForm.valid) {
 
+      let loading = this.loadingController.create({content : "Logging in ,please wait..."});
+      loading.present();
+
       try {
 
         const requestData = {};
@@ -113,44 +117,19 @@ export class SignInPage {
 
           // Save visitor data in local storage
           this.storage.set('visitor', response.data);
+          loading.dismissAll();
           this.navCtrl.push(TermsAndConditionsPage);
         }, err => {
           console.log(err);
+          loading.dismissAll();
         });
       } catch (error) {
         console.log(error);
+        loading.dismissAll();
       }
     } else {
       console.log("Sign in Form is invalid");
     }    
-  }
-
-  onChangeEvent(event, selectedValue, type) {
-    console.log("Drop down Change event occured"+ selectedValue);
-
-    // List employees belongs to selected department
-    if(type =='department') {
-
-      const requestData = {};
-      const request = {};
-      request["departmentId"] = selectedValue;
-      requestData["action"] = APIActions.getEmployeesByDepartment;
-      requestData["body"] = request;
-
-      try {
-        this.httpServiceProvider.post(requestData).subscribe((response: any) => {
-          console.log("Employee Data: "+response.data);
-          this.nameOfPersonList = response.data;  
-          this.nameOfDepartmentList.forEach((item)=>{
-            item.fullName = item.firstName + " " + item.lastName;
-          })
-        }, err => {
-            console.log(err);
-          });
-        } catch (error) {
-          console.log(error);
-        }
-    }
   }
 
   onCancelEvent() {
@@ -159,21 +138,30 @@ export class SignInPage {
 
   getDepartentData() {
 
+    let loading = this.loadingController.create({content : "Logging in ,please wait..."});
+    loading.present();
+
     const request = {};
     request["action"] = APIActions.getAllDepartmets;
     try {
       this.httpServiceProvider.get(request).subscribe((response: any) => {
         console.log(response.data);
         this.nameOfDepartmentList = response.data;
+        loading.dismissAll();
         }, err => {
           console.log(err);
+          loading.dismissAll();
         });
       } catch (error) {
+        loading.dismissAll();
         console.log(error);
     }
   }
 
   getAllPurposeData(){
+
+    //let loading = this.loadingController.create({content : "Logging in ,please wait..."});
+    //loading.present();
 
     const requestData = {};
     requestData["action"] = APIActions.getAllPurposes;
@@ -182,11 +170,14 @@ export class SignInPage {
       this.httpServiceProvider.get(requestData).subscribe((response: any) => {
         console.log(response.data);
         this.purposeVisitedList = response.data;
+        //loading.dismissAll();
       }, err => {
         console.log(err);
+        //loading.dismissAll();
       });
     } catch(error) {
       console.log(error);
+      //loading.dismissAll();
     }
   }
 
@@ -195,6 +186,10 @@ export class SignInPage {
 
     // List employees belongs to selected department
     if(type =='department') {
+
+      let loading = this.loadingController.create({content : "Logging in ,please wait..."});
+      loading.present();
+
       this.data.nameOfPerson='';
       const requestData = {};
       const request = {};
@@ -213,11 +208,15 @@ export class SignInPage {
             }
           }
           this.nameOfPersonList = list;  
+
+          loading.dismissAll();
         }, err => {
             console.log(err);
+            loading.dismissAll();
           });
         } catch (error) {
           console.log(error);
+          loading.dismissAll();
         }
     }
   }

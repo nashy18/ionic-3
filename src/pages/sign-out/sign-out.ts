@@ -7,6 +7,7 @@ import { AlertController } from 'ionic-angular';
 import { HttpHeaders } from '@angular/common/http';
 import { HttpServiceProvider } from '../../providers/http-service/http-service';
 import { Global,APIActions,Enums  } from '../../providers/config/contsants';
+import { LoadingController } from 'ionic-angular';
 
 /**
  * Generated class for the SignOutPage page.
@@ -34,7 +35,7 @@ export class SignOutPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
               private formBuilder: FormBuilder, private alertCtrl: AlertController,
-              private httpServiceProvider: HttpServiceProvider) {
+              private httpServiceProvider: HttpServiceProvider, public loadingController:LoadingController) {
     this.signOutForm = formBuilder.group({
       'UserList': ['', Validators.required]
     }); 
@@ -53,12 +54,18 @@ export class SignOutPage {
   onSubmit(value: any): void {
 
     if(this.signOutForm.valid) {
+
+      let loading = this.loadingController.create({content : "Logging in ,please wait..."});
+      loading.present();
+
       console.log("Sign out Form is valid");
       console.log(this.data);
+      
+      //call function to update visitor signout status
+      this.updateVisitorLog(this.selectedVisitor, loading);
+
       this.showMsg();
       this.navCtrl.push(HomePage);
-      //call function to update visitor signout status
-      this.updateVisitorLog(this.selectedVisitor);
     } else {
       console.log("Sign out Form is invalid");
     }
@@ -81,6 +88,9 @@ export class SignOutPage {
 
   getAllVisitors() {
 
+    let loading = this.loadingController.create({content : "Logging in ,please wait..."});
+    loading.present();
+
     const requestData = {};
     requestData["action"] = APIActions.getAllVisitors;
 
@@ -97,15 +107,19 @@ export class SignOutPage {
             }
           }
         }
+
+        loading.dismissAll();
       }, err => {
         console.log(err);
+        loading.dismissAll();
       });
     } catch(error) {
       console.log(error);
+      loading.dismissAll();
     }
   }
 
-  updateVisitorLog(input) {
+  updateVisitorLog(input, loading) {
     try {
       if(!input) return alert("Please select the user");
       const requestData = {};
@@ -116,11 +130,14 @@ export class SignOutPage {
       }
       this.httpServiceProvider.patch(requestData).subscribe((response: any) => {
         console.log(response.data);
+        loading.dismissAll();
       }, err => {
         console.log(err);
+        loading.dismissAll();
       });
     } catch(error) {
       console.log(error);
+      loading.dismissAll();
     }
   }
 }

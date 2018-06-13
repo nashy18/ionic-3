@@ -5,6 +5,7 @@ import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 import { HttpServiceProvider } from '../../providers/http-service/http-service';
 import { Global,APIActions,Enums  } from '../../providers/config/contsants';
 import { Storage } from '@ionic/storage';
+import { LoadingController } from 'ionic-angular';
 
 /**
  * Generated class for the TermsAndConditionsPage page.
@@ -58,7 +59,8 @@ export class TermsAndConditionsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public viewCtrl : ViewController, public modalCtrl : ModalController,
-              private httpServiceProvider: HttpServiceProvider, private storage: Storage) {
+              private httpServiceProvider: HttpServiceProvider, private storage: Storage,
+              public loadingController:LoadingController) {
    
       this.modalHeader = this.navParams.get('header');
       this.modalBody = this.navParams.get('body');
@@ -162,6 +164,10 @@ export class TermsAndConditionsPage {
   submit() {
 
     if(this.touchSignature) {
+
+      let loading = this.loadingController.create({content : "Logging in ,please wait..."});
+      loading.present();
+
       this.viewCtrl.dismiss();
     
       this.signature = this.signaturePad.toDataURL();
@@ -183,16 +189,18 @@ export class TermsAndConditionsPage {
         requestData["action"] = APIActions.updateVisitor+"/"+obj.id;
         requestData["body"] = request;
 
-         try {
-           this.httpServiceProvider.patch(requestData).subscribe((response: any) => {
-             console.log("Visior Updated Data: "+response.data);
-            
-           }, err => {
-               console.log(err);
-             });
-           } catch (error) {
-             console.log(error);
-           }
+          try {
+            this.httpServiceProvider.patch(requestData).subscribe((response: any) => {
+              console.log("Visior Updated Data: "+response.data);
+              loading.dismissAll();
+            }, err => {
+                console.log(err);
+                loading.dismissAll();
+            });
+          } catch (error) {
+              console.log(error);
+              loading.dismissAll();
+          }
       });
       
       
