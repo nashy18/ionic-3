@@ -18,6 +18,7 @@ import { SelectSearchableModule } from 'ionic-select-searchable';
 import { SharedService } from '../service/shared.service';
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     HttpClientModule,
     HttpModule,
     SelectSearchableModule,
-    SignaturePadModule
+    SignaturePadModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
