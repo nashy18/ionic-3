@@ -165,7 +165,7 @@ export class TermsAndConditionsPage {
 
     if(this.touchSignature) {
 
-      let loading = this.loadingController.create({content : "Logging in ,please wait..."});
+      let loading = this.loadingController.create({content : "Loading..."});
       loading.present();
 
       this.viewCtrl.dismiss();

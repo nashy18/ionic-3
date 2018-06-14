@@ -55,7 +55,7 @@ export class SignOutPage {
 
     if(this.signOutForm.valid) {
 
-      let loading = this.loadingController.create({content : "Logging in ,please wait..."});
+      let loading = this.loadingController.create({content : "Loading..."});
       loading.present();
 
       console.log("Sign out Form is valid");
@@ -88,7 +88,7 @@ export class SignOutPage {
 
   getAllVisitors() {
 
-    let loading = this.loadingController.create({content : "Logging in ,please wait..."});
+    let loading = this.loadingController.create({content : "Loading..."});
     loading.present();
 
     const requestData = {};

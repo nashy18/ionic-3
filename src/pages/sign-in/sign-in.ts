@@ -91,7 +91,7 @@ export class SignInPage {
     this.submitAttempt=true;
     if(this.signInForm.valid) {
 
-      let loading = this.loadingController.create({content : "Logging in ,please wait..."});
+      let loading = this.loadingController.create({content : "Loading..."});
       loading.present();
 
       try {
@@ -138,7 +138,7 @@ export class SignInPage {
 
   getDepartentData() {
 
-    let loading = this.loadingController.create({content : "Logging in ,please wait..."});
+    let loading = this.loadingController.create({content : "Loading..."});
     loading.present();
 
     const request = {};
@@ -187,7 +187,7 @@ export class SignInPage {
     // List employees belongs to selected department
     if(type =='department') {
 
-      let loading = this.loadingController.create({content : "Logging in ,please wait..."});
+      let loading = this.loadingController.create({content : "Loading..."});
       loading.present();
 
       this.data.nameOfPerson='';
