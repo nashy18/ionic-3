@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import { AboutUsPage } from '../about-us/about-us';
 import { SignInPage } from '../sign-in/sign-in';
 import { SignOutPage } from '../sign-out/sign-out';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Global } from "../../providers/config/contsants";
 
 /**
  * Generated class for the Home page.
@@ -25,13 +27,14 @@ export class HomePage {
     url: 'https://www.youtube.com/watch?v=P_aO2quAPuY'
   };
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private inAppBrowser: InAppBrowser) {
 
   }
 
   openAboutUsPage() {
 
     this.navCtrl.push(AboutUsPage);
+
   }
 
   openSignInPage() {

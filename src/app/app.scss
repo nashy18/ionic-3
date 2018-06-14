@@ -36,6 +36,9 @@
     .visitor-pass-content {
         font-size: 14px;
     }
+    .sign-out-img-div{
+        display: none;
+    }
 }
 
 /* Extra Small Devices, Phones */ 
@@ -53,6 +56,10 @@
     .visitor-pass-content {
         font-size: 14px;
     }
+
+    .sign-out-img-div{
+        display: none;
+    }
 }
 
 /* Small Devices, Tablets */
@@ -65,6 +72,10 @@
 
     .visitor-pass-content {
         font-size: 14px;
+    }
+
+    .sign-out-img-div{
+        display: none;
     }
 }
 
@@ -79,6 +90,10 @@
     .visitor-pass-content {
         font-size: 14px;
     }
+
+    .sign-out-img-div{
+        display: block;
+    }
 }
 
 /* Large Devices, Wide Screens */
@@ -91,6 +106,10 @@
 
     .visitor-pass-content {
         font-size: 14px;
+    }
+
+    .sign-out-img-div{
+        display: block;
     }
 }
 

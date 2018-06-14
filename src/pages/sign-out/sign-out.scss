@@ -168,16 +168,4 @@ page-sign-out {
             }
         }
     }
-
-    @media screen and (max-width: 1200px){
-        .sign-out-img{
-            display: none;
-        }
-    }
-
-    @media screen and (min-width: 1200px){
-        .sign-out-img{
-            display: block;
-        }
-    }
 }
