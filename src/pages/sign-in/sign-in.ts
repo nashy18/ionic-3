@@ -59,7 +59,7 @@ export class SignInPage {
           this.signInForm = fb.group({
             firstName : ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(2)])],     
             lastName : ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(2)])],  
-            phone : ['', Validators.compose([Validators.required, Validators.pattern(this.phonePattern)])],
+            phone : ['', Validators.compose([Validators.required, Validators.pattern(this.phonePattern), Validators.minLength(10), Validators.maxLength(15)])],
             email : ['', Validators.compose([Validators.pattern(/^[a-z0-9!#$%&'+\/=?^_`{|}~.-]+@\w+([\.-]?\w+)?(\.\w{2,4})+$/i), Validators.required])], 
             company : ['', Validators.required],  
             department : ['', Validators.required], 

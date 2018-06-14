@@ -106,8 +106,20 @@
                        <span class="tooltiptext">Enter your contact</span>
                       </button>
                   </ion-item> 
-                  <div class="req-lbl" *ngIf="!signInForm.controls.phone.valid && 
-                    (signInForm.controls.phone.touched )">* Phone is required (10 digit)!</div>             
+                  <!-- <div class="req-lbl" *ngIf="!signInForm.controls.phone.valid && 
+                    (signInForm.controls.phone.touched )">* Phone is required (10 digit)!</div>      -->
+                    <ng-container *ngIf="signInForm.controls.phone.hasError('minlength') && (signInForm.controls.phone.touched); then mobMinReq"></ng-container>
+                    <ng-template #mobMinReq>
+                      <div class="req-lbl">* Minimum 10 digits requird!</div>
+                    </ng-template>
+                    <ng-container *ngIf="signInForm.controls.phone.hasError('maxlength') && (signInForm.controls.phone.touched); then mobMaxReq"></ng-container>
+                    <ng-template #mobMaxReq>
+                      <div class="req-lbl">* Maximum 15 digits allowed!</div>
+                    </ng-template>
+                    <ng-container *ngIf="!signInForm.controls.phone.hasError('required') && !signInForm.controls.phone.hasError('minlength') && !signInForm.controls.phone.valid && (signInForm.controls.phone.touched); then mobInvalidName"></ng-container>
+                    <ng-template #mobInvalidName>
+                      <div class="req-lbl">* Invalid phone!</div>
+                    </ng-template>        
               </ion-col>
               <ion-col col-12 col-lg-6 col-md-6 col-sm-12 col-xs-12>    
                 <ion-label class="label_name">Email<span class="astrik"> * </span></ion-label>  
