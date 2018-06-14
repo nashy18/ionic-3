@@ -36,8 +36,13 @@
     .visitor-pass-content {
         font-size: 14px;
     }
+
     .sign-out-img-div{
         display: none;
+    }
+
+    .sign-in-bar-code-txt-align {
+        text-align: center;
     }
 }
 
@@ -60,6 +65,10 @@
     .sign-out-img-div{
         display: none;
     }
+
+    .sign-in-bar-code-txt-align {
+        text-align: center;
+    }
 }
 
 /* Small Devices, Tablets */
@@ -76,6 +85,10 @@
 
     .sign-out-img-div{
         display: none;
+    }
+
+    .sign-in-bar-code-txt-align {
+        text-align: center;
     }
 }
 
@@ -94,6 +107,10 @@
     .sign-out-img-div{
         display: block;
     }
+
+    .sign-in-bar-code-txt-align {
+        text-align: left;
+    }
 }
 
 /* Large Devices, Wide Screens */
@@ -110,6 +127,10 @@
 
     .sign-out-img-div{
         display: block;
+    }
+
+    .sign-in-bar-code-txt-align {
+        text-align: left;
     }
 }
 
