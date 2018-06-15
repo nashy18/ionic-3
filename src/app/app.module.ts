@@ -19,6 +19,7 @@ import { SharedService } from '../service/shared.service';
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { IonicStorageModule } from '@ionic/storage';
+import { AuthenticationPage } from '../pages/authentication/authentication';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { IonicStorageModule } from '@ionic/storage';
     AboutUsPage,
     SignInPage,
     SignOutPage,
-    TermsAndConditionsPage
+    TermsAndConditionsPage,
+    AuthenticationPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import { IonicStorageModule } from '@ionic/storage';
     AboutUsPage,
     SignInPage,
     SignOutPage,
-    TermsAndConditionsPage
+    TermsAndConditionsPage,
+    AuthenticationPage
   ],
   providers: [
     StatusBar,
