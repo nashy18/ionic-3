@@ -7,6 +7,7 @@ import {Http, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
 import { HttpServiceProvider } from '../../providers/http-service/http-service';
 import { Global,APIActions,Enums  } from '../../providers/config/contsants';
+import { DomSanitizer} from '@angular/platform-browser';
 
 
 /**
@@ -33,7 +34,7 @@ export class AuthenticationPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public menu: MenuController,
               public form:FormBuilder, public storage:Storage, private http: Http, 
               private httpServiceProvider: HttpServiceProvider, public loadingController: LoadingController,
-              public toastController: ToastController, public events: Events) {
+              public toastController: ToastController, public events: Events, public domSanitizer: DomSanitizer) {
       
     this.loginForm=form.group({
     
@@ -44,7 +45,7 @@ export class AuthenticationPage {
   
   onLogin(value: any): void{
 
-    if(this.loginForm.valid) {debugger
+    if(this.loginForm.valid) {
 
       let loading = this.loadingController.create({content : "Loading..."});
       loading.present();
@@ -64,13 +65,15 @@ export class AuthenticationPage {
 
           if(response.data != null) {
            
-            this.navCtrl.push(HomePage);
+            // After user logs in fetch company data based on logged in user and store 
+            // company related data in local storage
+            this.addCompanyInLocalStorage();
           } else {
 
             this.events.publish('toastr', 'User not found!');
           }
-          loading.dismissAll();
           
+          loading.dismissAll();
         }, err => {
           console.log(err);
           loading.dismissAll();
@@ -81,6 +84,53 @@ export class AuthenticationPage {
         loading.dismissAll();
         this.events.publish('toastr', 'Something is wrong. Please try again!');
       }
+    }
+  }
+
+  addCompanyInLocalStorage() {
+
+    let loading = this.loadingController.create({content : "Loading..."});
+    loading.present();
+
+    var requestData = {};
+    var request = {};
+    request["companyId"] = "5af6b480789aa61d98736751";
+    requestData["action"] = APIActions.getCompanyConfigByCompanyId;
+    requestData["body"] = request;
+
+    try {
+
+      this.httpServiceProvider.post(requestData).subscribe((response: any) => {
+
+        loading.dismissAll();
+
+        if(response.data != null) {
+
+          let data = {};
+          data["companyLogo"] = this.domSanitizer.bypassSecurityTrustResourceUrl(response.data[0].json.logo);
+          data["companyName"] = response.data[0].companyId.name;
+          data["companyDescription"] = this.domSanitizer.bypassSecurityTrustHtml(response.data[0].json.description);
+          data["companyVideo"] = this.domSanitizer.bypassSecurityTrustResourceUrl(response.data[0].json.videoURL);
+          data["poweredByLogo"] = this.domSanitizer.bypassSecurityTrustResourceUrl(response.data[0].json.poweredByLogo);
+          data["aboutUs"] = this.domSanitizer.bypassSecurityTrustHtml(response.data[0].json.aboutUs);
+          data["companyWebsiteURL"] =  this.domSanitizer.bypassSecurityTrustResourceUrl(response.data[0].json.companyWebsiteURL);
+          data["signInPageDescription"] =  this.domSanitizer.bypassSecurityTrustHtml(response.data[0].json.signInPageDescription);
+          data["termsAndConditions"] =  this.domSanitizer.bypassSecurityTrustHtml(response.data[0].json.termsAndConditions);
+          
+          this.storage.set('companyConfig', data);
+          
+          this.navCtrl.push(HomePage);
+        } else {
+
+          this.events.publish('toastr', 'Failed to get company data');
+          loading.dismissAll();
+        }
+      });
+    } catch(err) {
+
+      this.events.publish('toastr', 'Something is wrong while storing company data');
+      console.log(err);
+      loading.dismissAll();
     }
   }
 }

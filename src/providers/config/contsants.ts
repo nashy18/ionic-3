@@ -20,5 +20,6 @@ export const APIActions = Object.freeze({
     "getEmployeesByDepartment": "user/search",
     "getAllPurposes": "visitPurpose",
     "getAllVisitors": "visitor",
-    "authenticateUser": "user/login"
+    "authenticateUser": "user/login",
+    "getCompanyConfigByCompanyId": "companyconfig/search"
 })

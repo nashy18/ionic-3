@@ -14,52 +14,7 @@
     <ion-row> 
       <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
         <ion-content text-wrap style="height:355px;">
-          <ion-row>
-            <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
-              <ion-label><strong>The following health condition questions to be asked to all visitors/contractors intending to enter production areas of the factory. Visitors must appropriately signed in, read the GMP’s and be accompanied by management.</strong></ion-label>
-            </ion-col> 
-          </ion-row>
-          <ion-row>
-            <ion-col col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12>
-              <ion-label><strong><u>IN THE LAST 1 WEEK HAVE YOU SUFFERED FROM ANY OF THE FOLLOWING CONDITIONS:</u></strong></ion-label>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
-              <ul>
-                <li> Diarrhea or vomiting</li>
-                <li> Salmonella, Campylobacter, Shigella or E.Coli food poisoning</li>
-                <li> Any Parasitic infection</li>
-                <li> Ear, nose or throat infections</li>
-                <li> Skin rashes</li>
-                <li> Recurring boils</li>
-                <li> Typhoid or paratyphoid</li>
-                <li> Dysentery</li>
-              </ul>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
-              <ion-label>
-                <strong>
-                  If the visitor has any recent history of the above, then contact Quality Assurance for Guidance. Entry to Production areas is subject to the visitor/contractor complying with the following Hygiene rules.
-                </strong>
-              </ion-label>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
-              <ul>
-                <li> Wear Company issued smock and red hair net.</li>
-                <li> Wear beard net if you have a beard.</li>
-                <li> Use antibacterial hand cleanser and hand wash basin at appropriate points.</li>
-                <li> Remove all jewellery and watches except plain wedding ring (must be covered properly).</li>
-                <li> No smoking, drinking or eating (including chewing gum) except in designated areas.</li>
-                <li> No perfume or false nails.</li>
-                <li> All cuts to be covered with a suitable metal detectable plaster.</li>
-              </ul>
-            </ion-col>
-          </ion-row>
+          <div [innerHTML]="termsAndConsition"></div>
         </ion-content>
       </ion-col>
     </ion-row>

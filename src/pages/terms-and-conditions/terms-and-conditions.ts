@@ -36,6 +36,7 @@ export class TermsAndConditionsPage {
   modalHeader: string;
   modalBody: string;
   modalType: string;
+  termsAndConsition;
  // isAgreeDisagreeRequired = false;
   isSignatureRequired = false;
   agreeSelected = false;
@@ -62,6 +63,8 @@ export class TermsAndConditionsPage {
               private httpServiceProvider: HttpServiceProvider, private storage: Storage,
               public loadingController:LoadingController) {
    
+      console.log("constr loaded");
+      this.getTermsAndConsitionsData();
       this.modalHeader = this.navParams.get('header');
       this.modalBody = this.navParams.get('body');
       this.modalType = this.navParams.get('type');
@@ -247,5 +250,13 @@ export class TermsAndConditionsPage {
   }
   scrollToTop() {
     this.content.scrollToTop();
+  }
+
+  getTermsAndConsitionsData() {
+    
+    this.storage.get('companyConfig').then((obj) => {
+    
+      this.termsAndConsition = obj.termsAndConditions.changingThisBreaksApplicationSecurity;
+    });
   }
 }

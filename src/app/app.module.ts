@@ -4,7 +4,6 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpClientModule } from '@angular/common/http';
-
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { RestProvider } from '../providers/rest/rest';
@@ -20,6 +19,7 @@ import { SignaturePadModule } from 'angular2-signaturepad';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { IonicStorageModule } from '@ionic/storage';
 import { AuthenticationPage } from '../pages/authentication/authentication';
+import { SafePipe } from '../filters/safePipe';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,8 @@ import { AuthenticationPage } from '../pages/authentication/authentication';
     SignInPage,
     SignOutPage,
     TermsAndConditionsPage,
-    AuthenticationPage
+    AuthenticationPage,
+    SafePipe
   ],
   imports: [
     BrowserModule,
