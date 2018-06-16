@@ -1,0 +1,68 @@
+page-authentication {
+
+    .tooltip {        
+        position: relative;
+        display: inline-block;    
+   }
+
+   .tooltip-img {        
+    width:20px;
+    height:20px;
+   }
+
+   .tooltip-btn{
+    background-color: transparent;
+    margin:0px;
+   }
+
+   .tooltip .tooltiptext {
+       visibility: hidden;
+       width: 130px;
+       background-color:#555;
+       color: #fff;
+       font-size: 11px;
+       text-align: center;
+       border-radius: 6px;
+       padding: 5px 0;
+       position: absolute;
+       z-index: 1;
+       top: -5px;
+       right: 110%;
+   }
+    
+   .tooltip .tooltiptext::after {
+       content: "";
+       position: absolute;
+       top: 50%;
+       left: 100%;
+       margin-top: -5px;
+       border-width: 5px;
+       border-style: solid;
+       border-color: transparent transparent transparent #555;
+   }
+
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+    }
+
+    .item-cover {	
+        width:85%;
+    }
+
+    .item-inner {
+        border-bottom-color: transparent !important;
+        box-shadow: none !important;
+        border-radius: 10px;
+        font-size:1.8rem;        
+    }
+
+    .item-block {           
+        border-radius:10px;            
+        min-height:0px;
+        height:38px;       
+    }
+
+    .label_name{
+        color:#444444;
+   }
+}

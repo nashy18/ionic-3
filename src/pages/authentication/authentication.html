@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-navbar style="height: 84px;"> 
+    <ion-title>
+      <ion-grid text-center>
+        <!-- <ion-row text-center>
+          <ion-col col-12 col-lg-2 offset-lg-3 col-md-2 offset-md-3 col-sm-2 col-xs-2>
+            <img src="assets/imgs/natures-logo-header.png" style="height: 65px; margin-top: 3px;">
+          </ion-col>
+          <ion-col col-12 col-lg-7 col-md-7 col-sm-10 col-xs-10 text-left>
+            <ion-label style="font-size: 30px">Natures Touch</ion-label>
+          </ion-col>
+        </ion-row> -->
+        
+        <div text-center text-wrap style="font-size: 24px">Natures Touch</div>
+      </ion-grid>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content  class="item-bg-color">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12>
+        <ion-label text-center><h3><strong>Login</strong></h3></ion-label>
+      </ion-col>
+    </ion-row>
+    <form [formGroup]="loginForm">
+      <ion-row>
+        <ion-col col-12 col-lg-6 offset-lg-3 col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12>
+          <ion-label class="label_name">Username</ion-label>  
+          <ion-item>
+            <ion-input type="text" [(ngModel)]="data.username" formControlName="username" [class.invalid]="!loginForm.controls.username.valid && 
+             (loginForm.controls.username.dirty)"></ion-input>
+            <button class="tooltip tooltip-btn" clear item-right>
+              <img class="tooltip tooltip-img" src="assets/imgs/help_outline.svg">
+               <span class="tooltiptext">Enter Username</span>
+            </button>
+          </ion-item>
+          <ng-container *ngIf="loginForm.controls.username.hasError('required') && (loginForm.controls.username.touched); then userNameReq"></ng-container>
+          <ng-template #userNameReq>
+            <div class="req-lbl">* Username is required!</div>
+          </ng-template>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 col-lg-6 offset-lg-3 col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12>
+          <ion-label class="label_name">Password</ion-label>  
+          <ion-item>
+            <ion-input type="text" [(ngModel)]="data.password" formControlName="password" [class.invalid]="!loginForm.controls.password.valid && 
+             (loginForm.controls.password.dirty)"></ion-input>
+            <button class="tooltip tooltip-btn" clear item-right>
+              <img class="tooltip tooltip-img" src="assets/imgs/help_outline.svg">
+               <span class="tooltiptext">Enter Password</span>
+            </button>
+          </ion-item>
+          <ng-container *ngIf="loginForm.controls.password.hasError('required') && (loginForm.controls.password.touched); then passwordReq"></ng-container>
+          <ng-template #passwordReq>
+            <div class="req-lbl">* Password is required!</div>
+          </ng-template>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 text-center padding-top>
+          <button ion-button color="secondary" [disabled]="!loginForm.valid" (click)="onLogin(loginForm.value);" type="submit" round>Login</button>
+       </ion-col>
+     </ion-row>
+    </form>
+  </ion-grid>
+</ion-content>
