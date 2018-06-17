@@ -36,6 +36,7 @@ export class HomePage {
   companyDescription;
   companyVideo;
   poweredByLogo;
+  valuesLoaded;
 
   video: any = {
     url: 'https://www.youtube.com/watch?v=P_aO2quAPuY'
@@ -52,6 +53,7 @@ export class HomePage {
   ionViewDidLoad() {
     
     console.log('ionViewDidLoad Home');
+    this.valuesLoaded = false;
   }
 
   openAboutUsPage() {
@@ -72,24 +74,30 @@ export class HomePage {
 
   getCompanyConfig() {
 
-    let loading = this.loadingController.create({content : "Loading..."});
-    loading.present();
+    // let loading = this.loadingController.create({content : "Loading..."});
+    // loading.present();
 
     this.storage.get('companyConfig').then((obj) => {
 
-      loading.dismissAll();
+     // loading.dismissAll();
 
-      this.companyName = obj.companyName;
-      this.companyDescription = obj.companyDescription.changingThisBreaksApplicationSecurity;
-      this.companyLogo = obj.companyLogo.changingThisBreaksApplicationSecurity;
-      this.companyVideo = obj.companyVideo.changingThisBreaksApplicationSecurity;
-      this.poweredByLogo = obj.poweredByLogo.changingThisBreaksApplicationSecurity;
+      if(obj != null) {
+        
+        this.companyName = obj.companyName;
+        this.companyDescription = obj.companyDescription.changingThisBreaksApplicationSecurity;
+        this.companyLogo = obj.companyLogo.changingThisBreaksApplicationSecurity;
+        this.companyVideo = obj.companyVideo.changingThisBreaksApplicationSecurity;
+        this.poweredByLogo = obj.poweredByLogo.changingThisBreaksApplicationSecurity;
 
+        this.valuesLoaded = true;
+      }
+      
       console.log("Name: "+this.companyName);
       console.log("Desc: "+this.companyDescription);
       console.log("logo: "+this.companyLogo);
       console.log("video: "+this.companyVideo);
       console.log("poweredbylogo: "+this.poweredByLogo);
+      
       
     });
   }

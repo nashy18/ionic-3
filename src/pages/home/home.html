@@ -7,10 +7,10 @@
   <ion-grid fixed>
     <ion-row justify-content-center class="heading">
       <ion-col class="comp-title" col-2>
-        <ion-img class="comp-title-img" *ngIf="!url" [src]="companyLogo"></ion-img>
+        <ion-img class="comp-title-img" [src]="companyLogo"></ion-img>
       </ion-col>
       <ion-col class="comp-title-pad" col-10 text-wrap>
-        <ion-label class="comp-title-pad-lbl">
+        <ion-label class="comp-title-pad-lbl" *ngIf="valuesLoaded">
           Welcome to {{companyName}}: Montreal Facility
         </ion-label>
       </ion-col>
@@ -20,7 +20,7 @@
         <ion-row>
           <ion-col col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12>
             <ion-label text-wrap class="comp-para-lbl">
-              <div [innerHTML]="companyDescription"></div>
+              <div *ngIf="valuesLoaded" [innerHTML]="companyDescription"></div>
             </ion-label>
           </ion-col>
         </ion-row>
@@ -32,7 +32,7 @@
         <ion-row>
           <ion-col col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12>
             <div class="video-container">
-              <iframe width="560" height="415" [src]="companyVideo | safe" frameborder="0" allow="autoplay; encrypted-media"
+              <iframe width="560" height="415" *ngIf="valuesLoaded" [src]="companyVideo | safe" frameborder="0" allow="autoplay; encrypted-media"
                 allowfullscreen></iframe>
             </div>
           </ion-col>
