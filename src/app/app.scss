@@ -50,6 +50,20 @@
         font-size: 14px;
         margin-top: 2px;
     }
+    .about-btn{
+        text-align: center;
+    }
+    .auth-header-log{
+        height: 22px; 
+        margin-top: 3px;
+    }
+}
+
+.auth-header{
+    height: 70px;
+}
+.auth-header .toolbar-background{
+    background-color: white !important;
 }
 
 /* Extra Small Devices, Phones */ 
@@ -81,6 +95,13 @@
         font-size: 14px;
         margin-top: 2px;
     }
+    .about-btn{
+        text-align: center;
+    }
+    .auth-header-log{
+        height: 27px; 
+        margin-top: 3px;
+    }
 }
 
 /* Small Devices, Tablets */
@@ -107,6 +128,13 @@
         color: #FF0000;
         font-size: 14px;
         margin-top: 2px;
+    }
+    .about-btn{
+        text-align: center;
+    }
+    .auth-header-log{
+        height: 45px; 
+        margin-top: 3px;
     }
 }
 
@@ -135,6 +163,13 @@
         font-size: 14px;
         margin-top: 2px;
     }
+    .about-btn{
+        text-align: right;
+    }
+    .auth-header-log{
+        height: 45px; 
+        margin-top: 3px;
+    }
 }
 
 /* Large Devices, Wide Screens */
@@ -162,10 +197,14 @@
         font-size: 14px;
         margin-top: 2px;
     }
+    .about-btn{
+        text-align: right;
+    }
+    .auth-header-log{
+        height: 45px; 
+        margin-top: 3px;
+    }
 }
-
-
-
 
 /*==========  Non-Mobile First Method  ==========*/
 

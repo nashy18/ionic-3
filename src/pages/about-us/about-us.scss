@@ -20,7 +20,90 @@ page-about-us {
         width: 120px;
     }
     .para-lbl{        
-        padding: 5px 10px;
+        padding: 0px;
+        margin: 0px;
+    }
+    .para-box{
+        padding: 10px 10px 10px;
     }
 
+    // Welcome title & logo
+    .comp-title-pad {
+        padding-left:30px;
+        text-align:left;
+    }
+    .comp-title-pad-lbl{
+        text-align:left; 
+        font-weight: bold;
+    }
+    .comp-title {
+        text-align:right;
+    }
+    .comp-title-img{
+        position: relative;
+        width: 65px;
+        height: 65px;
+    }
+    
+    /* For following screen resolution */
+    @media screen and (max-width: 1200px){
+        .comp-title {
+            max-width: 30%;
+        }
+        .comp-title-pad {
+            font-size: 14px !important;
+        }
+        .comp-title-pad-lbl {
+            font-size: 14px !important;
+        }
+    }
+
+    @media screen and (min-width: 1200px){
+        .comp-title {
+            max-width: 20%;
+        }
+        .comp-title-pad {
+            font-size: 20px !important;
+        }
+        .comp-title-pad-lbl {
+            font-size: 20px !important;
+        }
+        .heading{
+            padding-left:200px;
+        }
+    }
+    
+    .btn {
+        padding: 10px 24px;
+        background: #506e1f;
+        transition: all 250ms ease-in;
+        font-size: 14px;
+        display: inline-block;
+        font-weight: 400;
+        text-align: center;
+        vertical-align: middle;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        cursor: pointer;
+        border: 1px solid transparent;
+        line-height: 1.42857;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        border-radius: 40px;
+        color: #fff;
+    }
+    .btn:hover {
+        color: #fff;
+    }    
+    .btn-light, .btn:hover {
+        background: #93a86e;
+    }       
+    a, a:hover {
+        color: #93a86e;
+    }    
+    a {
+        text-decoration: none;
+    } 
 }

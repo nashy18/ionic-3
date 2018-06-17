@@ -99,15 +99,16 @@ export class SignOutPage {
         console.log(response.data);
         var list = response.data;
         this.users = [];
+        var userDataList = [];
         if(list != null && list != undefined) {
           for (var i = 0; i < list.length; i++) {
             if(list[i] && !list[i].isLoggedOut){
               list[i]["fullName"] = list[i].firstName + ' ' + list[i].lastName;
-              this.users.push(list[i]);
+              userDataList.push(list[i]);
             }
           }
         }
-
+        this.users = this.getListByOrderASC(userDataList);
         loading.dismissAll();
       }, err => {
         console.log(err);
@@ -139,5 +140,24 @@ export class SignOutPage {
       console.log(error);
       loading.dismissAll();
     }
+  }
+
+  getListByOrderASC(list){
+    if(list == undefined || list == null){
+      return list;
+    }
+
+    return list.sort(function(a, b) {
+      var nameA = a.fullName.toUpperCase(); 
+      var nameB = b.fullName.toUpperCase(); 
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }        
+      // names must be equal
+      return 0;
+    });
   }
 }

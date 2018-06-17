@@ -70,8 +70,8 @@ export class SignInPage {
         });  
 
         this.visitingAreaList = [
-          { id: 101, name: 'Yes' },
-          { id: 102, name: 'No' }
+          { id: 102, name: 'No' },
+          { id: 101, name: 'Yes' }          
         ];     
         
   }
@@ -146,7 +146,7 @@ export class SignInPage {
     try {
       this.httpServiceProvider.get(request).subscribe((response: any) => {
         console.log(response.data);
-        this.nameOfDepartmentList = response.data;
+        this.nameOfDepartmentList = this.getListByOrderASC(response.data);
         loading.dismissAll();
         }, err => {
           console.log(err);
@@ -169,7 +169,7 @@ export class SignInPage {
     try {
       this.httpServiceProvider.get(requestData).subscribe((response: any) => {
         console.log(response.data);
-        this.purposeVisitedList = response.data;
+        this.purposeVisitedList = this.getListByOrderASC(response.data);
         //loading.dismissAll();
       }, err => {
         console.log(err);
@@ -207,7 +207,7 @@ export class SignInPage {
               list[i]["fullName"] = list[i].firstName + ' ' + list[i].lastName;
             }
           }
-          this.nameOfPersonList = list;  
+          this.nameOfPersonList = this.getPersonListByOrderASC(list);;  
 
           loading.dismissAll();
         }, err => {
@@ -221,4 +221,40 @@ export class SignInPage {
     }
   }
 
+  getListByOrderASC(list){
+    if(list == undefined || list == null){
+      return list;
+    }
+    return list.sort(function(a, b) {
+      var nameA = a.name.toUpperCase(); 
+      var nameB = b.name.toUpperCase(); 
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }        
+      // names must be equal
+      return 0;
+    });
+  }
+  
+  getPersonListByOrderASC(list){
+    if(list == undefined || list == null){
+      return list;
+    }
+
+    return list.sort(function(a, b) {
+      var nameA = a.fullName.toUpperCase(); 
+      var nameB = b.fullName.toUpperCase(); 
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }        
+      // names must be equal
+      return 0;
+    });
+  }
 }

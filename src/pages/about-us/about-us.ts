@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 import { Global } from "../../providers/config/contsants";
+import { Storage } from '@ionic/storage';
 /**
  * Generated class for the AboutUsPage page.
  *
@@ -15,6 +16,10 @@ import { Global } from "../../providers/config/contsants";
   templateUrl: 'about-us.html',
 })
 export class AboutUsPage {
+  aboutUs;
+  aboutUsWhoWeAreLearnMore;
+  aboutUsMoreInfo;
+
   options: InAppBrowserOptions = {
     location: 'yes',//Or 'no' 
     hidden: 'no', //Or  'yes'
@@ -34,31 +39,43 @@ export class AboutUsPage {
     footer: 'yes'
   }
 
-  constructor(public navCtrl: NavController, private iab: InAppBrowser) {
-
+  constructor(public navCtrl: NavController, private storage: Storage, private iab: InAppBrowser) {
+    this.getAboutUsData();
   }
 
   ionViewDidLoad() {
     //https://www.techiediaries.com/inappbrowser-ionic-v3/
-    this.openWithCordovaBrowser(Global.AboutUsURL);
+    //this.openWithCordovaBrowser(Global.AboutUsURL);
   }
 
   exitAboutPage() {
-    console.log('on clicked of exit()');
     this.navCtrl.push(HomePage);
   }
 
   openWithSystemBrowser(url: string) {
     let target = "_system";
-    this.iab.create(url, target, this.options);
+    //this.iab.create(url, target, this.options);
   }
   openWithInAppBrowser(url: string) {
     let target = "_blank";
-    this.iab.create(url, target, this.options);
+    //this.iab.create(url, target, this.options);
   }
   openWithCordovaBrowser(url: string) {
     let target = "_self";
     this.iab.create(url, target, this.options);
+  }
+  moreInfoPage() {
+    this.openWithCordovaBrowser(this.aboutUsMoreInfo);
+  }
+  aboutUsWhoWeArePage() {
+    this.openWithCordovaBrowser(this.aboutUsWhoWeAreLearnMore);
+  }
+  getAboutUsData() {
+    this.storage.get('companyConfig').then((obj) => {
+      this.aboutUs = obj.aboutUs.changingThisBreaksApplicationSecurity;
+      this.aboutUsWhoWeAreLearnMore = obj.aboutUsWhoWeAreLearnMore.changingThisBreaksApplicationSecurity;
+      this.aboutUsMoreInfo = obj.aboutUsMoreInfo.changingThisBreaksApplicationSecurity;
+    });
   }
 
 }
