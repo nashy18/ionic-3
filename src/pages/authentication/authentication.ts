@@ -113,6 +113,8 @@ export class AuthenticationPage {
           data["companyWebsiteURL"] =  this.domSanitizer.bypassSecurityTrustResourceUrl(response.data[0].json.companyWebsiteURL);
           data["signInPageDescription"] =  this.domSanitizer.bypassSecurityTrustHtml(response.data[0].json.signInPageDescription);
           data["termsAndConditions"] =  this.domSanitizer.bypassSecurityTrustHtml(response.data[0].json.termsAndConditions);
+          data["aboutUsWhoWeAreLearnMore"] = this.domSanitizer.bypassSecurityTrustHtml(response.data[0].json.aboutUsWhoWeAreLearnMore);
+          data["aboutUsMoreInfo"] = this.domSanitizer.bypassSecurityTrustHtml(response.data[0].json.aboutUsMoreInfo);
           
           this.storage.remove('companyConfig');
           this.storage.set('companyConfig', data);

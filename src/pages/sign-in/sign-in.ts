@@ -48,7 +48,7 @@ export class SignInPage {
   purposeVisitedList = [];
   visitingAreaList = [];
 
-  phonePattern = "^((\\+91-?)|0)?[0-9]{10}$";
+  phonePattern = "^[0-9]*";
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
 
   data = { firstName:'', lastName:'', phone:'', email:'' , company:'', department:'', nameOfPerson:'', purpose:'', controlledArea:''};
@@ -116,6 +116,7 @@ export class SignInPage {
           console.log("Visitor created Successfully! "+response.data);
 
           // Save visitor data in local storage
+          this.storage.remove('visitor');
           this.storage.set('visitor', response.data);
           loading.dismissAll();
           this.navCtrl.push(TermsAndConditionsPage);

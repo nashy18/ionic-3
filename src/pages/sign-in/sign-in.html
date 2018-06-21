@@ -116,8 +116,12 @@
                     <ng-template #mobMaxReq>
                       <div class="req-lbl">* Maximum 15 digits allowed!</div>
                     </ng-template>
-                    <ng-container *ngIf="!signInForm.controls.phone.hasError('required') && !signInForm.controls.phone.hasError('minlength') && !signInForm.controls.phone.valid && (signInForm.controls.phone.touched); then mobInvalidName"></ng-container>
+                    <ng-container *ngIf="signInForm.controls.phone.hasError('required') && !signInForm.controls.phone.hasError('maxlength') && !signInForm.controls.phone.hasError('minlength') && !signInForm.controls.phone.valid && (signInForm.controls.phone.touched); then mobInvalidName"></ng-container>
                     <ng-template #mobInvalidName>
+                      <div class="req-lbl">* Phone is required!</div>
+                    </ng-template> 
+                    <ng-container *ngIf="!signInForm.controls.phone.hasError('required') && !signInForm.controls.phone.hasError('maxlength') && !signInForm.controls.phone.hasError('minlength') && !signInForm.controls.phone.valid && (signInForm.controls.phone.touched); then wrongMob"></ng-container>
+                    <ng-template #wrongMob>
                       <div class="req-lbl">* Invalid phone!</div>
                     </ng-template>        
               </ion-col>
