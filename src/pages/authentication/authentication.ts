@@ -115,7 +115,9 @@ export class AuthenticationPage {
           data["termsAndConditions"] =  this.domSanitizer.bypassSecurityTrustHtml(response.data[0].json.termsAndConditions);
           data["aboutUsWhoWeAreLearnMore"] = this.domSanitizer.bypassSecurityTrustHtml(response.data[0].json.aboutUsWhoWeAreLearnMore);
           data["aboutUsMoreInfo"] = this.domSanitizer.bypassSecurityTrustHtml(response.data[0].json.aboutUsMoreInfo);
-          
+          data["aboutUsProduct"] = this.domSanitizer.bypassSecurityTrustHtml(response.data[0].json.aboutUsProduct);
+          data["aboutUsProductLearnmore"] = this.domSanitizer.bypassSecurityTrustHtml(response.data[0].json.aboutUsProductLearnmore);
+
           this.storage.remove('companyConfig');
           this.storage.set('companyConfig', data);
           

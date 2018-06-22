@@ -24,9 +24,13 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12>
+      <ion-col col-12 col-lg-6 col-md-12 col-sm-12 col-xs-12 padding-top>
         <div [innerHTML]="aboutUs"></div>
         <button class='btn' (click)='aboutUsWhoWeArePage()'>Learn more</button>
+      </ion-col>
+      <ion-col col-12 col-lg-6 col-md-12 col-sm-12 col-xs-12 padding-top>
+        <div [innerHTML]="aboutUsProduct"></div>
+        <button class='btn' (click)='aboutUsProductPage()'>Learn more</button>
       </ion-col>
     </ion-row>
     <ion-row justify-content-end padding-top>

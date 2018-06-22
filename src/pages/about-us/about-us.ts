@@ -19,6 +19,8 @@ export class AboutUsPage {
   aboutUs;
   aboutUsWhoWeAreLearnMore;
   aboutUsMoreInfo;
+  aboutUsProduct;
+  aboutUsProductLearnMore;
 
   options: InAppBrowserOptions = {
     location: 'yes',//Or 'no' 
@@ -70,11 +72,16 @@ export class AboutUsPage {
   aboutUsWhoWeArePage() {
     this.openWithCordovaBrowser(this.aboutUsWhoWeAreLearnMore);
   }
+  aboutUsProductPage() {
+    this.openWithCordovaBrowser(this.aboutUsProductLearnMore);
+  }
   getAboutUsData() {
     this.storage.get('companyConfig').then((obj) => {
       this.aboutUs = obj.aboutUs.changingThisBreaksApplicationSecurity;
       this.aboutUsWhoWeAreLearnMore = obj.aboutUsWhoWeAreLearnMore.changingThisBreaksApplicationSecurity;
       this.aboutUsMoreInfo = obj.aboutUsMoreInfo.changingThisBreaksApplicationSecurity;
+      this.aboutUsProduct = obj.aboutUsProduct.changingThisBreaksApplicationSecurity;
+      this.aboutUsProductLearnMore = obj.aboutUsProductLearnmore.changingThisBreaksApplicationSecurity;
     });
   }
 
