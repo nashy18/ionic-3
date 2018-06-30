@@ -62,12 +62,21 @@ export class AuthenticationPage {
         requestData["action"] = APIActions.authenticateUser;
         requestData["body"] = request;
         
-        this.httpServiceProvider.post(requestData).subscribe((response: any) => {
+        this.httpServiceProvider.post(requestData).subscribe((response: any) => {debugger
           console.log("Successfully logged in! "+response.data);
 
-          if(response.data != null) {
+          if(response.data != null) {debugger
            
-            // After user logs in fetch company data based on logged in user and store 
+            // Store authtoken in localstorage
+            this.storage.remove('authToken');
+            this.storage.set('authToken', response.data.token);
+
+            // Store logged in user data in local storage
+            this.storage.remove('loggedOnUser');
+            // removing password field before storing
+            delete response.data.user['password'];
+            this.storage.set('loggedOnUser', response.data.user);
+
             // company related data in local storage
             this.addCompanyInLocalStorage();
           } else {
@@ -99,7 +108,7 @@ export class AuthenticationPage {
 
     try {
 
-      this.httpServiceProvider.post(requestData).subscribe((response: any) => {
+      this.httpServiceProvider.post(requestData).subscribe((response: any) => {debugger
 
         if(response.data != null) {
 
@@ -120,14 +129,13 @@ export class AuthenticationPage {
 
           this.storage.remove('companyConfig');
           this.storage.set('companyConfig', data);
-          
           this.navCtrl.push(HomePage);
         } else {
 
           this.events.publish('toastr', 'Failed to get company data');
         }
       });
-    } catch(err) {
+    } catch(err) {debugger
 
       this.events.publish('toastr', 'Something is wrong while storing company data');
       console.log(err);
