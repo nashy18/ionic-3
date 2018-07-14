@@ -1,5 +1,5 @@
 import { Component, Pipe, PipeTransform } from '@angular/core';
-import { NavController,LoadingController, ToastController } from 'ionic-angular';
+import { NavController,LoadingController, ToastController, ViewController, Events } from 'ionic-angular';
 import { AboutUsPage } from '../about-us/about-us';
 import { SignInPage } from '../sign-in/sign-in';
 import { SignOutPage } from '../sign-out/sign-out';
@@ -42,17 +42,15 @@ export class HomePage {
     url: 'https://www.youtube.com/watch?v=P_aO2quAPuY'
   };
 
-  constructor(public navCtrl: NavController, private inAppBrowser: InAppBrowser, public storage: Storage,
+  constructor(private viewCtrl: ViewController, public navCtrl: NavController, private inAppBrowser: InAppBrowser, public storage: Storage,
               public domSanitizer: DomSanitizer, public loadingController: LoadingController,
-              public toastController: ToastController) {
+              public toastController: ToastController, public events: Events) {
 
     console.log('home ctrl loaded');
     this.getCompanyConfig();
   }
 
   ionViewDidLoad() {
-    
-    console.log('ionViewDidLoad Home');
     this.valuesLoaded = false;
   }
 
@@ -66,10 +64,15 @@ export class HomePage {
 
     this.navCtrl.push(SignInPage);
   }
-
+ 
   signOut() {
 
     this.navCtrl.push(SignOutPage);
+  }
+
+  openAppLogOutPage() {
+    
+    this.events.publish('toastr', 'Page is under construction.We\'ll be here soon..');
   }
 
   getCompanyConfig() {
@@ -90,15 +93,9 @@ export class HomePage {
         this.poweredByLogo = obj.poweredByLogo.changingThisBreaksApplicationSecurity;
 
         this.valuesLoaded = true;
-      }
-      
-      console.log("Name: "+this.companyName);
-      console.log("Desc: "+this.companyDescription);
-      console.log("logo: "+this.companyLogo);
-      console.log("video: "+this.companyVideo);
-      console.log("poweredbylogo: "+this.poweredByLogo);
-      
+      }  
       
     });
   }
+
 }

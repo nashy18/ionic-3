@@ -52,12 +52,12 @@ page-authentication {
     .item-inner {
         border-bottom-color: transparent !important;
         box-shadow: none !important;
-        border-radius: 10px;
+        border-radius: 8px;
         font-size:1.8rem;        
     }
 
     .item-block {           
-        border-radius:10px;            
+        border-radius:8px;            
         min-height:0px;
         height:38px;       
     }
@@ -65,4 +65,87 @@ page-authentication {
     .label_name{
         color:#444444;
    }
+   
+   .bg-image{
+        background-image: url("../assets/imgs/bg-image.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        background-color: #edeef2;
+        opacity: 0.8;
+   }
+
+   .input-logo-icon{
+        color:#4EA600;
+        font-size: 1.7rem;
+    }
+
+    .log-reg-btn{
+        border-radius:7px;
+        font-size:1.3rem;        
+        text-transform: none;
+        opacity: 1 !important;
+        min-width: 100px;
+        height: 2.5rem;
+    }
+
+    .log-btn{        
+        color: #FFFFFF;
+        background-color:#4EA600;        
+    }
+
+    .reg-btn{        
+        color: #000000;
+        background-color:#FFFFFF;
+        font-weight: 500;        
+    }
+
+    .button-md, .button-wp, .button-ios {
+        height: 3rem;
+    }
+
+    a[disabled], button[disabled], [ion-button][disabled] {
+        cursor: default;
+        opacity: .4 !important;
+        pointer-events: none;
+    }
+    .auth-log{        
+        background-size: contain;
+        background-position: center;
+        // width: 180px;
+        height: 170px;        
+        resize: both;
+        overflow: scroll;
+        opacity: 1 !important;
+    }
+    .auth-logo-rw {
+        // padding-top: 70px;
+        padding-bottom: 0px;
+    }
+
+    .form-auth-rw-unm, .form-auth-rw-pwd {
+        opacity: 1 !important;
+    }
+
+    .form-auth-rw-unm {
+        max-height: 65px;
+        min-height: 65px;        
+    }
+
+    .form-auth-rw-pwd {
+        max-height: 55px; 
+        min-height: 55px; 
+    }
+    .col-powered-logo-img{
+        padding-top: 60px; 
+        padding-left: 60px;
+        text-align: center;
+        opacity: 1 !important;
+    }
+    .powered-logo-img{
+        width: 130px;
+        height: 30px;
+        background: none;
+        opacity: 1 !important;
+    }
 }

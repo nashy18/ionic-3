@@ -1,8 +1,39 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title text-center>Home</ion-title>
-  </ion-navbar>
+  <ion-navbar hideBackButton="true">
+      <ion-title text-center><img class="nav-header-logo" src="assets/imgs/Smart-Visitor-Log_Side.png"></ion-title>
+      <ion-buttons left>
+        <button ion-button icon-only>
+          <ion-icon name="menu"></ion-icon>          
+        </button>
+      </ion-buttons>
+    </ion-navbar>
 </ion-header>
+
+<ion-menu [content]="mycontent">
+    <ion-header>
+        <ion-toolbar>
+          <ion-title text-center><img class="nav-header-logo" src="assets/imgs/Smart-Visitor-Log_Side.png"></ion-title>
+        </ion-toolbar>
+    </ion-header>      
+    <ion-content>
+      <ion-list>          
+        <button ion-item no-lines menuClose (click)="openAboutUsPage()">
+            <ion-label class="menu-item">About us</ion-label>
+        </button>
+        <button ion-item no-lines menuClose (click)="openSignInPage()">
+          <ion-label class="font-wt-500">Visitor sign in</ion-label>
+        </button>
+        <button ion-item no-lines menuClose (click)="signOut()">
+          <ion-label class="font-wt-500">Visitor sign out</ion-label>
+        </button>
+        <button ion-item no-lines menuClose (click)="openAppLogOutPage()">
+          <ion-label class="font-wt-500">App log out</ion-label>
+        </button>
+      </ion-list>
+    </ion-content>
+  </ion-menu>  
+<ion-nav #mycontent [root]="rootPage"></ion-nav>
+
 <ion-content class="item-bg-color">
   <ion-grid fixed>
     <ion-row justify-content-center class="heading">
@@ -36,7 +67,7 @@
                 allowfullscreen></iframe>
             </div>
           </ion-col>
-        </ion-row>
+        </ion-row>        
       </ion-col>
       <ion-col class="home-lft-col" col-12 col-lg-6 col-md-12 col-sm-12 col-xs-12>
         <div>

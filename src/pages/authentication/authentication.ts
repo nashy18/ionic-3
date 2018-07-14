@@ -26,7 +26,7 @@ export class AuthenticationPage {
 
   username: AbstractControl;
   password: AbstractControl;
-
+  errorMsg;
   loginForm:FormGroup;
   
   data = { username:'', password:''};
@@ -48,10 +48,8 @@ export class AuthenticationPage {
   onLogin(value: any): void{
 
     if(this.loginForm.valid) {
-
       let loading = this.loadingController.create({content : "Loading..."});
       loading.present();
-
       try {
       
         const requestData = {};
@@ -62,10 +60,9 @@ export class AuthenticationPage {
         requestData["action"] = APIActions.authenticateUser;
         requestData["body"] = request;
         
-        this.httpServiceProvider.post(requestData).subscribe((response: any) => {debugger
-          console.log("Successfully logged in! "+response.data);
+        this.httpServiceProvider.post(requestData).subscribe((response: any) => {
 
-          if(response.data != null) {debugger
+          if(response.data != null) {
            
             // Store authtoken in localstorage
             this.storage.remove('authToken');
@@ -88,7 +85,11 @@ export class AuthenticationPage {
         }, err => {
           console.log(err);
           loading.dismissAll();
-          this.events.publish('toastr', 'Something is wrong. Please try again!');
+          if(err.error != 'undefined' && err.error != null && err.error.text == "Unauthorized"){
+            this.errorMsg = "Invalid username or password";
+          }else{
+            this.events.publish('toastr', 'Something is wrong. Please try again!');
+          }          
         });
       } catch (error) {
         console.log(error);
@@ -148,5 +149,9 @@ export class AuthenticationPage {
 
   ionViewDidLeave() {
     this.resetForm();
+  }
+
+  onRegister(){
+    this.events.publish('toastr', 'Page is under construction.We\'ll be here soon..');
   }
 }
