@@ -9,39 +9,6 @@
     </ion-navbar>
 </ion-header>
 
-<!-- <ion-menu [content]="mycontent" persistent="true" side="left">
-    <ion-header>
-        <ion-toolbar>
-          <ion-buttons left>
-            <button ion-button icon-only menuClose>
-              <ion-icon name="menu"></ion-icon>          
-            </button>
-          </ion-buttons>
-          <ion-title text-center><img class="nav-header-logo m-t-xs" src="assets/imgs/Smart-Visitor-Log_Side.png"></ion-title>
-        </ion-toolbar>
-    </ion-header>      
-    <ion-content>
-      <ion-list>       
-        <button class="activeHomeHighlight" ion-item menuClose (click)="openHomePage()">
-            <ion-label class="font-wt-500">Home</ion-label>
-        </button>   
-        <button ion-item menuClose (click)="openAboutUsPage()">
-            <ion-label class="font-wt-500">About us</ion-label>
-        </button>
-        <button ion-item menuClose (click)="openSignInPage()">
-          <ion-label class="font-wt-500">Visitor sign in</ion-label>
-        </button>
-        <button ion-item menuClose (click)="signOut()">
-          <ion-label class="font-wt-500">Visitor sign out</ion-label>
-        </button>
-        <button ion-item no-lines menuClose (click)="openAppLogOutPage()">
-          <ion-label class="font-wt-500">App log out</ion-label>
-        </button>
-      </ion-list>
-    </ion-content>
-  </ion-menu>  
-<ion-nav #mycontent [root]="rootPage"></ion-nav> -->
-
 <ion-content class="item-bg-color">
   <ion-grid fixed>
     <ion-row justify-content-center class="heading">
@@ -90,33 +57,30 @@
         <div>
           <ion-grid fixed>
             <ion-row>
-              <ion-col offset-lg-2 col-lg-8 offset-md-2 col-md-8 col-sm-12 col-xs-12 class="container-left-panel">
+              <ion-col offset-lg-2 col-lg-8 offset-md-2 col-md-8 col-sm-12 col-4 class="">
                 <ion-card class="about-us-card-bg" (click)="openAboutUsPage()">
                   <ion-card-content text-center>
                     <img text-center class="home-img" width="25" height="75" src="assets/imgs/about-us.png" />
-                    <ion-label class="font-wt-700">About Us</ion-label>
+                    <ion-label text-wrap class="font-wt-700">About Us</ion-label>
                   </ion-card-content>
                 </ion-card>
               </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col offset-lg-2 col-lg-8 offset-md-2 col-md-8 col-sm-12 col-xs-12>
+              <ion-col offset-lg-2 col-lg-8 offset-md-2 col-md-8 col-sm-12 col-4>
                 <ion-card class="visitor-entry-card-bg" (click)="openSignInPage()">
                   <ion-card-content text-center>
                     <!-- <ion-thumbnail> -->
                     <img text-center class="home-img" width="25" height="75" src="assets/imgs/visitor-entry.png" />
-                    <ion-label class="font-wt-700">Visitor Sign In</ion-label>
+                    <ion-label text-wrap class="font-wt-700">Visitor Sign In</ion-label>
                     <!-- </ion-thumbnail> -->
                   </ion-card-content>
                 </ion-card>
               </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col offset-lg-2 col-lg-8 offset-md-2 col-md-8 col-sm-12 col-xs-12>
+            
+              <ion-col offset-lg-2 col-lg-8 offset-md-2 col-md-8 col-sm-12 col-4>
                 <ion-card class="visitor-exit-card-bg" (click)="signOut()">
                   <ion-card-content text-center>
                     <img text-center class="home-img" width="25" height="75" src="assets/imgs/visitor-exit.png" />
-                    <ion-label class="font-wt-700">Visitor Sign Out</ion-label>
+                    <ion-label text-wrap class="font-wt-700">Visitor Sign Out</ion-label>
                   </ion-card-content>
                 </ion-card>
               </ion-col>

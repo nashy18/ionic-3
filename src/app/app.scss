@@ -125,6 +125,11 @@
         height: 200px;
         border-width: 3px;
     }
+
+    .home-img {
+        max-width: 75% !important;
+        display: inline !important;
+    }
 }
 
 /* Small Devices, Tablets */
@@ -169,6 +174,11 @@
     }
     .slide-sign-in {
         padding-top: 80px;
+    }
+
+    .home-img {
+        max-width: 25% !important;
+        display: inline !important;
     }
 }
 
@@ -215,6 +225,11 @@
     .slide-sign-in {
         padding-top: 90px;
     }
+
+    .home-img {
+        max-width: 25% !important;
+        display: inline !important;
+    }
 }
 
 /* Large Devices, Wide Screens */
@@ -259,6 +274,11 @@
     }
     .slide-sign-in {
         padding-top: 110px;
+    }
+
+    .home-img {
+        max-width: 25% !important;
+        display: inline !important;
     }
 }
 
