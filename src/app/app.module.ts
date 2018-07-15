@@ -21,6 +21,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { AuthenticationPage } from '../pages/authentication/authentication';
 import { SafePipe } from '../filters/safePipe';
 import { HttpInterceptorProvider } from '../providers/http-interceptor/http-interceptor';
+//import {Camera} from '@ionic-native/camera';
 
 @NgModule({
   declarations: [
@@ -35,12 +36,19 @@ import { HttpInterceptorProvider } from '../providers/http-interceptor/http-inte
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
     HttpClientModule,
     HttpModule,
     SelectSearchableModule,
     SignaturePadModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    IonicModule.forRoot(MyApp,{
+      menuType: 'overlay',
+      platforms: {
+        ios: {
+          menuType: 'overlay',
+        }
+      }
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -59,7 +67,7 @@ import { HttpInterceptorProvider } from '../providers/http-interceptor/http-inte
     RestProvider,
     HttpServiceProvider,
     SharedService,
-    InAppBrowser,
+    InAppBrowser
     
     // {
     //   provide: HTTP_INTERCEPTORS,

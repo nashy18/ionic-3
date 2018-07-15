@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,MenuController, Events, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, Events, LoadingController, ToastController, Nav } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { HomePage } from '../home/home';
 import { Storage } from '@ionic/storage';
@@ -28,11 +28,10 @@ export class AuthenticationPage {
   password: AbstractControl;
   errorMsg;
   loginForm:FormGroup;
-  
   data = { username:'', password:''};
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public menu: MenuController,
-              public form:FormBuilder, public storage:Storage, private http: Http, 
+              public form:FormBuilder, public storage:Storage, private http: Http, public nav: Nav,
               private httpServiceProvider: HttpServiceProvider, public loadingController: LoadingController,
               public toastController: ToastController, public events: Events, public domSanitizer: DomSanitizer) {
       
@@ -130,7 +129,9 @@ export class AuthenticationPage {
 
           this.storage.remove('companyConfig');
           this.storage.set('companyConfig', data);
-          this.navCtrl.push(HomePage);
+          
+          this.nav.setRoot(HomePage);
+          //this.navCtrl.push(HomePage);
         } else {
 
           this.events.publish('toastr', 'Failed to get company data');

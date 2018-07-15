@@ -12,12 +12,12 @@
             <ion-label item-left>
               <ion-icon name="person" class="input-logo-icon"></ion-icon>
             </ion-label>
-            <ion-input text-center autocomplete="on" autocorrect="on" type="text" class="pswdfield" placeholder= "username" no-lines [(ngModel)]="data.username" formControlName="username" [class.invalid]="!loginForm.controls.username.valid && 
+            <ion-input text-left autocomplete="on" autocorrect="on" type="text" class="pswdfield" placeholder= "User Name" no-lines [(ngModel)]="data.username" formControlName="username" [class.invalid]="!loginForm.controls.username.valid && 
             (loginForm.controls.username.dirty)"></ion-input>
           </ion-item>
           <ng-container *ngIf="loginForm.controls.username.hasError('required') && (loginForm.controls.username.touched); then userNameReq"></ng-container>
           <ng-template #userNameReq>
-            <div class="req-lbl">* Username is required!</div>
+            <div class="req-lbl"><strong>* User Name is required!</strong></div>
           </ng-template>
         </ion-col>
       </ion-row>      
@@ -27,18 +27,18 @@
             <ion-label item-left>
               <ion-icon  name="key" class="input-logo-icon"></ion-icon>
             </ion-label>
-            <ion-input text-center autocomplete="on" autocorrect="on" type="password" class="pswdfield" placeholder= "password" no-lines [(ngModel)]="data.password" formControlName="password" [class.invalid]="!loginForm.controls.password.valid && (loginForm.controls.password.dirty)"></ion-input>
+            <ion-input text-left autocomplete="on" autocorrect="on" type="password" class="pswdfield" placeholder= "Password" no-lines [(ngModel)]="data.password" formControlName="password" [class.invalid]="!loginForm.controls.password.valid && (loginForm.controls.password.dirty)"></ion-input>
             </ion-item>
           <ng-container *ngIf="loginForm.controls.password.hasError('required') && (loginForm.controls.password.touched); then passwordReq"></ng-container>
           <ng-template #passwordReq>
-            <div class="req-lbl">* Password is required!</div>
+            <div class="req-lbl"><strong>* Password is required!</strong></div>
           </ng-template>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col col-12 text-center col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-sm-6 offset-sm-3 col-xs-8 offset-xs-2>
-            <div class="req-lbl" [innerHTML]="errorMsg"></div>
-       </ion-col>
+          <div class="req-lbl" [innerHTML]="errorMsg"></div>
+        </ion-col>
      </ion-row>
       <ion-row>
         <ion-col col-12 text-center col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-sm-6 offset-sm-3 col-xs-8 offset-xs-2>

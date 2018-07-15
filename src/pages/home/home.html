@@ -2,28 +2,36 @@
   <ion-navbar hideBackButton="true">
       <ion-title text-center><img class="nav-header-logo" src="assets/imgs/Smart-Visitor-Log_Side.png"></ion-title>
       <ion-buttons left>
-        <button ion-button icon-only>
+        <button ion-button icon-only menuToggle>
           <ion-icon name="menu"></ion-icon>          
         </button>
       </ion-buttons>
     </ion-navbar>
 </ion-header>
 
-<ion-menu [content]="mycontent">
+<!-- <ion-menu [content]="mycontent" persistent="true" side="left">
     <ion-header>
         <ion-toolbar>
-          <ion-title text-center><img class="nav-header-logo" src="assets/imgs/Smart-Visitor-Log_Side.png"></ion-title>
+          <ion-buttons left>
+            <button ion-button icon-only menuClose>
+              <ion-icon name="menu"></ion-icon>          
+            </button>
+          </ion-buttons>
+          <ion-title text-center><img class="nav-header-logo m-t-xs" src="assets/imgs/Smart-Visitor-Log_Side.png"></ion-title>
         </ion-toolbar>
     </ion-header>      
     <ion-content>
-      <ion-list>          
-        <button ion-item no-lines menuClose (click)="openAboutUsPage()">
-            <ion-label class="menu-item">About us</ion-label>
+      <ion-list>       
+        <button class="activeHomeHighlight" ion-item menuClose (click)="openHomePage()">
+            <ion-label class="font-wt-500">Home</ion-label>
+        </button>   
+        <button ion-item menuClose (click)="openAboutUsPage()">
+            <ion-label class="font-wt-500">About us</ion-label>
         </button>
-        <button ion-item no-lines menuClose (click)="openSignInPage()">
+        <button ion-item menuClose (click)="openSignInPage()">
           <ion-label class="font-wt-500">Visitor sign in</ion-label>
         </button>
-        <button ion-item no-lines menuClose (click)="signOut()">
+        <button ion-item menuClose (click)="signOut()">
           <ion-label class="font-wt-500">Visitor sign out</ion-label>
         </button>
         <button ion-item no-lines menuClose (click)="openAppLogOutPage()">
@@ -32,7 +40,7 @@
       </ion-list>
     </ion-content>
   </ion-menu>  
-<ion-nav #mycontent [root]="rootPage"></ion-nav>
+<ion-nav #mycontent [root]="rootPage"></ion-nav> -->
 
 <ion-content class="item-bg-color">
   <ion-grid fixed>
