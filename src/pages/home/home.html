@@ -59,15 +59,24 @@
           <ion-col col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right>
             <ion-img width="100" height="25" [src]="poweredByLogo"></ion-img>
           </ion-col>
+        </ion-row>             
+        <ion-row *ngIf="hasSlideimages">
+            <ion-col col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 class="slider-col">
+                <ion-slides (ionSlideDidChange)="onHomePageSlideChange()" speed="100" autoplay="2000" centeredSlides="true" loop="true" pager="true" paginationType="bullets">
+                  <ion-slide *ngFor="let th of thumbsPaths"> 
+                      <div class="slide-content slide-content-resol"><img class="object-fit_fill" [src]=th></div>                 
+                  </ion-slide>                                             
+                </ion-slides>
+            </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row *ngIf="!hasSlideimages">
           <ion-col col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12>
             <div class="video-container">
-              <iframe width="560" height="415" *ngIf="valuesLoaded" [src]="companyVideo | safe" frameborder="0" allow="autoplay; encrypted-media"
+              <iframe width="560" height="415" [src]="companyVideo | safe" frameborder="0" allow="autoplay; encrypted-media"
                 allowfullscreen></iframe>
             </div>
           </ion-col>
-        </ion-row>        
+        </ion-row>
       </ion-col>
       <ion-col class="home-lft-col" col-12 col-lg-6 col-md-12 col-sm-12 col-xs-12>
         <div>

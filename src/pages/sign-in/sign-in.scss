@@ -8,8 +8,8 @@ page-sign-in {
         white-space: initial !important;
     }
     .sign-in-img {
-        min-height: auto;
-        height: 100%;
+        //min-height: auto;
+        //height: 100%;
     }
     .page-title {
         font-size: 32px;
@@ -137,7 +137,14 @@ page-sign-in {
 
     @media screen and (min-width: 1200px){
         .sign-in-img{
-            display: block;
+           display: block;
         }
     }
+
+    .object-fit_fill { 
+        height: 100%;
+        width:100%;
+        object-fit: fill;        
+    }
+
 }

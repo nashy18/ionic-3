@@ -6,14 +6,24 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title text-center>Visitor Sign In</ion-title>
+    <ion-title text-center><img class="nav-header-logo" src="assets/imgs/Smart-Visitor-Log_Side.png"></ion-title>
   </ion-navbar>
 </ion-header>
+
 <ion-content padding class="item-bg-color">
   <ion-grid fixed>
     <ion-row>
-      <ion-col col-12 col-lg-5 col-md-5 col-sm-12 col-xs-12>
-        <img class="sign-in-img" width="100%" height="auto" src="assets/imgs/sign-in.png" />
+      <ion-col hideWhen="android,ios" col-12 col-lg-5 col-md-5 col-sm-12 col-xs-12>
+        <!-- <img class="sign-in-img" width="100%" height="auto" src="assets/imgs/sign-in.png" /> -->
+        <ion-row *ngIf="hasSlideimages" class="slide-sign-in">
+          <ion-col col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 class="slider-col">
+              <ion-slides (ionSlideDidChange)="onSignInSlideChange()" speed="500" autoplay="2000" centeredSlides="true" loop="true" pager="true" paginationType="bullets">
+                <ion-slide *ngFor="let th of thumbsPaths"> 
+                    <div class="slide-content slide-content-resol"><img class="object-fit_fill" [src]=th></div>                 
+                </ion-slide>                                             
+              </ion-slides>
+          </ion-col>
+        </ion-row>
       </ion-col>
       <ion-col col-12 col-lg-7 col-md-7 col-sm-12 col-xs-12 padding-horizontal>
         <div class="sign-in-bg-color">

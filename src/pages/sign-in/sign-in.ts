@@ -1,5 +1,5 @@
-import { Component, ErrorHandler, NgModule } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
+import { Component, ErrorHandler, NgModule, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController, Slides} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { SelectSearchableComponent } from 'ionic-select-searchable';
 import { Http } from '@angular/http';
@@ -52,6 +52,11 @@ export class SignInPage {
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
 
   data = { firstName:'', lastName:'', phone:'', email:'' , company:'', department:'', nameOfPerson:'', purpose:'', controlledArea:''};
+  @ViewChild(Slides) signInSlides: Slides;
+  signInSlideImages;
+  defaultSlideImages
+  hasSlideimages;
+  thumbsPaths :String[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private fb: FormBuilder, public alertCtrl: AlertController,
               private http: Http, private httpServiceProvider: HttpServiceProvider,private storage: Storage,
@@ -73,6 +78,8 @@ export class SignInPage {
           { id: 102, name: 'No' },
           { id: 101, name: 'Yes' }          
         ];     
+
+        this.setSlider();     
         
   }
 
@@ -81,9 +88,31 @@ export class SignInPage {
   }
 
   ionViewDidLoad() {
+    this.hasSlideimages = false;
     this.getDepartentData();
     this.getAllPurposeData();
-    console.log('ionViewDidLoad SignInPage');
+    this.getSignInSliderData();
+  }
+
+  ionViewDidEnter() {
+      setTimeout(() => {
+        if(this.hasSlideimages){
+          this.signInSlides.startAutoplay();
+          this.signInSlides.autoplay = 2000;
+          this.signInSlides.autoplayDisableOnInteraction = false;  
+        }             
+      }, 1000);              
+  }
+
+  ionViewWillLeave(){
+    if(this.hasSlideimages){
+      this.signInSlides.stopAutoplay();
+    }     
+  }
+
+  onSignInSlideChange() { 
+
+    //this.signInSlides.realIndex;
   }
 
   onSubmit(value: any): void {
@@ -258,4 +287,27 @@ export class SignInPage {
       return 0;
     });
   }
+
+  setSlider() {
+    this.thumbsPaths = [
+      "../assets/imgs/slide-img-1.png",
+      "../assets/imgs/slide-img-2.png",
+      "../assets/imgs/slide-img-3.png",
+      "../assets/imgs/slide-img-4.png",
+      "../assets/imgs/slide-img-5.png",
+      "../assets/imgs/slide-img-6.png"
+    ];
+  }
+
+  getSignInSliderData() {
+    this.signInSlideImages = 'something of list';
+    this.defaultSlideImages = 'default video link'; 
+    
+    if(this.signInSlideImages != null){
+      this.hasSlideimages = true;          
+    }
+
+    this.setSlider();
+  }
+
 }

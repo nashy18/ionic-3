@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
 import { SelectSearchableComponent } from 'ionic-select-searchable';
 import { HomePage } from '../home/home';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
@@ -33,17 +33,47 @@ export class SignOutPage {
     { id: 103, name: 'Raj Ali' }
   ];  
 
+  @ViewChild(Slides) signOutSlides: Slides;
+  signOutSlideImages;
+  defaultSlideImages
+  hasSlideimages;
+  thumbsPaths :String[];
+
   constructor(public navCtrl: NavController, public navParams: NavParams, 
               private formBuilder: FormBuilder, private alertCtrl: AlertController,
               private httpServiceProvider: HttpServiceProvider, public loadingController:LoadingController) {
     this.signOutForm = formBuilder.group({
       'UserList': ['', Validators.required]
     }); 
+
+    this.setSlider();
   }
 
   ionViewDidLoad() {
+    this.hasSlideimages = false;
     this.getAllVisitors();
-    console.log('ionViewDidLoad SignOutPage');
+    this.getSignOutSliderData();
+  }
+
+  ionViewDidEnter() {
+    if(this.hasSlideimages){
+      setTimeout(() => {
+        this.signOutSlides.startAutoplay();
+        this.signOutSlides.autoplay = 2000;
+        this.signOutSlides.autoplayDisableOnInteraction = false;      
+      }, 1000);
+    }           
+  }
+
+  ionViewWillLeave(){
+    if(this.hasSlideimages){
+      this.signOutSlides.stopAutoplay();
+    }
+  }
+
+  onSignOutSlideChange() { 
+
+    //this.signOutSlides.realIndex;
   }
 
   resetForm() {
@@ -159,5 +189,27 @@ export class SignOutPage {
       // names must be equal
       return 0;
     });
+  }
+
+  setSlider() {
+    this.thumbsPaths = [
+      "../assets/imgs/slide-img-1.png",
+      "../assets/imgs/slide-img-2.png",
+      "../assets/imgs/slide-img-3.png",
+      "../assets/imgs/slide-img-4.png",
+      "../assets/imgs/slide-img-5.png",
+      "../assets/imgs/slide-img-6.png"
+    ];
+  }
+
+  getSignOutSliderData() {
+    this.signOutSlideImages = 'something of list';
+    this.defaultSlideImages = 'default video link'; 
+    
+    if(this.signOutSlideImages != null){
+      this.hasSlideimages = true;          
+    }
+
+    this.setSlider();
   }
 }

@@ -128,4 +128,13 @@ page-home {
         font-weight: 100;
         color: #555;
     }
+
+    .object-fit_fill { 
+        height: 100%;
+        width:100%;
+        object-fit: fill;        
+    }
+    // .slider-col{
+    //     background-size: cover !important;
+    // }
 }

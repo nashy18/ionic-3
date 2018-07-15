@@ -1,5 +1,5 @@
-import { Component, Pipe, PipeTransform } from '@angular/core';
-import { NavController,LoadingController, ToastController, ViewController, Events } from 'ionic-angular';
+import { Component, Pipe, PipeTransform, ViewChild } from '@angular/core';
+import { NavController,LoadingController, ToastController, ViewController, Events, Slides } from 'ionic-angular';
 import { AboutUsPage } from '../about-us/about-us';
 import { SignInPage } from '../sign-in/sign-in';
 import { SignOutPage } from '../sign-out/sign-out';
@@ -37,21 +37,47 @@ export class HomePage {
   companyVideo;
   poweredByLogo;
   valuesLoaded;
+  hasSlideimages;
+  companySlideImages;
+  defaultVideo;
+  @ViewChild(Slides) homeSlides: Slides;
 
   video: any = {
     url: 'https://www.youtube.com/watch?v=P_aO2quAPuY'
   };
 
+  thumbsPaths :String[];
   constructor(private viewCtrl: ViewController, public navCtrl: NavController, private inAppBrowser: InAppBrowser, public storage: Storage,
               public domSanitizer: DomSanitizer, public loadingController: LoadingController,
               public toastController: ToastController, public events: Events) {
-
-    console.log('home ctrl loaded');
     this.getCompanyConfig();
+    this.setSlider();
   }
 
-  ionViewDidLoad() {
+  ionViewDidLoad() {    
     this.valuesLoaded = false;
+    this.hasSlideimages = false;
+  }
+
+   ionViewDidEnter() {      
+    setTimeout(() => {
+      if(this.hasSlideimages){
+        this.homeSlides.startAutoplay();
+        this.homeSlides.autoplay = 2000;
+        this.homeSlides.autoplayDisableOnInteraction = false;
+      }            
+    }, 1000);            
+  }
+
+  ionViewWillLeave(){
+    if(this.hasSlideimages){
+      this.homeSlides.stopAutoplay();
+    }    
+  }
+
+  onHomePageSlideChange() { 
+
+    //this.homeSlides.realIndex;
   }
 
   openAboutUsPage() {
@@ -91,11 +117,28 @@ export class HomePage {
         this.companyLogo = obj.companyLogo.changingThisBreaksApplicationSecurity;
         this.companyVideo = obj.companyVideo.changingThisBreaksApplicationSecurity;
         this.poweredByLogo = obj.poweredByLogo.changingThisBreaksApplicationSecurity;
+        this.companySlideImages = null;
+        this.defaultVideo = 'default video link';
 
+        if(this.companySlideImages != null){
+          this.hasSlideimages = true;          
+        }else if(this.companyVideo == null) {
+          this.companyVideo = this.defaultVideo;          
+        }
         this.valuesLoaded = true;
       }  
       
     });
   }
 
+  setSlider() {
+    this.thumbsPaths = [
+      "../assets/imgs/slide-img-1.png",
+      "../assets/imgs/slide-img-2.png",
+      "../assets/imgs/slide-img-3.png",
+      "../assets/imgs/slide-img-4.png",
+      "../assets/imgs/slide-img-5.png",
+      "../assets/imgs/slide-img-6.png"
+    ];
+  }
 }

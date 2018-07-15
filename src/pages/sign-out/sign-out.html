@@ -2,21 +2,27 @@
   Generated template for the SignOutPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
+  Ionic pages and navigation. class="sign-out-img-div"
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>Sign-out</ion-title>
+    <ion-title><img class="nav-header-logo" src="assets/imgs/Smart-Visitor-Log_Side.png"></ion-title>
   </ion-navbar>
-
 </ion-header>
-
 <ion-content padding class="item-bg-color">
   <ion-grid>
     <ion-row>
-      <ion-col class="sign-out-img-div" col-lg-4 col-sm-12 col-md-12 col-xs-12>
-        <ion-img class="sign-out-img" src="assets/imgs/sign-out.png"></ion-img>
+      <ion-col hideWhen="android,ios" col-lg-4 col-sm-12 col-md-12 col-xs-12>
+        <!-- <ion-img class="sign-out-img" src="assets/imgs/sign-out.png"></ion-img> -->
+        <ion-row *ngIf="hasSlideimages" class="slide-sign-out">
+          <ion-col col-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 class="slider-col">
+              <ion-slides (ionSlideDidChange)="onSignOutSlideChange()" speed="500" autoplay="2000" centeredSlides="true" loop="true" pager="true" paginationType="bullets">
+                <ion-slide *ngFor="let th of thumbsPaths"> 
+                    <div class="slide-content slide-content-resol"><img class="object-fit_fill" [src]=th></div>                 
+                </ion-slide>                                             
+              </ion-slides>
+          </ion-col>
+        </ion-row>
       </ion-col>
       <ion-col col-lg-8 col-sm-12 col-md-12 col-xs-12 padding-horizontal>
         <ion-row>
