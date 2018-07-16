@@ -1,5 +1,5 @@
 import { Component, Pipe, PipeTransform, ViewChild } from '@angular/core';
-import { NavController,LoadingController, ToastController, ViewController, Events, Slides } from 'ionic-angular';
+import { NavController,LoadingController, ToastController, ViewController, Events, Slides, Nav } from 'ionic-angular';
 import { AboutUsPage } from '../about-us/about-us';
 import { SignInPage } from '../sign-in/sign-in';
 import { SignOutPage } from '../sign-out/sign-out';
@@ -49,7 +49,7 @@ export class HomePage {
   thumbsPaths :String[];
   constructor(private viewCtrl: ViewController, public navCtrl: NavController, private inAppBrowser: InAppBrowser, public storage: Storage,
               public domSanitizer: DomSanitizer, public loadingController: LoadingController,
-              public toastController: ToastController, public events: Events) {
+              public toastController: ToastController, public events: Events, public nav: Nav) {
     this.getCompanyConfig();
     this.setSlider();
   }
@@ -82,18 +82,20 @@ export class HomePage {
 
   openAboutUsPage() {
 
-    this.navCtrl.push(AboutUsPage);
-
+    //this.navCtrl.push(AboutUsPage);
+    this.nav.setRoot(AboutUsPage);
   }
 
   openSignInPage() {
 
-    this.navCtrl.push(SignInPage);
+    //this.navCtrl.push(SignInPage);
+    this.nav.setRoot(SignInPage);
   }
  
   signOut() {
 
-    this.navCtrl.push(SignOutPage);
+    //this.navCtrl.push(SignOutPage);
+    this.nav.setRoot(SignOutPage);
   }
 
   openAppLogOutPage() {
