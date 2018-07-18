@@ -57,7 +57,7 @@
         <div>
           <ion-grid fixed>
             <ion-row>
-              <ion-col offset-lg-2 col-lg-8 offset-md-2 col-md-8 col-sm-12 col-4 class="">
+              <ion-col offset-lg-2 col-lg-8 offset-md-2 col-md-8 col-sm-12 col-xs-12 class="">
                 <ion-card class="about-us-card-bg" (click)="openAboutUsPage()">
                   <ion-card-content text-center>
                     <img text-center class="home-img" width="25" height="75" src="assets/imgs/about-us.png" />
@@ -65,7 +65,9 @@
                   </ion-card-content>
                 </ion-card>
               </ion-col>
-              <ion-col offset-lg-2 col-lg-8 offset-md-2 col-md-8 col-sm-12 col-4>
+            </ion-row>
+            <ion-row>
+              <ion-col offset-lg-2 col-lg-8 offset-md-2 col-md-8 col-sm-12 col-xs-12>
                 <ion-card class="visitor-entry-card-bg" (click)="openSignInPage()">
                   <ion-card-content text-center>
                     <!-- <ion-thumbnail> -->
@@ -75,8 +77,9 @@
                   </ion-card-content>
                 </ion-card>
               </ion-col>
-            
-              <ion-col offset-lg-2 col-lg-8 offset-md-2 col-md-8 col-sm-12 col-4>
+            </ion-row>
+            <ion-row>
+              <ion-col offset-lg-2 col-lg-8 offset-md-2 col-md-8 col-sm-12 col-xs-12>
                 <ion-card class="visitor-exit-card-bg" (click)="signOut()">
                   <ion-card-content text-center>
                     <img text-center class="home-img" width="25" height="75" src="assets/imgs/visitor-exit.png" />
