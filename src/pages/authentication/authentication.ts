@@ -108,7 +108,7 @@ export class AuthenticationPage {
 
     try {
 
-      this.httpServiceProvider.post(requestData).subscribe((response: any) => {debugger
+      this.httpServiceProvider.post(requestData).subscribe((response: any) => {
 
         if(response.data != null) {
 

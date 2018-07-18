@@ -3,7 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { RestProvider } from '../providers/rest/rest';
@@ -20,8 +20,6 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { IonicStorageModule } from '@ionic/storage';
 import { AuthenticationPage } from '../pages/authentication/authentication';
 import { SafePipe } from '../filters/safePipe';
-import { HttpInterceptorProvider } from '../providers/http-interceptor/http-interceptor';
-//import {Camera} from '@ionic-native/camera';
 
 @NgModule({
   declarations: [
@@ -68,12 +66,6 @@ import { HttpInterceptorProvider } from '../providers/http-interceptor/http-inte
     HttpServiceProvider,
     SharedService,
     InAppBrowser
-    
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: HttpInterceptorProvider,
-    //   multi: true
-    // }
   ]
 })
 export class AppModule {}
