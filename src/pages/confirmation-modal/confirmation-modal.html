@@ -14,16 +14,23 @@
  </ion-header>
 <ion-content padding class="">
   <ion-grid fixed>
-    <ion-row>
-      <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12>
-        <ion-label text-wrap><strong>{{modalBody}}</strong></ion-label>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center padding-top>
-        <button ion-button color="danger"outline round (click)="cancelModal()">Cancel</button>
-        <button ion-button color="secondary" outline round (click)="confirmClick()">Confirm</button>
-      </ion-col>
-    </ion-row>
+    <form [formGroup]="confirmationForm" >
+      <ion-row>
+        <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center>
+          <ion-label text-wrap><strong>{{modalBody}}</strong></ion-label>
+          <ion-item> 
+            <ion-input *ngIf="isAdminValidate" type="text" [(ngModel)]="adminEmail.email" formControlName="email" [class.invalid]="!confirmationForm.controls.email.valid && 
+              (confirmationForm.controls.email.dirty)">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center padding-top>
+          <button ion-button color="danger"outline round (click)="cancelModal()">Cancel</button>
+          <button ion-button color="secondary" outline round (click)="confirmClick(adminEmail)">Confirm</button>
+        </ion-col>
+      </ion-row>
+    </form>
   </ion-grid>
 </ion-content>

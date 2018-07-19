@@ -129,7 +129,7 @@ export class TermsAndConditionsPage {
     modalPage.onDidDismiss((obj) => {
       console.log("I have dismissed."+obj);
       
-      if(obj.status == 'confirmed') {
+      if((obj) && obj.status == 'confirmed') {
 
         this.isSubmitDisabled = false; //used to enable submit button after click agree button on modal
         //this.isSignatureBoxHidden = false; //used to enable signature box after click agree button on modal
@@ -215,7 +215,7 @@ export class TermsAndConditionsPage {
       
         console.log("I have dismissed "+obj);
 
-        if(obj.status == 'confirmed') {
+        if((obj) && obj.status == 'confirmed') {
 
           var data = {GMPType: this.modalType}
           var printModalPage = this.modalCtrl.create('VisitorPassModalPage', data); 

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ViewController, AlertController, Nav } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { Storage } from '@ionic/storage';
 
@@ -16,6 +16,8 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'visitor-pass-modal.html',
 })
 export class VisitorPassModalPage {
+
+  @ViewChild(Nav) nav: Nav;
 
   GMPType: string;
   modalData: any;
@@ -77,7 +79,10 @@ export class VisitorPassModalPage {
        buttons: [{
           text: 'Ok',
           handler: () => {
-            this.navCtrl.push(HomePage);
+            //this.navCtrl.push(HomePage);
+            //this.nav.setRoot(HomePage);
+            //this.navCtrl.setRoot(HomePage);
+            //alert.dismiss();
           }
         }]
      });

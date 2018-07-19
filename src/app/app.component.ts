@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Events, ToastController, Nav } from 'ionic-angular';
+import { Platform, Events, ToastController, Nav, ModalController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
@@ -20,9 +20,9 @@ export class MyApp {
   activePage: any;
 
   pages: Array<{title: String, component: any}>;
-
+  
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
-              public events: Events, public toastController: ToastController) {
+              public events: Events, public toastController: ToastController, public modalCtrl : ModalController) {
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -47,8 +47,32 @@ export class MyApp {
   }
 
   openPage(page) {
-    this.nav.setRoot(page.component);
-    this.activePage = page;
+
+    if(page.title == 'Admin Sign Out') {
+
+        console.log("admin signout");
+        var data = { header: 'Confirmation', body : 'Are you Admin? Please enter your email id: ', type: 'adminLogOut' };
+        var modalPage = this.modalCtrl.create('ConfirmationModalPage', data); 
+        modalPage.present();
+
+        modalPage.onDidDismiss((obj) => {
+
+          if((obj) && obj.status == 'confirmed') {
+            this.nav.setRoot(AuthenticationPage);
+          }
+          
+          console.log("Admin Email validation modal closed");
+        });
+
+        modalPage.onWillDismiss(() => {
+      
+          console.log("Admin Email validation modal is about to close");
+        });
+    } else {
+
+      this.nav.setRoot(page.component);
+      this.activePage = page;
+    }
   }
 
   checkActivePage(page) {

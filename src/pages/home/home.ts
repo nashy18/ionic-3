@@ -41,7 +41,7 @@ export class HomePage {
   companySlideImages;
   defaultVideo;
   @ViewChild(Slides) homeSlides: Slides;
-
+  @ViewChild(Nav) nav: Nav;
   video: any = {
     url: 'https://www.youtube.com/watch?v=P_aO2quAPuY'
   };
@@ -49,7 +49,7 @@ export class HomePage {
   thumbsPaths :String[];
   constructor(private viewCtrl: ViewController, public navCtrl: NavController, private inAppBrowser: InAppBrowser, public storage: Storage,
               public domSanitizer: DomSanitizer, public loadingController: LoadingController,
-              public toastController: ToastController, public events: Events, public nav: Nav) {
+              public toastController: ToastController, public events: Events) {
     this.getCompanyConfig();
     this.setSlider();
   }
@@ -83,19 +83,22 @@ export class HomePage {
   openAboutUsPage() {
 
     //this.navCtrl.push(AboutUsPage);
-    this.nav.setRoot(AboutUsPage);
+    //this.nav.setRoot(AboutUsPage);
+    this.navCtrl.setRoot(AboutUsPage);
   }
 
   openSignInPage() {
 
     //this.navCtrl.push(SignInPage);
-    this.nav.setRoot(SignInPage);
+    //this.nav.setRoot(SignInPage);
+    this.navCtrl.setRoot(SignInPage);
   }
  
   signOut() {
 
     //this.navCtrl.push(SignOutPage);
-    this.nav.setRoot(SignOutPage);
+    //this.nav.setRoot(SignOutPage);
+    this.navCtrl.setRoot(SignOutPage);
   }
 
   openAppLogOutPage() {
